@@ -8,13 +8,11 @@ namespace FPS.Control
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] GameObject firstPersonCameraObject;
-
         [Header("Look")]
+        [SerializeField] GameObject firstPersonCameraObject;
         Vector2 lookInputValue;
         float yRotation = 0f;
         float xRotation = 0f;
-
         // 플레이어 시점에서 x축과 y축의 감도
         // 에디터 상의 카메라 기준 x축, y축이 아님
         // 즉, x축감도는 가로 회전(y축 회전)의 감도, y축 감도는 세로 회전(x축 회전)의 감도임
@@ -22,9 +20,9 @@ namespace FPS.Control
         public float playerYAxisSensitivity = 1f;
 
         [Header("Move")]
-        Vector2 moveInputValue;
         [SerializeField] float moveSpeed = 5f;
         [SerializeField] float runningSpeedModifier = 1.5f;
+        Vector2 moveInputValue;
 
         [Header("Jump")]
         [SerializeField] float jumpPower = 5f;
