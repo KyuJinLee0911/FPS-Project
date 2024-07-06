@@ -24,5 +24,4 @@ public interface IDamageable
     bool IsDead { get; set; }
     void TakeDamage(GameObject instigator, float damage);
     void Die();
-    Vector3 GetHoamingTargetLocation();
 }
