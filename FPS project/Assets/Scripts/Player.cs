@@ -27,11 +27,6 @@ public class Player : Creature, IDamageable
         }
     }
 
-    public Vector3 GetHoamingTargetLocation()
-    {
-        return transform.position;
-    }
-
     public void Die()
     {
         OnPlayerDie();

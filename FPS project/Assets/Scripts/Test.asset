@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 201aecf5c394d594ca52a11a8ea15c82, type: 3}
+  m_Script: {fileID: 11500000, guid: b3bbd3de6f5ac4e4e89bfdace73809f2, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  weaponName: TestWeapon
-  damage: 15
-  criticalMultiples: 1.5
+  weaponName: testWeapon
+  damage: 10
+  criticalMultiples: 2
   mag: 30
-  fireRate: 6
+  fireRate: 10
   fireRange: 30
   weaponType: 0
-  projectile: {fileID: 4138816894924396826, guid: c20d975ee473f7848950001100b09420, type: 3}
-  weaponPrefab: {fileID: 4243271525775095593, guid: 13e9a3e27ea35314f81c11760e8ef0b1, type: 3}
+  projectile: {fileID: 4138816894924396826, guid: 2b328852af457b846a937da2c39f4ad3, type: 3}
+  weaponPrefab: {fileID: 4243271525775095593, guid: 65119681e5b1b264d9081d42b4a80a89, type: 3}
