@@ -11,21 +11,23 @@ public class Fighter : MonoBehaviour
     [SerializeField] private float timeSinceLastFire = 0f;
     [SerializeField] private IDamageable target;
     [SerializeField] Transform muzzleTransform;
+    
     void Start()
     {
-        
+
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        if(isWeaponFire)
+        if (isWeaponFire)
             Fire();
     }
 
     void OnFire(InputValue value)
     {
-        if(value.Get<float>() == 1)
+        if (value.Get<float>() == 1)
         {
             isWeaponFire = true;
         }
@@ -41,10 +43,31 @@ public class Fighter : MonoBehaviour
         float _timeBetweenFires = 1 / currentWeapon.FireRate;
 
         timeSinceLastFire += Time.deltaTime;
-        if(timeSinceLastFire >= _timeBetweenFires)
+        if (timeSinceLastFire >= _timeBetweenFires)
         {
             currentWeapon.FireArm(muzzleTransform, gameObject);
             timeSinceLastFire = 0;
         }
+    }
+
+    void OnMainSkill()
+    {
+        UseMainSkill();
+    }
+    void UseMainSkill()
+    {
+        Player player = GetComponent<Player>();
+        player.mainSkill.DoSkill();
+    }
+
+    void OnSubSkill()
+    {
+        UseSubSkill();
+    }
+
+    void UseSubSkill()
+    {
+        Player player = GetComponent<Player>();
+        player.subSkill.DoSkill();
     }
 }

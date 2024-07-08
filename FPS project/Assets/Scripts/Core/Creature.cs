@@ -19,9 +19,9 @@ public class Creature : MonoBehaviour
 
 public interface IDamageable
 {
-    float Hp { get; set; }
-    float Defence { get; set; }
-    bool IsDead { get; set; }
+    float hp { get; set; }
+    float defence { get; set; }
+    bool isDead { get; set; }
     void TakeDamage(GameObject instigator, float damage);
     void Die();
 }
