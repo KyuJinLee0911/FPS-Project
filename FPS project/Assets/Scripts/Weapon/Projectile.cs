@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        if (other.GetComponent<IDamageable>().IsDead) return;
+        if (other.GetComponent<IDamageable>().isDead) return;
 
         other.GetComponent<IDamageable>().TakeDamage(instigator, projectileDamage);
         if (isExplode)
