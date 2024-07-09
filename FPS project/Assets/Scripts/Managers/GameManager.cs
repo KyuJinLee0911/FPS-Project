@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public PlayerClassData[] playerClassDatas;
+    
 
     void Awake()
     {
@@ -19,8 +20,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
-
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     public static GameManager Instance
     {

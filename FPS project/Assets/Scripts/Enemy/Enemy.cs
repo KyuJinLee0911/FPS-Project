@@ -2,17 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Creature
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Initialize()
     {
-        
+        hp = 100;
+        defence = 0.1f;
+        level = 1;
+        autoCriticalRate = 0.0f;
+        autoCriticalMagnification = 1f;
+        isDead = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        Initialize();
+    }
+    public override void Die()
+    {
+
+    }
+
+    public override void TakeDamage(GameObject instigator, float damage)
+    {
+        base.TakeDamage(instigator, damage);
     }
 }
