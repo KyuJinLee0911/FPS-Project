@@ -8,6 +8,7 @@ namespace FPS.Control
 {
     public class PlayerController : MonoBehaviour
     {
+        public bool isControlable = true;
         [Header("Look")]
         [SerializeField] GameObject firstPersonCameraObject;
         Vector2 lookInputValue;
@@ -30,23 +31,26 @@ namespace FPS.Control
         [SerializeField] int currentJumpCount;
         [SerializeField] LayerMask groundLayer;
 
-        private void OnCollisionEnter(Collision other) 
+        [Header("UI")]
+        [SerializeField] GameObject infoTab;
+
+        private void OnCollisionEnter(Collision other)
         {
             ContactPoint contact = other.GetContact(0);
             Vector3 pos = contact.point;
 
             // 플레이어와의 충돌이 일어난 것은 무시
-            if(other.collider.tag == "Player") return;
+            if (other.collider.tag == "Player") return;
 
             // 캐릭터가 몬스터와 충돌이 일어났을 때
-            if(other.collider.tag == "Enemy")
-            {   
+            if (other.collider.tag == "Enemy")
+            {
                 // 충돌이 일어난 지점의 y좌표가 캐릭터의 y좌표보다 위에 있을 때
                 // 즉, 발로 밟지 않았고 그냥 부딪혔을 때는 무시
-                if(pos.y > transform.position.y) return;
+                if (pos.y > transform.position.y) return;
                 // 발로 밟았을 때 추가 예정
             }
-            
+
             // 점프 횟수 초기화
             currentJumpCount = maxJumpCount;
         }
@@ -58,16 +62,22 @@ namespace FPS.Control
 
         void OnMove(InputValue value)
         {
+            if (!isControlable) return;
+
             moveInputValue = value.Get<Vector2>();
         }
 
         void OnLook(InputValue value)
         {
+            if (!isControlable) return;
+
             lookInputValue = value.Get<Vector2>();
         }
 
         void OnJump()
         {
+            if (!isControlable) return;
+
             Rigidbody rigidbody = GetComponent<Rigidbody>();
 
             if (currentJumpCount > 0)
@@ -79,6 +89,8 @@ namespace FPS.Control
 
         void OnRun(InputValue value)
         {
+            if (!isControlable) return;
+
             // 누르기 시작할 떄 속도를 달리기 속도로
             if (value.Get<float>() == 1)
                 moveSpeed *= runningSpeedModifier;
@@ -87,11 +99,25 @@ namespace FPS.Control
                 moveSpeed /= runningSpeedModifier;
         }
 
+        void OnInfoTab(InputValue value)
+        {
+            if (value.Get<float>() == 1)
+            {
+                infoTab.SetActive(true);
+                isControlable = false;
+            }
+            else if (value.Get<float>() == 0)
+            {
+                infoTab.SetActive(false);
+                isControlable = true;
+            }
+        }
+
         void FixedUpdate()
         {
             Look();
             Move();
-            
+
         }
         private void Look()
         {

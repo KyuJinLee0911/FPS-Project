@@ -60,8 +60,7 @@ public class WeaponData : ScriptableObject
     {
         projectile.range = fireRange;
         Projectile projectileInstance = Instantiate(projectile, gunTransform.position, gunTransform.rotation);
-        projectileInstance.SetDamage(damage);
-
+        projectileInstance.SetDamage(damage, criticalMultiples, instigator);
         
         // 투사체의 목표를 설정 후 발사할 때 목표를 바라보고 화살이 일직선으로 나가도록
         // projectileInstance.SetTarget(target, instigator, Damage);

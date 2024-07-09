@@ -27,11 +27,11 @@ public class Status : MonoBehaviour
         switch(unitCode)
         {
             case UnitCode.UC_GUARDIAN :
-                status = new Status(unitCode, 100, 10);
+                status = new Status(unitCode, 100, 0.1f);
                 break;
 
             case UnitCode.UC_COMMANDO :
-                status = new Status(UnitCode.UC_COMMANDO, 110, 8);
+                status = new Status(UnitCode.UC_COMMANDO, 110, 0.08f);
                 break;
         }
 

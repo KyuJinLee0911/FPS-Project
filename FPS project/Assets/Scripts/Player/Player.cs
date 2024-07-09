@@ -13,27 +13,31 @@ public enum UnitCode
     UC_BOSS
 }
 
-public class Player : Creature, IDamageable
+public class Player : Creature
 {
     public UnitCode unitCode;
     public Status status;
     public PlayerClassData classData;
-    public float hp { get; set; }
-    public float defence { get; set; }
-    public bool isDead { get; set; }
-
     public Skill mainSkill;
     public Skill subSkill;
-    
+
+    public List<ItemData> itemList = new List<ItemData>();
+
     public event Action OnPlayerDamage;
     public event Action OnPlayerDie;
 
-    public void Initialize()
+    // 처음 시작할 때, 캐릭터 클래스 변경 시에만 호출
+    // 캐릭터 클래스는 게임 플레이 도중 변경할 수 없고, 거점에서만 변경이 가능하기 때문에
+    // 모든 스탯을 초기값으로 리셋해도 무방함
+    public override void Initialize()
     {
         status = new Status();
         status = status.SetUnitStatus(unitCode);
         hp = status.hp;
         defence = status.defence;
+        level = 1;
+        autoCriticalRate = 0.1f;
+        autoCriticalMagnification = 1.75f;
         isDead = false;
         mainSkill = classData.mainSkill;
         mainSkill.Initialize();
@@ -46,20 +50,12 @@ public class Player : Creature, IDamageable
         Initialize();
     }
 
-    public void TakeDamage(GameObject instigator, float damage)
+    public override void TakeDamage(GameObject instigator, float damage)
     {
-        Debug.Log("ouch!");
-        // 캐릭터의 방어율이 100% 이하일때는 기본 데미지에서 방어율만큼의 데미지를 제외하고 차감, 100% 이상일때는 데미지가 1만 들어가도록 함
-        float damageRate = defence < 1 ? 1 - defence : 1 / damage;
-        hp -= damage * damageRate;
-        // OnPlayerDamage();
-        if (hp <= 0)
-        {
-            Die();
-        }
+        base.TakeDamage(instigator, damage);
     }
 
-    public void Die()
+    public override void Die()
     {
         OnPlayerDie();
     }
@@ -70,5 +66,4 @@ public class Player : Creature, IDamageable
         unitCode = classData.unitCode;
         Initialize();
     }
-
 }

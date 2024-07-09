@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Projectile : MonoBehaviour
 {
     // IDamageable target;
     [SerializeField] float projectileSpeed = 6f;
     [SerializeField] float projectileDamage = 0f;
+    // 약점 공격 시의 크리티컬 배율 (무기의 크리티컬 배율을 따라감)
+    [SerializeField] float criticalMagnification = 1f;
+    // 약점 아닌 곳을 공격했을 때의 크리티컬 배율 (instigator의 크리티컬 배율을 따라감)
+    [SerializeField] float autoCriticalMagnification = 1f;
     float projectileHoamingRange = 5f;
     [SerializeField] bool isHoaming = false;
     [SerializeField] bool isExplode = false;
@@ -27,7 +30,15 @@ public class Projectile : MonoBehaviour
         }
         if (other.GetComponent<IDamageable>().isDead) return;
 
-        other.GetComponent<IDamageable>().TakeDamage(instigator, projectileDamage);
+        // 약점 공격 시
+        // 무기의 크리티컬 확률을 따르는 크리티컬 대미지
+        // Physics.OverlapBox 이용해서 구현
+
+        // 약점이 아닌 곳 공격 시
+        // 공격자의 자동 크리티컬 확률과 배율을 따르는 크리티컬 대미지
+        other.GetComponent<IDamageable>().TakeDamage(instigator, instigator.GetComponent<Fighter>().CalculateAutoCriticalDamage(projectileDamage));
+
+        Debug.Log(instigator.name);
         if (isExplode)
             Debug.Log("BOOM!");
         // Instantiate(explosionEffect, transform.position, Quaternion.identity);
@@ -55,10 +66,14 @@ public class Projectile : MonoBehaviour
         transform.Translate(Vector3.forward * projectileSpeed * Time.deltaTime);
     }
 
-    public void SetDamage(float damage)
+    // 대미지와 크리티컬 배율(무기의), 공격자를 무기로부터 전달받음
+    // 크리티컬 확률은 받아오지 않아도 됨
+    // 약점을 공격하면 무조건 크리티컬이기 때문
+    public void SetDamage(float damage, float criticalMagnification, GameObject instigator)
     {
         projectileDamage = damage;
-        // this.instigator = instigator;
+        this.criticalMagnification = criticalMagnification;
+        this.instigator = instigator;
     }
 
     // 일정 거리 이상 날아갔을때 비활성화
@@ -70,6 +85,7 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
     }
 
+    // SphereCast를 통해 목표 탐색 후 가장 가까운 목표를 향해 유도
     void HoamingTarget()
     {
         RaycastHit[] sphereCastData;
@@ -104,11 +120,6 @@ public class Projectile : MonoBehaviour
         else
             return;
     }
-
-    // 추가 예정
-    // 유도기능
-    // - 원래대로 앞을 향해 날아가다가 일정 범위 내에 적이 포착되면 해당 방향을 향해 날아가도록
-    // 데미지 입을때 누가 공격하는지 알도록 instigator 추가 (경험치 획득을 위해)
 
     // 오브젝트 풀링
 }
