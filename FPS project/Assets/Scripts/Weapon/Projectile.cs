@@ -16,34 +16,36 @@ public class Projectile : MonoBehaviour
     [SerializeField] bool isExplode = false;
     [SerializeField] GameObject explosionEffect;
     public float range;
-
     [SerializeField] float maxLifeTime;
     float currentLifeTime;
     GameObject instigator = null;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<IDamageable>() == null)
+        // Projectile은 HitBox레이어
+        // HitBox 레이어는 HurtBox 레이어와만 상호작용이 가능하도록 설정해 두었기 때문에
+        // other 콜라이더는 Enemy 오브젝트의 자식 오브젝트로 들어가있는 HurtBox레이어를 가진 Head와 Body 오브젝트와 상호작용
+        // Enemy 오브젝트의 root 트랜스폼에 있는 IDamageable을 사용하기 위해 TriggerEnter시에 rootTransform을 따로 할당해줌
+        Transform rootTransform;
+        rootTransform = other.transform.root;
+        IDamageable damageable = rootTransform.GetComponent<IDamageable>();
+        CheckWeakness checkWeakness = other.GetComponent<CheckWeakness>();
+
+        if (damageable == null ||damageable.isDead || checkWeakness == null)
         {
-            Destroy(gameObject);
+            currentLifeTime = 0;
+            ObjectPool.ReturnObj(instigator.name, this);
             return;
         }
-        if (other.GetComponent<IDamageable>().isDead) return;
 
-        // 약점 공격 시
-        // 무기의 크리티컬 확률을 따르는 크리티컬 대미지
-        // Physics.OverlapBox 이용해서 구현
+        damageable.TakeDamage(instigator, instigator.GetComponent<Fighter>().CalculateDamage(projectileDamage, checkWeakness.damageType));
 
-        // 약점이 아닌 곳 공격 시
-        // 공격자의 자동 크리티컬 확률과 배율을 따르는 크리티컬 대미지
-        other.GetComponent<IDamageable>().TakeDamage(instigator, instigator.GetComponent<Fighter>().CalculateAutoCriticalDamage(projectileDamage));
-
-        Debug.Log(instigator.name);
         if (isExplode)
             Debug.Log("BOOM!");
         // Instantiate(explosionEffect, transform.position, Quaternion.identity);
 
-        Destroy(gameObject);
+        currentLifeTime = 0;
+        ObjectPool.ReturnObj(instigator.name, this);
     }
 
     private void Start()
@@ -82,7 +84,11 @@ public class Projectile : MonoBehaviour
         currentLifeTime += Time.deltaTime;
 
         if (currentLifeTime >= maxLifeTime)
-            Destroy(gameObject);
+        {
+            currentLifeTime = 0;
+            ObjectPool.ReturnObj(instigator.name, this); 
+        }
+            
     }
 
     // SphereCast를 통해 목표 탐색 후 가장 가까운 목표를 향해 유도

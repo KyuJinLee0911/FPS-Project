@@ -2,16 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Item : MonoBehaviour, IInteractable
 {
     protected ItemData itemData;
-
+    [SerializeField] private GameObject itemInfoWorldSpaceUI;
+    public GameObject worldSpaceUI { get => itemInfoWorldSpaceUI; }
+    public bool canInteract { get; set; }
     public void Init(string itemName)
     {
         this.itemData = ItemManager.Instance.GetItemData(itemName);
     }
 
     public virtual void DoItem() { }
+
+    public void DoInteraction()
+    {
+
+    }
 
     public ItemData GetItemData()
     {

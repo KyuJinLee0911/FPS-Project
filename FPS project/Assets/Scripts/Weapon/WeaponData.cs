@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum WeaponType
 {
@@ -27,8 +28,13 @@ public class WeaponData : ScriptableObject
     public float Damage { get => damage; }
     [SerializeField] private float criticalMultiples;
     public float CriticalMultiples { get => criticalMultiples; }
-    [SerializeField] private float mag;
-    public float Mag { get => mag; }
+    [SerializeField] private int mag;
+    public int Mag { get => mag; }
+    public int currentMag;
+    private bool canFireWeapon = true;
+    public bool CanFireWeapon { get => canFireWeapon; }
+    [SerializeField] private float reloadTime;
+    public float ReloadTime { get => reloadTime; }
     [SerializeField] private float fireRate;
     public float FireRate { get => fireRate; }
     [SerializeField] private float fireRange;
@@ -36,10 +42,18 @@ public class WeaponData : ScriptableObject
     [SerializeField] private WeaponType weaponType;
     public WeaponType WeaponType { get => weaponType; }
     [SerializeField] private Projectile projectile;
+    public Projectile Projectile { get => projectile; }
     private WeaponGrade weaponGrade;
     public GameObject weaponPrefab;
+
+    private void Awake()
+    {
+        currentMag = Mag;
+    }
+
     public void FireArm(Transform transform, GameObject instigator)
     {
+        currentMag--;
         switch (weaponType)
         {
             case WeaponType.WT_PROJECTILE:
@@ -59,13 +73,9 @@ public class WeaponData : ScriptableObject
     public void LaunchProjectile(Transform gunTransform, GameObject instigator)
     {
         projectile.range = fireRange;
-        Projectile projectileInstance = Instantiate(projectile, gunTransform.position, gunTransform.rotation);
+        Projectile projectileInstance = ObjectPool.GetObj(instigator.name);
+        projectileInstance.transform.SetPositionAndRotation(gunTransform.position, gunTransform.rotation);
         projectileInstance.SetDamage(damage, criticalMultiples, instigator);
-        
-        // 투사체의 목표를 설정 후 발사할 때 목표를 바라보고 화살이 일직선으로 나가도록
-        // projectileInstance.SetTarget(target, instigator, Damage);
-        // projectileInstance.transform.LookAt(gunTransform.position + gunTransform.forward);
-        // projectileInstance.transform.LookAt(projectileInstance.GetAimLocation());
         Debug.Log("PewPew");
     }
 
@@ -77,5 +87,14 @@ public class WeaponData : ScriptableObject
     public void MeleeAttack()
     {
         Debug.Log("Swoosh");
+    }
+
+    public IEnumerator ReloadMag()
+    {
+        canFireWeapon = false;
+        Debug.Log("Reloading...");
+        yield return new WaitForSeconds(reloadTime);
+        currentMag = mag;
+        canFireWeapon = true;
     }
 }
