@@ -20,7 +20,7 @@ public class Enemy : Creature
     }
     public override void Die()
     {
-
+        base.Die();
     }
 
     public override void TakeDamage(GameObject instigator, float damage)

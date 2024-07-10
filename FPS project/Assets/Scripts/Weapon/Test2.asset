@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3bbd3de6f5ac4e4e89bfdace73809f2, type: 3}
-  m_Name: Test
+  m_Name: Test2
   m_EditorClassIdentifier: 
-  weaponName: testWeapon
-  damage: 10
+  weaponName: 
+  damage: 20
   criticalMultiples: 2
-  mag: 30
-  currentMag: 30
+  mag: 15
+  currentMag: 15
   reloadTime: 2
-  fireRate: 10
+  fireRate: 2
   fireRange: 30
   weaponType: 0
   projectile: {fileID: 4138816894924396826, guid: 2b328852af457b846a937da2c39f4ad3, type: 3}
-  weaponPrefab: {fileID: 4243271525775095593, guid: 65119681e5b1b264d9081d42b4a80a89, type: 3}
+  weaponPrefab: {fileID: 4243271525775095593, guid: 24782bd632106e648a24b3c21ee59a78, type: 3}

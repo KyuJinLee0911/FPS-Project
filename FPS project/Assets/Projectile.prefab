@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4528065271109663012}
   - component: {fileID: 3716443933718712667}
   - component: {fileID: 4138816894924396826}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45262a3b8e1f334d92a5e8014f3d35c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 6
+  projectileSpeed: 30
   projectileDamage: 0
   criticalMagnification: 1
   autoCriticalMagnification: 1

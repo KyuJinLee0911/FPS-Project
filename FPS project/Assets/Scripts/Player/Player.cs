@@ -57,6 +57,7 @@ public class Player : Creature
 
     public override void Die()
     {
+        base.Die();
         OnPlayerDie();
     }
 

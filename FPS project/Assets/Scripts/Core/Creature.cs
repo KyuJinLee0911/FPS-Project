@@ -13,7 +13,11 @@ public abstract class Creature : MonoBehaviour, IDamageable, IStat
 
     public abstract void Initialize();
 
-    public abstract void Die();
+    public virtual void Die()
+    {
+        Debug.Log("Dead!!!!!!");
+        isDead = true;
+    }
 
     public virtual void TakeDamage(GameObject instigator, float damage)
     {
