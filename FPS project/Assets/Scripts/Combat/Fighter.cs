@@ -10,7 +10,7 @@ public class Fighter : MonoBehaviour
     public WeaponData CurrentWeapon { get => currentWeapon; set => currentWeapon = value; }
     public List<GameObject> weaponSlots = new List<GameObject>();
     public int currentWeaponIndex;
-    [SerializeField] private bool isWeaponFire = false;
+    public bool isWeaponFire = false;
     [SerializeField] private float timeSinceLastFire = 0f;
     // 히트 스캔에 필요한 타겟
     [SerializeField] private IDamageable target;
@@ -46,7 +46,7 @@ public class Fighter : MonoBehaviour
         }
     }
 
-    void Fire()
+    public void Fire()
     {
         float _timeBetweenFires = 1 / currentWeapon.FireRate;
 
