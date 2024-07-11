@@ -19,3 +19,7 @@ MonoBehaviour:
   autoCriticalRate: 0.1
   mainSkill: {fileID: 1628043387786768075, guid: 118d613dd2c90a842aa581357d7857ac, type: 3}
   subSkill: {fileID: 8432331294738534537, guid: 79f8da56d7b000a438f16f99aff10077, type: 3}
+  allAbilities:
+  - {fileID: 2791440842733047449, guid: 3995acf10009f9845989ff770048add1, type: 3}
+  - {fileID: 6047071159243697702, guid: 5204e437547508847b33aab27c47cce9, type: 3}
+  - {fileID: 7920360056512729223, guid: 4a0ddca180c810a428a6a5d9c61624e8, type: 3}

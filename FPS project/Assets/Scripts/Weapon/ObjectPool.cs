@@ -75,6 +75,4 @@ public class ObjectPool : MonoBehaviour
         obj.transform.SetParent(Instance.transform);
         Instance.poolingObjQueueDict[key].Enqueue(obj);
     }
-
-
 }

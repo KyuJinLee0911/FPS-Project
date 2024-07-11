@@ -12,4 +12,6 @@ public class PlayerClassData : ScriptableObject
     public float autoCriticalRate;
     public Skill mainSkill;
     public Skill subSkill;
+    [SerializeField] private List<Ability> allAbilities;
+    public List<Ability> AllAbilities { get => allAbilities; }
 }

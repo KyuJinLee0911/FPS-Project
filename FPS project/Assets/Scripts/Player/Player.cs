@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Media;
 using UnityEngine;
 
 public enum UnitCode
@@ -20,11 +19,13 @@ public class Player : Creature
     public PlayerClassData classData;
     public Skill mainSkill;
     public Skill subSkill;
+    private int abilityPoint;
 
     public List<ItemData> itemList = new List<ItemData>();
 
     public event Action OnPlayerDamage;
     public event Action OnPlayerDie;
+    public event Action OnPlayerLevelUp;
 
     // 처음 시작할 때, 캐릭터 클래스 변경 시에만 호출
     // 캐릭터 클래스는 게임 플레이 도중 변경할 수 없고, 거점에서만 변경이 가능하기 때문에
@@ -43,11 +44,18 @@ public class Player : Creature
         mainSkill.Initialize();
         subSkill = classData.subSkill;
         subSkill.Initialize();
+
+        OnPlayerLevelUp += GainAbilityPoint;
+        OnPlayerLevelUp += GameManager.Instance.OpenSelectAbilityUI;
     }
 
     private void Start()
     {
         Initialize();
+        GameManager.Instance.currentClass = classData;
+        {
+            
+        }
     }
 
     public override void TakeDamage(GameObject instigator, float damage)
@@ -64,7 +72,20 @@ public class Player : Creature
     public void ChangePlayerClass(int index)
     {
         classData = GameManager.Instance.playerClassDatas[index];
+        GameManager.Instance.currentClass = classData;
         unitCode = classData.unitCode;
         Initialize();
+    }
+
+    public void PlayerLevelUp()
+    {
+        level++;
+        Debug.Log($"Level Up! Current Level : {level}");
+        OnPlayerLevelUp();
+    }
+
+    public void GainAbilityPoint()
+    {
+        abilityPoint++;
     }
 }
