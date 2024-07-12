@@ -22,4 +22,5 @@ public interface IInteractable
     GameObject worldSpaceUI { get; }
     bool canInteract { get; set; }
     void DoInteraction();
+    void SetDescription();
 }

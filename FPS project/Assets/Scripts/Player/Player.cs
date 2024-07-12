@@ -15,13 +15,13 @@ public enum UnitCode
 public class Player : Creature
 {
     public UnitCode unitCode;
-    public Status status;
     public PlayerClassData classData;
     public Skill mainSkill;
     public Skill subSkill;
     private int abilityPoint;
-
-    public List<ItemData> itemList = new List<ItemData>();
+    public int currentExp;
+    public int currentTotalExp;
+    public int expToNextLevel;
 
     public event Action OnPlayerDamage;
     public event Action OnPlayerDie;
@@ -32,11 +32,11 @@ public class Player : Creature
     // 모든 스탯을 초기값으로 리셋해도 무방함
     public override void Initialize()
     {
-        status = new Status();
-        status = status.SetUnitStatus(unitCode);
-        hp = status.hp;
-        defence = status.defence;
         level = 1;
+        hp = GameManager.Instance._data.userStats[level].hp;
+        defence = GameManager.Instance._data.userStats[level].defence;
+        Debug.Log($"User created, level : {level}, hp : {hp}, defence : {defence}");
+
         autoCriticalRate = 0.1f;
         autoCriticalMagnification = 1.75f;
         isDead = false;
@@ -46,16 +46,8 @@ public class Player : Creature
         subSkill.Initialize();
 
         OnPlayerLevelUp += GainAbilityPoint;
-        OnPlayerLevelUp += GameManager.Instance.OpenSelectAbilityUI;
-    }
-
-    private void Start()
-    {
-        Initialize();
-        GameManager.Instance.currentClass = classData;
-        {
-            
-        }
+        OnPlayerLevelUp += GameManager.Instance._class.OpenSelectAbilityUI;
+        OnPlayerLevelUp += SetStats;
     }
 
     public override void TakeDamage(GameObject instigator, float damage)
@@ -71,8 +63,9 @@ public class Player : Creature
 
     public void ChangePlayerClass(int index)
     {
-        classData = GameManager.Instance.playerClassDatas[index];
-        GameManager.Instance.currentClass = classData;
+        classData = GameManager.Instance._class.playerClassDatas[index];
+        GameManager.Instance._class.currentClass = classData;
+        GameManager.Instance._data.Init();
         unitCode = classData.unitCode;
         Initialize();
     }
@@ -87,5 +80,14 @@ public class Player : Creature
     public void GainAbilityPoint()
     {
         abilityPoint++;
+    }
+
+    public void SetStats()
+    {
+        Dictionary<int, Stat> statDict = GameManager.Instance._data.userStats;
+        hp = statDict[level].hp;
+        defence = statDict[level].defence;
+        currentExp = 0;
+        expToNextLevel = statDict[level].expToNextLevel;
     }
 }

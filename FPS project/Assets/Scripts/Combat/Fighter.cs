@@ -20,8 +20,8 @@ public class Fighter : MonoBehaviour
 
     private void Start()
     {
-        ObjectPool.Instance.AddNewObj(gameObject.name, currentWeapon.Projectile.gameObject);
-        ObjectPool.Instance.Initialize(gameObject.name, currentWeapon.Mag);
+        GameManager.Instance._pool.AddNewObj(gameObject.name, currentWeapon.Projectile.gameObject);
+        GameManager.Instance._pool.Initialize(gameObject.name, currentWeapon.Mag);
         weaponSlots.Add(GunPosition.GetChild(0).gameObject);
         currentWeaponIndex = 0;
     }

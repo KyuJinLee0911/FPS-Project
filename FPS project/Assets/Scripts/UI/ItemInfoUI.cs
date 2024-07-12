@@ -4,10 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum CanvasType
+{
+    CT_WORLDSPACE,
+    CT_SCREENSPACE
+}
+
 public class ItemInfoUI : MonoBehaviour
 {
-    public Text itemNameTxt;
-    public Text itemDescriptionText;
-    public Image itemImage;
+    
+
 
 }

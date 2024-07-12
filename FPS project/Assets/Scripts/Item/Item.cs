@@ -1,42 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Item : MonoBehaviour, IInteractable
 {
-    protected ItemData itemData;
-    [SerializeField] private GameObject itemInfoWorldSpaceUI;
+    [SerializeField] protected ItemData itemData;
+    public ItemData ItemData { get => itemData; }
+    [SerializeField] protected GameObject itemInfoWorldSpaceUI;
     public GameObject worldSpaceUI { get => itemInfoWorldSpaceUI; }
     public bool canInteract { get; set; }
-    public void Init(string itemName)
+    
+    public CanvasType canvasType;
+    public Text itemNameTxt;
+    public Text itemDescriptionText;
+    public Image itemImage = null;
+    public Item item;
+
+    public void SetDescription()
     {
-        this.itemData = ItemManager.Instance.GetItemData(itemName);
+        if (canvasType == CanvasType.CT_SCREENSPACE) return;
+        Debug.Log($"{item.ItemData}");
+        itemNameTxt.text = item.ItemData.itemName;
+        itemDescriptionText.text = item.ItemData.itemDescription;
+        if (item.ItemData.itemImage != null)
+            itemImage.sprite = item.ItemData.itemImage;
     }
 
     public virtual void DoItem() { }
 
-    public void DoInteraction()
+    public virtual void DoInteraction()
     {
-
-    }
-
-    public ItemData GetItemData()
-    {
-        return itemData;
-    }
-
-    private void Start()
-    {
-        Init(this.name);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag("Player")) return;
-
         DoItem();
-        ItemManager.Instance.AddItemToPlayer(itemData);
-        Debug.Log($"Add {itemData.itemName} to player");
+        GameManager.Instance._item.activatedItem.Add(itemData);
+        SetDescription();
+        Debug.Log($"item {itemData.itemKey} activated");
         Destroy(gameObject);
     }
 }

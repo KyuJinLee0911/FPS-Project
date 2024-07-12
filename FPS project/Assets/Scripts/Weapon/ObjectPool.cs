@@ -5,23 +5,8 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    private static ObjectPool instance;
-    public static ObjectPool Instance
-    {
-        get
-        {
-            if (instance != null) return instance;
-            else return null;
-        }
-    }
     private Dictionary<string, GameObject> sampleObjDict = new Dictionary<string, GameObject>();
     private Dictionary<string, Queue<Projectile>> poolingObjQueueDict = new Dictionary<string, Queue<Projectile>>();
-
-    private void Awake()
-    {
-        if (instance == null) instance = this;
-        else Destroy(gameObject);
-    }
 
     public void Initialize(string key, int initCount)
     {
@@ -51,28 +36,28 @@ public class ObjectPool : MonoBehaviour
         
     }
 
-    public static Projectile GetObj(string key)
+    public Projectile GetObj(string key)
     {
-        if(Instance.poolingObjQueueDict[key].Count > 0)
+        if(poolingObjQueueDict[key].Count > 0)
         {
-            var obj = Instance.poolingObjQueueDict[key].Dequeue();
+            var obj = poolingObjQueueDict[key].Dequeue();
             obj.transform.SetParent(null);
             obj.gameObject.SetActive(true);
             return obj;
         }
         else
         {
-            var newObj = Instance.CreateNewObj(key);
+            var newObj = CreateNewObj(key);
             newObj.gameObject.SetActive(true);
             newObj.transform.SetParent(null);
             return newObj;
         }
     }
 
-    public static void ReturnObj(string key, Projectile obj)
+    public void ReturnObj(string key, Projectile obj)
     {
         obj.gameObject.SetActive(false);
-        obj.transform.SetParent(Instance.transform);
-        Instance.poolingObjQueueDict[key].Enqueue(obj);
+        obj.transform.SetParent(transform);
+        poolingObjQueueDict[key].Enqueue(obj);
     }
 }

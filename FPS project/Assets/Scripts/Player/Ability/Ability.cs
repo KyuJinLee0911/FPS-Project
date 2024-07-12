@@ -7,7 +7,7 @@ public class Ability : MonoBehaviour
     public AbilityData data;
     public virtual void DoAbility()
     {
-        GameManager.Instance.activatedAbilityDict.Add(data.Key, this);
+        GameManager.Instance._class.activatedAbilityDict.Add(data.Key, this);
         Debug.Log($"Name : {data.AbilityName}, Grade : {data.AbilityGrade} added and activated");
     }
 }

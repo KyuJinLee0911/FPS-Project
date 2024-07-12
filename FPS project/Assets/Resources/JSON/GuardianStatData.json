@@ -1,0 +1,46 @@
+{
+    "stats": [
+        {
+            "level": "1",
+            "hp": "100",
+            "defence": "0.1",
+            "expToNextLevel" : "100"
+        },
+        {
+            "level": "2",
+            "hp": "110",
+            "defence": "0.11",
+            "expToNextLevel" : "150"
+        },
+        {
+            "level": "3",
+            "hp": "120",
+            "defence": "0.12",
+            "expToNextLevel" : "250"
+        },
+        {
+            "level": "4",
+            "hp": "130",
+            "defence": "0.13",
+            "expToNextLevel" : "400"
+        },
+        {
+            "level": "5",
+            "hp": "140",
+            "defence": "0.14",
+            "expToNextLevel" : "600"
+        },
+        {
+            "level": "6",
+            "hp": "150",
+            "defence": "0.15",
+            "expToNextLevel" : "850"
+        },
+        {
+            "level": "7",
+            "hp": "160",
+            "defence": "0.16",
+            "expToNextLevel" : "1150"
+        }
+    ]
+}

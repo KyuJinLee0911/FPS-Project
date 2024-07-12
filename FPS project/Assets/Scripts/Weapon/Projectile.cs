@@ -34,7 +34,7 @@ public class Projectile : MonoBehaviour
         if (damageable == null ||damageable.isDead || checkWeakness == null)
         {
             currentLifeTime = 0;
-            ObjectPool.ReturnObj(instigator.name, this);
+            GameManager.Instance._pool.ReturnObj(instigator.name, this);
             return;
         }
 
@@ -45,7 +45,7 @@ public class Projectile : MonoBehaviour
         // Instantiate(explosionEffect, transform.position, Quaternion.identity);
 
         currentLifeTime = 0;
-        ObjectPool.ReturnObj(instigator.name, this);
+        GameManager.Instance._pool.ReturnObj(instigator.name, this);
     }
 
     private void Start()
@@ -86,7 +86,7 @@ public class Projectile : MonoBehaviour
         if (currentLifeTime >= maxLifeTime)
         {
             currentLifeTime = 0;
-            ObjectPool.ReturnObj(instigator.name, this); 
+            GameManager.Instance._pool.ReturnObj(instigator.name, this); 
         }
             
     }

@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bbd3de6f5ac4e4e89bfdace73809f2, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
+  itemType: 0
+  itemKey: tw1
+  itemName: Test Weapon
+  itemRarity: 0
+  itemDescription: twdescription twdescription twdescription twdescription twdescription
+    twdescription twdescription twdescription
+  itemImage: {fileID: 0}
   weaponName: testWeapon
   damage: 10
   criticalMultiples: 2

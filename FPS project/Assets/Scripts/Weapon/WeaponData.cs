@@ -10,20 +10,9 @@ public enum WeaponType
     WT_HEATSCAN,
 }
 
-public enum WeaponGrade
-{
-    WG_NORMAL,
-    WG_RARE,
-    WG_SUPERIOR,
-    WG_EPIC,
-    WG_LEGENDARY
-}
-
 [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make new Weapon", order = 0)]
-public class WeaponData : ScriptableObject
+public class WeaponData : ItemData
 {
-    [SerializeField] string weaponName;
-    public string Name { get => weaponName; }
     [SerializeField] private float damage;
     public float Damage { get => damage; }
     [SerializeField] private float criticalMultiples;
@@ -43,7 +32,6 @@ public class WeaponData : ScriptableObject
     public WeaponType WeaponType { get => weaponType; }
     [SerializeField] private Projectile projectile;
     public Projectile Projectile { get => projectile; }
-    private WeaponGrade weaponGrade;
     public GameObject weaponPrefab;
 
     private void Awake()
@@ -73,7 +61,7 @@ public class WeaponData : ScriptableObject
     public void LaunchProjectile(Transform gunTransform, GameObject instigator)
     {
         projectile.range = fireRange;
-        Projectile projectileInstance = ObjectPool.GetObj(instigator.name);
+        Projectile projectileInstance = GameManager.Instance._pool.GetObj(instigator.name);
         projectileInstance.transform.SetPositionAndRotation(gunTransform.position, gunTransform.rotation);
         projectileInstance.SetDamage(damage, criticalMultiples, instigator);
         Debug.Log("PewPew");

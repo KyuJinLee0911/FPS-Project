@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour, IInteractable
+public class Weapon : Item
 {
     public WeaponData weaponData;
-    [SerializeField] GameObject itemInfoWorldSpaceUI;
-    public GameObject worldSpaceUI { get => itemInfoWorldSpaceUI; }
-    public bool canInteract { get; set; }
 
-    public void DoInteraction()
+    public override void DoInteraction()
     {
         itemInfoWorldSpaceUI.SetActive(false);
         Fighter fighter = GameObject.FindGameObjectWithTag("Player").GetComponent<Fighter>();
