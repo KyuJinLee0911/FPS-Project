@@ -20,14 +20,17 @@ public class Fighter : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance._pool.AddNewObj(gameObject.name, currentWeapon.Projectile.gameObject);
-        GameManager.Instance._pool.Initialize(gameObject.name, currentWeapon.Mag);
+        if (currentWeapon.WeaponType == WeaponType.WT_PROJECTILE)
+        {
+            GameManager.Instance._pool.AddNewObj(gameObject.name, currentWeapon.Projectile.gameObject);
+            GameManager.Instance._pool.Initialize(gameObject.name, currentWeapon.Mag);
+        }
         weaponSlots.Add(GunPosition.GetChild(0).gameObject);
         currentWeaponIndex = 0;
     }
     void Update()
     {
-        if (isWeaponFire && currentWeapon.CanFireWeapon)
+        if (isWeaponFire)
             Fire();
     }
 
@@ -48,6 +51,7 @@ public class Fighter : MonoBehaviour
 
     public void Fire()
     {
+        if(!currentWeapon.CanFireWeapon) return;
         float _timeBetweenFires = 1 / currentWeapon.FireRate;
 
         timeSinceLastFire += Time.deltaTime;

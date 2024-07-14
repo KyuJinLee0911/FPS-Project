@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3bbd3de6f5ac4e4e89bfdace73809f2, type: 3}
-  m_Name: EnemyWeaponTest
+  m_Name: TestExplosion
   m_EditorClassIdentifier: 
   itemType: 0
-  itemKey: ew
-  itemName: enemy  weapon
+  itemKey: tw1
+  itemName: Test Weapon
   itemRarity: 0
-  itemDescription: ew description
+  itemDescription: twdescription twdescription twdescription twdescription twdescription
+    twdescription twdescription twdescription
   itemImage: {fileID: 0}
-  weaponName: enemy weapon
-  damage: 20
+  damage: 10
   criticalMultiples: 2
-  mag: 15
-  currentMag: 15
+  mag: 30
+  currentMag: 5
   reloadTime: 2
-  fireRate: 2
+  fireRate: 10
   fireRange: 30
   weaponType: 0
-  projectile: {fileID: 4138816894924396826, guid: 2b328852af457b846a937da2c39f4ad3, type: 3}
-  weaponPrefab: {fileID: 0}
+  projectile: {fileID: 4138816894924396826, guid: 2c4aec30894c49d458b4a8124bef606e, type: 3}
+  weaponPrefab: {fileID: 4243271525775095593, guid: eceb0cd74a8fd3844ba577a5b0fdabe8, type: 3}

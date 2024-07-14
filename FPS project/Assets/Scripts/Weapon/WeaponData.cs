@@ -49,7 +49,7 @@ public class WeaponData : ItemData
                 break;
 
             case WeaponType.WT_HEATSCAN:
-                FireHeatscan();
+                FireHitScan(instigator);
                 break;
 
             case WeaponType.WT_MELEE:
@@ -63,13 +63,28 @@ public class WeaponData : ItemData
         projectile.range = fireRange;
         Projectile projectileInstance = GameManager.Instance._pool.GetObj(instigator.name);
         projectileInstance.transform.SetPositionAndRotation(gunTransform.position, gunTransform.rotation);
-        projectileInstance.SetDamage(damage, criticalMultiples, instigator);
+        projectileInstance.SetProjectileDamage(damage, criticalMultiples, instigator);
         Debug.Log("PewPew");
     }
 
-    public void FireHeatscan()
+    public void FireHitScan(GameObject instigator)
     {
-        Debug.Log("Buzzzzzzz");
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2 - 1, Screen.height / 2 - 1));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, fireRange))
+        {
+            IDamageable target = hit.collider.GetComponent<IDamageable>();
+            if (target == null) return;
+
+            // 탄흔효과
+            ShowBulletEffect();
+            target.TakeDamage(instigator, damage);
+        }
+    }
+
+    void ShowBulletEffect()
+    {
+
     }
 
     public void MeleeAttack()
@@ -84,5 +99,10 @@ public class WeaponData : ItemData
         yield return new WaitForSeconds(reloadTime);
         currentMag = mag;
         canFireWeapon = true;
+    }
+
+    public void ApplyImpack(Vector3 dir, float power)
+    {
+        // 넉백
     }
 }

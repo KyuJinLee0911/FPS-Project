@@ -90,6 +90,14 @@ public class DataManager : MonoBehaviour
             Debug.Log("Successfully Loaded");
         }
     }
+
+    public void DeleteData()
+    {
+        if(!File.Exists(path))
+            return;
+        
+        File.Delete(path);
+    }
 }
 
 [Serializable]

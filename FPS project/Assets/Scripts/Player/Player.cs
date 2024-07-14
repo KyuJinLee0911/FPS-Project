@@ -32,6 +32,9 @@ public class Player : Creature
     // 모든 스탯을 초기값으로 리셋해도 무방함
     public override void Initialize()
     {
+        if(GameManager.Instance.player == null)
+            GameManager.Instance.player = this;
+
         level = 1;
         hp = GameManager.Instance._data.userStats[level].hp;
         defence = GameManager.Instance._data.userStats[level].defence;
@@ -48,6 +51,11 @@ public class Player : Creature
         OnPlayerLevelUp += GainAbilityPoint;
         OnPlayerLevelUp += GameManager.Instance._class.OpenSelectAbilityUI;
         OnPlayerLevelUp += SetStats;
+    }
+
+    void Start()
+    {
+        Initialize();
     }
 
     public override void TakeDamage(GameObject instigator, float damage)

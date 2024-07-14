@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class Enemy : Creature
     [SerializeField] float chaseRange;
     private BTSelector root;
     private Fighter fighter;
+    private event Action OnGetHit;
+
     public override void Initialize()
     {
         targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -42,6 +45,8 @@ public class Enemy : Creature
         scoutSequence.AddChild(scoutAction);
 
         root.Evaluate();
+
+        OnGetHit += ShowHitEffect;
     }
 
     private void Update()
@@ -61,6 +66,7 @@ public class Enemy : Creature
 
     public override void TakeDamage(GameObject instigator, float damage)
     {
+        OnGetHit();
         base.TakeDamage(instigator, damage);
     }
 
@@ -79,6 +85,7 @@ public class Enemy : Creature
     private BTNodeState Attack()
     {
         if(isDead) return BTNodeState.Failure;
+        
         transform.LookAt(targetTransform);
         fighter.isWeaponFire = true;
         fighter.Fire();
@@ -103,5 +110,11 @@ public class Enemy : Creature
 
         Debug.Log("Scout Action");
         return BTNodeState.Running;
+    }
+
+    void ShowHitEffect()
+    {
+        // 피격 효과
+        Debug.Log($"Effect! {gameObject.name}");
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 public class Projectile : MonoBehaviour
 {
     // IDamageable target;
@@ -20,8 +21,15 @@ public class Projectile : MonoBehaviour
     float currentLifeTime;
     GameObject instigator = null;
 
+    [SerializeField] private float explosionForce;
+    [SerializeField] private float explosionRadious;
+    [SerializeField] private float expUpwardModifier;
+
     private void OnTriggerEnter(Collider other)
     {
+        // 폭발하는 투사체의 경우, 폭발은 triggerEnter시에 항상 발생
+        if (isExplode)
+            Explode();
         // Projectile은 HitBox레이어
         // HitBox 레이어는 HurtBox 레이어와만 상호작용이 가능하도록 설정해 두었기 때문에
         // other 콜라이더는 Enemy 오브젝트의 자식 오브젝트로 들어가있는 HurtBox레이어를 가진 Head와 Body 오브젝트와 상호작용
@@ -31,18 +39,22 @@ public class Projectile : MonoBehaviour
         IDamageable damageable = rootTransform.GetComponent<IDamageable>();
         CheckWeakness checkWeakness = other.GetComponent<CheckWeakness>();
 
-        if (damageable == null ||damageable.isDead || checkWeakness == null)
+        // 데미지를 입힐 수 없는 오브젝트이거나, 이미 죽은 적이거나, 약점을 판단하는 checkweakness가 없는 경우
+        // 오브젝트를 풀에 바로 리턴
+        if (damageable == null || damageable.isDead || checkWeakness == null)
         {
             currentLifeTime = 0;
             GameManager.Instance._pool.ReturnObj(instigator.name, this);
             return;
         }
 
-        damageable.TakeDamage(instigator, instigator.GetComponent<Fighter>().CalculateDamage(projectileDamage, checkWeakness.damageType));
+        WeaponData weaponData = instigator.GetComponent<Fighter>().CurrentWeapon;
 
-        if (isExplode)
-            Debug.Log("BOOM!");
-        // Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        if (!isExplode)
+            // 넉백
+            weaponData.ApplyImpack(Vector3.zero, 0);
+
+        damageable.TakeDamage(instigator, instigator.GetComponent<Fighter>().CalculateDamage(projectileDamage, checkWeakness.damageType));
 
         currentLifeTime = 0;
         GameManager.Instance._pool.ReturnObj(instigator.name, this);
@@ -71,7 +83,7 @@ public class Projectile : MonoBehaviour
     // 대미지와 크리티컬 배율(무기의), 공격자를 무기로부터 전달받음
     // 크리티컬 확률은 받아오지 않아도 됨
     // 약점을 공격하면 무조건 크리티컬이기 때문
-    public void SetDamage(float damage, float criticalMagnification, GameObject instigator)
+    public void SetProjectileDamage(float damage, float criticalMagnification, GameObject instigator)
     {
         projectileDamage = damage;
         this.criticalMagnification = criticalMagnification;
@@ -86,9 +98,9 @@ public class Projectile : MonoBehaviour
         if (currentLifeTime >= maxLifeTime)
         {
             currentLifeTime = 0;
-            GameManager.Instance._pool.ReturnObj(instigator.name, this); 
+            GameManager.Instance._pool.ReturnObj(instigator.name, this);
         }
-            
+
     }
 
     // SphereCast를 통해 목표 탐색 후 가장 가까운 목표를 향해 유도
@@ -127,5 +139,18 @@ public class Projectile : MonoBehaviour
             return;
     }
 
-    // 오브젝트 풀링
+    void Explode()
+    {
+        Collider[] colliders;
+
+        colliders = Physics.OverlapSphere(transform.position, 20);
+
+        foreach (var col in colliders)
+        {
+            if (col.attachedRigidbody == null) continue;
+            if (col.CompareTag("Player")) continue;
+
+            col.attachedRigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadious, expUpwardModifier);
+        }
+    }
 }

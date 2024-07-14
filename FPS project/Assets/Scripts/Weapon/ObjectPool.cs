@@ -26,6 +26,7 @@ public class ObjectPool : MonoBehaviour
 
     public void AddNewObj(string key, GameObject obj)
     {
+        if(obj == null) return;
         if (!sampleObjDict.ContainsKey(key))
             sampleObjDict.Add(key, obj);
         else
