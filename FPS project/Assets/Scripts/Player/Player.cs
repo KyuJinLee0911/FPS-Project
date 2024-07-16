@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FPS.Control;
 using UnityEngine;
 
 public enum UnitCode
@@ -19,7 +20,6 @@ public class Player : Creature
     public Skill mainSkill;
     public Skill subSkill;
     private int abilityPoint;
-    public int currentExp;
     public int currentTotalExp;
     public int expToNextLevel;
 
@@ -27,21 +27,20 @@ public class Player : Creature
     public event Action OnPlayerDie;
     public event Action OnPlayerLevelUp;
 
-    // 처음 시작할 때, 캐릭터 클래스 변경 시에만 호출
-    // 캐릭터 클래스는 게임 플레이 도중 변경할 수 없고, 거점에서만 변경이 가능하기 때문에
-    // 모든 스탯을 초기값으로 리셋해도 무방함
+    // 스테이지 별로 플레이어 오브젝트 존재
+    // 각 스테이지가 시작될때마다 호출
     public override void Initialize()
     {
-        if(GameManager.Instance.player == null)
+        if (GameManager.Instance.player == null)
+        {
             GameManager.Instance.player = this;
+            GameManager.Instance.controller = GetComponent<PlayerController>();
+        }
 
-        level = 1;
-        hp = GameManager.Instance._data.userStats[level].hp;
-        defence = GameManager.Instance._data.userStats[level].defence;
+        GameManager.Instance._data.LoadData();
+        SetPlayerPosition();
+
         Debug.Log($"User created, level : {level}, hp : {hp}, defence : {defence}");
-
-        autoCriticalRate = 0.1f;
-        autoCriticalMagnification = 1.75f;
         isDead = false;
         mainSkill = classData.mainSkill;
         mainSkill.Initialize();
@@ -51,6 +50,12 @@ public class Player : Creature
         OnPlayerLevelUp += GainAbilityPoint;
         OnPlayerLevelUp += GameManager.Instance._class.OpenSelectAbilityUI;
         OnPlayerLevelUp += SetStats;
+    }
+
+    void SetPlayerPosition()
+    {
+        transform.position = GameManager.Instance.startPos.position;
+        transform.rotation = GameManager.Instance.startPos.rotation;
     }
 
     void Start()
@@ -63,9 +68,9 @@ public class Player : Creature
         base.TakeDamage(instigator, damage);
     }
 
-    public override void Die()
+    public override void Die(GameObject instigator)
     {
-        base.Die();
+        base.Die(instigator);
         OnPlayerDie();
     }
 
@@ -76,6 +81,14 @@ public class Player : Creature
         GameManager.Instance._data.Init();
         unitCode = classData.unitCode;
         Initialize();
+    }
+    private void Update()
+    {
+        if(exp >= expToNextLevel)
+        {
+            exp -= expToNextLevel;
+            PlayerLevelUp();
+        }
     }
 
     public void PlayerLevelUp()
@@ -95,7 +108,7 @@ public class Player : Creature
         Dictionary<int, Stat> statDict = GameManager.Instance._data.userStats;
         hp = statDict[level].hp;
         defence = statDict[level].defence;
-        currentExp = 0;
+        exp = 0;
         expToNextLevel = statDict[level].expToNextLevel;
     }
 }

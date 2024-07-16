@@ -7,7 +7,7 @@ public enum WeaponType
 {
     WT_PROJECTILE,
     WT_MELEE,
-    WT_HEATSCAN,
+    WT_HITSCAN,
 }
 
 [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make new Weapon", order = 0)]
@@ -20,8 +20,7 @@ public class WeaponData : ItemData
     [SerializeField] private int mag;
     public int Mag { get => mag; }
     public int currentMag;
-    private bool canFireWeapon = true;
-    public bool CanFireWeapon { get => canFireWeapon; }
+    public bool canFireWeapon { get; set; }
     [SerializeField] private float reloadTime;
     public float ReloadTime { get => reloadTime; }
     [SerializeField] private float fireRate;
@@ -33,11 +32,10 @@ public class WeaponData : ItemData
     [SerializeField] private Projectile projectile;
     public Projectile Projectile { get => projectile; }
     public GameObject weaponPrefab;
+    public LineRenderer bulletEffect;
+    [SerializeField] private float rebound;
+    public float Rebound { get => rebound; set => rebound = value; }
 
-    private void Awake()
-    {
-        currentMag = Mag;
-    }
 
     public void FireArm(Transform transform, GameObject instigator)
     {
@@ -48,7 +46,7 @@ public class WeaponData : ItemData
                 LaunchProjectile(transform, instigator);
                 break;
 
-            case WeaponType.WT_HEATSCAN:
+            case WeaponType.WT_HITSCAN:
                 FireHitScan(instigator);
                 break;
 
@@ -64,12 +62,13 @@ public class WeaponData : ItemData
         Projectile projectileInstance = GameManager.Instance._pool.GetObj(instigator.name);
         projectileInstance.transform.SetPositionAndRotation(gunTransform.position, gunTransform.rotation);
         projectileInstance.SetProjectileDamage(damage, criticalMultiples, instigator);
-        Debug.Log("PewPew");
     }
 
     public void FireHitScan(GameObject instigator)
     {
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2 - 1, Screen.height / 2 - 1));
+        Transform muzzleTransform = instigator.GetComponent<Fighter>().muzzleTransform;
+        Vector2 reboundRayPos = Random.insideUnitCircle * rebound * 0.033f;
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2 - 1 + reboundRayPos.x, Screen.height / 2 - 1 + reboundRayPos.y));
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, fireRange))
         {
@@ -77,14 +76,13 @@ public class WeaponData : ItemData
             if (target == null) return;
 
             // 탄흔효과
-            ShowBulletEffect();
+            bulletEffect.SetPosition(1, hit.point);
             target.TakeDamage(instigator, damage);
         }
-    }
-
-    void ShowBulletEffect()
-    {
-
+        else
+        {
+            bulletEffect.SetPosition(1, muzzleTransform.position + muzzleTransform.TransformDirection(reboundRayPos.x, reboundRayPos.y, 15));
+        }
     }
 
     public void MeleeAttack()

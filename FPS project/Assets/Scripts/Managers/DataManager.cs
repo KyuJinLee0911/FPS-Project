@@ -43,12 +43,13 @@ public class DataManager : MonoBehaviour
     public void SaveData()
     {
         Player player = GameManager.Instance.player;
-        data.pos = player.transform.position;
-        data.rot = player.transform.rotation.eulerAngles;
         data.hp = player.hp;
         data.defence = player.defence;
         data.level = player.level;
-        data.currentExp = 0;
+        data.currentExp = player.exp;
+        data.currentClass = (int)GameManager.Instance._class.currentClass.classType;
+        data.autoCriticalRate = player.autoCriticalRate;
+        data.autoCriticalMagnification = player.autoCriticalMagnification;
 
         string json = JsonUtility.ToJson(data, true);
 
@@ -66,11 +67,12 @@ public class DataManager : MonoBehaviour
             player.level = userStats[1].level;
             player.hp = userStats[1].hp;
             player.defence = userStats[1].defence;
-            player.currentExp = 0;
+            player.exp = 0;
             player.expToNextLevel = userStats[1].expToNextLevel;
+            GameManager.Instance._class.currentClass = GameManager.Instance._class.playerClassDatas[0];
+            player.autoCriticalRate = 0.1f;
+            player.autoCriticalMagnification = 1.75f;
 
-            player.transform.position = Vector3.zero;
-            player.transform.rotation = Quaternion.identity;
             SaveData();
         }
         else
@@ -81,14 +83,19 @@ public class DataManager : MonoBehaviour
             player.level = data.level;
             player.hp = data.hp;
             player.defence = data.defence;
-            player.currentExp = data.currentExp;
+            player.exp = data.currentExp;
             player.expToNextLevel = userStats[data.level].expToNextLevel;
-
-            player.transform.position = new Vector3(data.pos.x, data.pos.y, data.pos.z);
-            player.transform.rotation = Quaternion.Euler(data.rot.x, data.rot.y, data.rot.z);
+            GameManager.Instance._class.currentClass = GameManager.Instance._class.playerClassDatas[data.currentClass];
+            player.autoCriticalRate = data.autoCriticalRate;
+            player.autoCriticalMagnification = data.autoCriticalMagnification;
 
             Debug.Log("Successfully Loaded");
         }
+    }
+
+    public bool IsSaveDataExist()
+    {
+        return File.Exists(path);
     }
 
     public void DeleteData()
@@ -103,10 +110,11 @@ public class DataManager : MonoBehaviour
 [Serializable]
 public class SaveData
 {
-    public Vector3 pos;
-    public Vector3 rot;
     public float hp;
     public float defence;
     public int level;
     public int currentExp;
+    public int currentClass;
+    public float autoCriticalRate;
+    public float autoCriticalMagnification;
 }

@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.UI;
+
+public enum ClassType
+{
+    CT_GUARDIAN = 0,
+    CT_COMMANDO = 1,
+    CT_REACON = 2
+}
 
 public class ClassManager : MonoBehaviour
 {
@@ -55,10 +63,18 @@ public class ClassManager : MonoBehaviour
             // - ability data를 정상적으로 받아오지 못하는 버그가 있음
             temp.ability = newAbility;
             temp.gameObject.SetActive(true);
+            GameManager.Instance.SetCursorState(true, CursorLockMode.None);
+            // 어빌리티 선택시 일시정지 해제 및 커서 숨기고, 버튼 다시 비활성화
+            temp.GetComponent<Button>().onClick.AddListener(()=>GameManager.Instance.AdjustTimeScale(1));
+            temp.GetComponent<Button>().onClick.AddListener(()=>GameManager.Instance.SetCursorState(false, CursorLockMode.Locked));
+            temp.GetComponent<Button>().onClick.AddListener(() => temp.gameObject.SetActive(false));
 
             // 카운트 증가
             // 카운트가 3이 되기 전, 즉 0, 1, 2 총 세번 반복하여 중복 없이 등록
             cnt++;
         }
+
+        // 어빌리티 창 켜질때 일시정지
+        GameManager.Instance.AdjustTimeScale(0);
     }
 }

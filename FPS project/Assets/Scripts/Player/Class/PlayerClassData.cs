@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerClassData : ScriptableObject
 {
     public UnitCode unitCode;
+    public ClassType classType;
     public string className;
     public float hp;
     public float defence;

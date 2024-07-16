@@ -11,24 +11,30 @@ public class Fighter : MonoBehaviour
     public List<GameObject> weaponSlots = new List<GameObject>();
     public int currentWeaponIndex;
     public bool isWeaponFire = false;
-    [SerializeField] private float timeSinceLastFire = 0f;
+    [SerializeField] private float timeSinceLastFire = float.MaxValue;
     // 히트 스캔에 필요한 타겟
     [SerializeField] private IDamageable target;
     public Transform muzzleTransform;
     public Transform GunPosition;
+    public GameObject gunModel;
+    Vector3 defaultGunPos;
+    bool isRebound = false;
 
 
     private void Start()
     {
+        currentWeapon.canFireWeapon = true;
         if (currentWeapon.WeaponType == WeaponType.WT_PROJECTILE)
         {
             GameManager.Instance._pool.AddNewObj(gameObject.name, currentWeapon.Projectile.gameObject);
             GameManager.Instance._pool.Initialize(gameObject.name, currentWeapon.Mag);
         }
         weaponSlots.Add(GunPosition.GetChild(0).gameObject);
+        gunModel = weaponSlots[0];
+        defaultGunPos = gunModel.transform.localPosition;
         currentWeaponIndex = 0;
     }
-    void Update()
+    void FixedUpdate()
     {
         if (isWeaponFire)
             Fire();
@@ -44,20 +50,22 @@ public class Fighter : MonoBehaviour
         }
         else
         {
-            timeSinceLastFire = float.MaxValue;
+
             isWeaponFire = false;
         }
     }
 
     public void Fire()
     {
-        if(!currentWeapon.CanFireWeapon) return;
+        if (!currentWeapon.canFireWeapon) return;
         float _timeBetweenFires = 1 / currentWeapon.FireRate;
 
         timeSinceLastFire += Time.deltaTime;
         if (timeSinceLastFire >= _timeBetweenFires)
         {
             currentWeapon.FireArm(muzzleTransform, gameObject);
+            if (currentWeapon.WeaponType == WeaponType.WT_HITSCAN)
+                StartCoroutine(ShowBulletEffect(muzzleTransform));
             timeSinceLastFire = 0;
         }
         if (currentWeapon.currentMag <= 0)
@@ -175,5 +183,49 @@ public class Fighter : MonoBehaviour
             currentWeaponIndex = 1;
         }
         muzzleTransform = newWeapon.transform.GetChild(0);
+    }
+
+    public IEnumerator ShowBulletEffect(Transform muzzleTransform)
+    {
+        WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
+        currentWeapon.bulletEffect.SetPosition(0, muzzleTransform.position);
+        currentWeapon.bulletEffect.gameObject.SetActive(true);
+        MakeRebound();
+        for (int i = 0; i < 3; i++)
+        {
+            yield return waitForFixedUpdate;
+        }
+        currentWeapon.bulletEffect.gameObject.SetActive(false);
+    }
+
+    public void MakeRebound()
+    {
+        gunModel.transform.localPosition = defaultGunPos;
+        gunModel.transform.Translate(Vector3.forward * -0.1f);
+        currentWeapon.Rebound += 3;
+        if (!isRebound)
+        {
+            StartCoroutine(Rebound());
+        }
+    }
+
+    IEnumerator Rebound()
+    {
+        isRebound = true;
+        while(true)
+        {
+            gunModel.transform.localPosition = Vector3.Lerp(gunModel.transform.localPosition, defaultGunPos, Time.deltaTime * 3.0f);
+            currentWeapon.Rebound = Mathf.Lerp(currentWeapon.Rebound, 0, Time.deltaTime * 3.0f);
+            if(Vector3.Distance(gunModel.transform.localPosition, defaultGunPos) < 0.001f)
+            {
+                gunModel.transform.localPosition = defaultGunPos;
+                currentWeapon.Rebound = 0;
+                isRebound = false;
+                break;
+            }
+            yield return null;
+        }
+        yield break;
+
     }
 }

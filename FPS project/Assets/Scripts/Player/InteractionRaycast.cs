@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractionRaycast : MonoBehaviour
 {
 
-    [SerializeField]GameObject worldSpaceUI = null;
+    [SerializeField] GameObject worldSpaceUI = null;
     IInteractable interactable = null;
     private void Update()
     {
@@ -39,18 +39,22 @@ public class InteractionRaycast : MonoBehaviour
     private void EnableWorldSpaceUI(RaycastHit hit)
     {
         interactable = hit.collider.GetComponent<IInteractable>();
-        worldSpaceUI = interactable.worldSpaceUI;
-        worldSpaceUI.SetActive(true);
-        interactable.SetDescription();
+        if (interactable.worldSpaceUI != null)
+        {
+            worldSpaceUI = interactable.worldSpaceUI;
+            worldSpaceUI.SetActive(true);
+            interactable.SetDescription();
+        }
+
         interactable.canInteract = true;
     }
 
     private void DisableWorldSpaceUI()
     {
         if (interactable == null) return;
+        interactable.canInteract = false;
         if (worldSpaceUI == null) return;
 
-        interactable.canInteract = false;
         worldSpaceUI.SetActive(false);
         worldSpaceUI = null;
         interactable = null;
@@ -58,6 +62,7 @@ public class InteractionRaycast : MonoBehaviour
 
     void OnInteraction()
     {
-        interactable.DoInteraction();
+        if (interactable.canInteract)
+            interactable.DoInteraction();
     }
 }

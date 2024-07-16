@@ -17,10 +17,12 @@ public class Enemy : Creature
     public override void Initialize()
     {
         targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        int playerLevel = GameManager.Instance.player.level;
         fighter = GetComponent<Fighter>();
-        hp = 100;
-        defence = 0.1f;
-        level = 1;
+        hp = GameManager.Instance._data.enemyStats[playerLevel].hp;
+        defence = GameManager.Instance._data.enemyStats[playerLevel].defence;
+        level = playerLevel;
+        exp = GameManager.Instance._data.enemyStats[playerLevel].expToNextLevel;
         autoCriticalRate = 0.0f;
         autoCriticalMagnification = 1f;
         isDead = false;
@@ -58,14 +60,18 @@ public class Enemy : Creature
     {
         Initialize();
     }
-    public override void Die()
+    public override void Die(GameObject instigator)
     {
-        base.Die();
+        // if (isDead) return;
+        base.Die(instigator);
         fighter.isWeaponFire = false;
+        instigator.GetComponent<IStat>().exp += exp;
+        Debug.Log(instigator.GetComponent<IStat>().exp);
     }
 
     public override void TakeDamage(GameObject instigator, float damage)
     {
+        // if (isDead) return;
         OnGetHit();
         base.TakeDamage(instigator, damage);
     }
@@ -84,8 +90,8 @@ public class Enemy : Creature
 
     private BTNodeState Attack()
     {
-        if(isDead) return BTNodeState.Failure;
-        
+        if (isDead) return BTNodeState.Failure;
+
         transform.LookAt(targetTransform);
         fighter.isWeaponFire = true;
         fighter.Fire();
@@ -95,8 +101,8 @@ public class Enemy : Creature
 
     private BTNodeState Chase()
     {
-        if(isDead) return BTNodeState.Failure;
-        if(fighter.isWeaponFire) fighter.isWeaponFire = false;
+        if (isDead) return BTNodeState.Failure;
+        if (fighter.isWeaponFire) fighter.isWeaponFire = false;
         transform.LookAt(targetTransform);
         Debug.Log("Chase Action");
         transform.position = Vector3.MoveTowards(transform.position, targetTransform.position, moveSpeed * Time.deltaTime);
@@ -105,8 +111,8 @@ public class Enemy : Creature
 
     private BTNodeState Scout()
     {
-        if(isDead) return BTNodeState.Failure;
-        if(fighter.isWeaponFire) fighter.isWeaponFire = false;
+        if (isDead) return BTNodeState.Failure;
+        if (fighter.isWeaponFire) fighter.isWeaponFire = false;
 
         Debug.Log("Scout Action");
         return BTNodeState.Running;

@@ -10,11 +10,13 @@ public abstract class Creature : MonoBehaviour, IDamageable, IStat
     public float hp { get; set; }
     public float defence { get; set; }
     public bool isDead { get; set; }
+    public int exp { get; set; }
 
     public abstract void Initialize();
 
-    public virtual void Die()
+    public virtual void Die(GameObject instigator)
     {
+        if (isDead) return;
         Debug.Log("Dead!!!!!!");
         isDead = true;
     }
@@ -27,7 +29,7 @@ public abstract class Creature : MonoBehaviour, IDamageable, IStat
         // OnPlayerDamage();
         if (hp <= 0)
         {
-            Die();
+            Die(instigator);
         }
         Debug.Log($"ouch! HP : {hp}");
     }
@@ -39,7 +41,7 @@ public interface IDamageable
     float defence { get; set; }
     bool isDead { get; set; }
     void TakeDamage(GameObject instigator, float damage);
-    void Die();
+    void Die(GameObject instigator);
 }
 
 public interface IStat
@@ -47,5 +49,5 @@ public interface IStat
     float autoCriticalRate { get; set; }
     float autoCriticalMagnification { get; set; }
     int level { get; set; }
-
+    int exp { get; set; }
 }
