@@ -40,7 +40,7 @@ public class DataManager : MonoBehaviour
         Debug.Log(path);
     }
 
-    public void SaveData()
+    public void SaveIngameData()
     {
         Player player = GameManager.Instance.player;
         data.hp = player.hp;
@@ -57,7 +57,7 @@ public class DataManager : MonoBehaviour
         Debug.Log("Save Complete");
     }
 
-    public void LoadData()
+    public void LoadIngameData()
     {
 
         Player player = GameManager.Instance.player;
@@ -73,7 +73,7 @@ public class DataManager : MonoBehaviour
             player.autoCriticalRate = 0.1f;
             player.autoCriticalMagnification = 1.75f;
 
-            SaveData();
+            SaveIngameData();
         }
         else
         {

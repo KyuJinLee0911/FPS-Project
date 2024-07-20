@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31800d615ab57d847968781e247e33b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemData: {fileID: 0}
   itemInfoWorldSpaceUI: {fileID: 8683005921399743348}
   canvasType: 0
   itemNameTxt: {fileID: 4583593127956422956}

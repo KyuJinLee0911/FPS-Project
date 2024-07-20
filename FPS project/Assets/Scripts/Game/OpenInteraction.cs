@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class OpenInteraction : MonoBehaviour, IInteractable
 {
-    public GameObject worldSpaceUI { get; }
+    [SerializeField] protected GameObject uiObj;
+    public GameObject worldSpaceUI { get; protected set;}
 
     public bool canInteract { get; set; }
 
@@ -13,6 +14,7 @@ public class OpenInteraction : MonoBehaviour, IInteractable
     private void Start()
     {
         animator = GetComponent<Animator>();
+        worldSpaceUI = uiObj;
     }
 
     public virtual void DoInteraction()

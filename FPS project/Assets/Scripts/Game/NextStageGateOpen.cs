@@ -20,6 +20,6 @@ public class NextStageGateOpen : OpenInteraction
 
     public void StopMoving()
     {
-        GameManager.Instance.player.GetComponent<PlayerController>().isControlable = false;
+        GameManager.Instance.controller.isControlable = false;
     }
 }

@@ -158,7 +158,7 @@ public class GameManager : MonoBehaviour
     {
         // 다음스테이지로 가기 전에 현재 데이터 저장
         controller.isControlable = false;
-        _data.SaveData();
+        _data.SaveIngameData();
         currentStageIndex++;
 
         if (currentStageIndex >= stageNames.Length)

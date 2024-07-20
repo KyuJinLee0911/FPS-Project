@@ -120,8 +120,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31800d615ab57d847968781e247e33b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: fc3d70915e2863d4fbf4ff3bc5939937, type: 2}
+  itemData: {fileID: 0}
   itemInfoWorldSpaceUI: {fileID: 8683005921399743348}
+  canvasType: 0
+  itemNameTxt: {fileID: 0}
+  itemDescriptionText: {fileID: 0}
+  itemImage: {fileID: 0}
+  item: {fileID: 0}
+  weaponData: {fileID: 11400000, guid: fc3d70915e2863d4fbf4ff3bc5939937, type: 2}
 --- !u!1 &9192581589288518983
 GameObject:
   m_ObjectHideFlags: 0

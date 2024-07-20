@@ -403,8 +403,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ed605be896e7a4fbb236ad2020ec7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasType: 1
-  itemNameTxt: {fileID: 707748068845635842}
-  itemDescriptionText: {fileID: 1420418018651744100}
-  itemImage: {fileID: 4996475073254472688}
-  item: {fileID: 0}

@@ -37,7 +37,7 @@ public class Player : Creature
             GameManager.Instance.controller = GetComponent<PlayerController>();
         }
 
-        GameManager.Instance._data.LoadData();
+        GameManager.Instance._data.LoadIngameData();
         SetPlayerPosition();
 
         Debug.Log($"User created, level : {level}, hp : {hp}, defence : {defence}");
@@ -55,7 +55,6 @@ public class Player : Creature
     void SetPlayerPosition()
     {
         transform.position = GameManager.Instance.startPos.position;
-        transform.rotation = GameManager.Instance.startPos.rotation;
     }
 
     void Start()

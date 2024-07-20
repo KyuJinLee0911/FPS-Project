@@ -17,7 +17,7 @@ public class InteractionRaycast : MonoBehaviour
         Ray cameraRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
         RaycastHit hit;
 
-        if (Physics.Raycast(cameraRay, out hit, 5))
+        if (Physics.Raycast(cameraRay, out hit, 2))
         {
             if (hit.collider.GetComponent<IInteractable>() != null)
             {
