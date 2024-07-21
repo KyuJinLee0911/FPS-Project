@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     public int currentStageIndex = 0;
     public Transform startPos;
     public Transform endPos;
+    public BattleZoneCtrl battleZoneCtrl;
 
     public void Init()
     {

@@ -38,6 +38,7 @@ public class Player : Creature
         }
 
         GameManager.Instance._data.LoadIngameData();
+        totalHp = hp;
         SetPlayerPosition();
 
         Debug.Log($"User created, level : {level}, hp : {hp}, defence : {defence}");
@@ -55,6 +56,7 @@ public class Player : Creature
     void SetPlayerPosition()
     {
         transform.position = GameManager.Instance.startPos.position;
+        transform.localRotation = GameManager.Instance.startPos.localRotation;
     }
 
     void Start()

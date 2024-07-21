@@ -10,9 +10,11 @@ public class Enemy : Creature
     [SerializeField] float moveSpeed;
     [SerializeField] float attackRange;
     [SerializeField] float chaseRange;
+    [SerializeField] private bool isInsideBattleZone;
     private BTSelector root;
     private Fighter fighter;
     private event Action OnGetHit;
+
 
     public override void Initialize()
     {
@@ -20,6 +22,7 @@ public class Enemy : Creature
         int playerLevel = GameManager.Instance.player.level;
         fighter = GetComponent<Fighter>();
         hp = GameManager.Instance._data.enemyStats[playerLevel].hp;
+        totalHp = hp;
         defence = GameManager.Instance._data.enemyStats[playerLevel].defence;
         level = playerLevel;
         exp = GameManager.Instance._data.enemyStats[playerLevel].expToNextLevel;
@@ -67,7 +70,12 @@ public class Enemy : Creature
         fighter.isWeaponFire = false;
         instigator.GetComponent<IStat>().exp += exp;
         Debug.Log(instigator.GetComponent<IStat>().exp);
+        if(isInsideBattleZone && GameManager.Instance.battleZoneCtrl != null)
+        {
+            GameManager.Instance.battleZoneCtrl.SubtractEnemyCount(this);
+        }
     }
+
 
     public override void TakeDamage(GameObject instigator, float damage)
     {
