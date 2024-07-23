@@ -11,14 +11,18 @@ public class Enemy : Creature
     [SerializeField] float attackRange;
     [SerializeField] float chaseRange;
     [SerializeField] private bool isInsideBattleZone;
+    [SerializeField] Animator animator;
+    bool isMoving;
     private BTSelector root;
     private Fighter fighter;
     private event Action OnGetHit;
 
 
+
     public override void Initialize()
     {
         targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        
         int playerLevel = GameManager.Instance.player.level;
         fighter = GetComponent<Fighter>();
         hp = GameManager.Instance._data.enemyStats[playerLevel].hp;
@@ -29,14 +33,17 @@ public class Enemy : Creature
         autoCriticalRate = 0.0f;
         autoCriticalMagnification = 1f;
         isDead = false;
+        isMoving = false;
 
         root = new BTSelector();
         BTSequence attackSequence = new BTSequence();
         BTSequence chaseSequence = new BTSequence();
         BTSequence scoutSequence = new BTSequence();
+        
         BTAction attackAction = new BTAction(Attack);
         BTAction chaseAction = new BTAction(Chase);
         BTAction scoutAction = new BTAction(Scout);
+
         BTCondition playerInRange = new BTCondition(IsPlayerInRange);
         BTCondition playerInChaseRange = new BTCondition(IsPlayerInChaseRange);
 
@@ -57,6 +64,7 @@ public class Enemy : Creature
     private void Update()
     {
         root.Evaluate();
+        animator.SetBool("isMoving", isMoving);
     }
 
     private void Start()
@@ -79,7 +87,7 @@ public class Enemy : Creature
 
     public override void TakeDamage(GameObject instigator, float damage)
     {
-        // if (isDead) return;
+        if (isDead) return;
         OnGetHit();
         base.TakeDamage(instigator, damage);
     }
@@ -95,12 +103,13 @@ public class Enemy : Creature
         float distance = Vector3.Distance(transform.position, targetTransform.position);
         return distance <= chaseRange;
     }
-
     private BTNodeState Attack()
     {
         if (isDead) return BTNodeState.Failure;
-
+        Transform gunTransform = fighter.GunPosition.GetChild(0);
+        isMoving = false;
         transform.LookAt(targetTransform);
+        gunTransform.LookAt(targetTransform.position + new Vector3(0, 1, 0));
         fighter.isWeaponFire = true;
         fighter.Fire();
         Debug.Log("Attack Action");
@@ -114,6 +123,7 @@ public class Enemy : Creature
         transform.LookAt(targetTransform);
         Debug.Log("Chase Action");
         transform.position = Vector3.MoveTowards(transform.position, targetTransform.position, moveSpeed * Time.deltaTime);
+        isMoving = true;
         return BTNodeState.Running;
     }
 
@@ -121,13 +131,14 @@ public class Enemy : Creature
     {
         if (isDead) return BTNodeState.Failure;
         if (fighter.isWeaponFire) fighter.isWeaponFire = false;
-
+        isMoving = false;
         Debug.Log("Scout Action");
         return BTNodeState.Running;
     }
 
     void ShowHitEffect()
     {
+        animator.SetTrigger("GetHit");
         // 피격 효과
         Debug.Log($"Effect! {gameObject.name}");
     }

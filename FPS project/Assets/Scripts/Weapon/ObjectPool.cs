@@ -59,6 +59,10 @@ public class ObjectPool : MonoBehaviour
     {
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(transform);
-        poolingObjQueueDict[key].Enqueue(obj);
+        if(poolingObjQueueDict.ContainsKey(key))
+            poolingObjQueueDict[key].Enqueue(obj);
+        else
+            Destroy(obj.gameObject);
+
     }
 }

@@ -6,7 +6,8 @@ using UnityEngine.UIElements;
 public class Projectile : MonoBehaviour
 {
     // IDamageable target;
-    [SerializeField] float projectileSpeed = 6f;
+    [Header("Projectile Data")]
+    [SerializeField] float projectileSpeed = 15f;
     [SerializeField] float projectileDamage = 0f;
     // 약점 공격 시의 크리티컬 배율 (무기의 크리티컬 배율을 따라감)
     [SerializeField] float criticalMagnification = 1f;
@@ -15,61 +16,124 @@ public class Projectile : MonoBehaviour
     float projectileHoamingRange = 5f;
     [SerializeField] bool isHoaming = false;
     [SerializeField] bool isExplode = false;
-    [SerializeField] GameObject explosionEffect;
     public float range;
-    [SerializeField] float maxLifeTime;
-    float currentLifeTime;
     GameObject instigator = null;
+    [SerializeField] float currentLifeTime = 0.0f;
 
+    [Header("Particle System and Effect")]
+    [SerializeField] protected float hitOffset = 0f;
+    [SerializeField] protected GameObject hit;
+    [SerializeField] protected ParticleSystem hitPS;
+    [SerializeField] protected GameObject flash;
+    [SerializeField] protected Rigidbody rb;
+    [SerializeField] protected Collider col;
+    [SerializeField] protected Light lightSourse;
+    [SerializeField] protected ParticleSystem projectilePS;
+
+    [Header("Explosion")]
+    [SerializeField] GameObject explosionEffect;
     [SerializeField] private float explosionForce;
     [SerializeField] private float explosionRadious;
     [SerializeField] private float expUpwardModifier;
 
-    private void OnTriggerEnter(Collider other)
+    bool isParticleStart = false;
+
+    private void OnCollisionEnter(Collision other)
     {
         // 폭발하는 투사체의 경우, 폭발은 triggerEnter시에 항상 발생
         if (isExplode)
             Explode();
-        // Projectile은 HitBox레이어
-        // HitBox 레이어는 HurtBox 레이어와만 상호작용이 가능하도록 설정해 두었기 때문에
-        // other 콜라이더는 Enemy 오브젝트의 자식 오브젝트로 들어가있는 HurtBox레이어를 가진 Head와 Body 오브젝트와 상호작용
-        // Enemy 오브젝트의 root 트랜스폼에 있는 IDamageable을 사용하기 위해 TriggerEnter시에 rootTransform을 따로 할당해줌
-        Transform rootTransform;
-        rootTransform = other.transform.root;
-        IDamageable damageable = rootTransform.GetComponent<IDamageable>();
-        CheckWeakness checkWeakness = other.GetComponent<CheckWeakness>();
-
-        // 데미지를 입힐 수 없는 오브젝트이거나, 이미 죽은 적이거나, 약점을 판단하는 checkweakness가 없는 경우
-        // 오브젝트를 풀에 바로 리턴
-        if (damageable == null || damageable.isDead || checkWeakness == null)
+        if (other.collider.CompareTag(gameObject.tag))
         {
-            currentLifeTime = 0;
             GameManager.Instance._pool.ReturnObj(instigator.name, this);
             return;
         }
 
-        WeaponData weaponData = instigator.GetComponent<Fighter>().CurrentWeapon;
+        EnableVfx(other);
+
+        Transform rootTransform = other.collider.transform.root;
+        Fighter fighter = instigator.GetComponent<Fighter>();
+        IDamageable damageable = rootTransform.GetComponent<IDamageable>();
+
+
+        // 데미지를 입힐 수 없는 오브젝트이거나, 이미 죽은 적이거나, 약점을 판단하는 checkweakness가 없는 경우
+        // 오브젝트를 풀에 바로 리턴
+        if (damageable == null || damageable.isDead)
+        {
+            GameManager.Instance._pool.ReturnObj(instigator.name, this);
+            return;
+        }
+
+        WeaponData weaponData = fighter.CurrentWeapon;
 
         if (!isExplode)
             // 넉백
             weaponData.ApplyImpack(Vector3.zero, 0);
 
-        damageable.TakeDamage(instigator, instigator.GetComponent<Fighter>().CalculateDamage(projectileDamage, checkWeakness.damageType));
+        float _damage = 0;
+        if (other.collider.gameObject.layer == 8)
+            _damage = fighter.CalculateDamage(projectileDamage, DamageType.DT_NORMAL);
+        else if (other.collider.gameObject.layer == 10)
+            _damage = fighter.CalculateDamage(projectileDamage, DamageType.DT_WEAKNESS);
 
-        currentLifeTime = 0;
+        if (_damage != 0)
+            damageable.TakeDamage(instigator, _damage);
+
         GameManager.Instance._pool.ReturnObj(instigator.name, this);
+    }
+
+    private void EnableVfx(Collision other)
+    {
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        if (lightSourse != null)
+            lightSourse.enabled = false;
+        col.enabled = false;
+        projectilePS.Stop();
+        projectilePS.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        ContactPoint contact = other.contacts[0];
+        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        Vector3 pos = contact.point + contact.normal * hitOffset;
+
+        if (hit != null)
+        {
+            hit.transform.rotation = rot;
+            hit.transform.position = pos;
+            hit.transform.LookAt(contact.point + contact.normal);
+            hitPS.Play();
+        }
     }
 
     private void Start()
     {
-        maxLifeTime = range / projectileSpeed;
-        Debug.Log(maxLifeTime);
+        currentLifeTime = 0;
+        isParticleStart = true;
+    }
+
+    private void OnEnable()
+    {
+        currentLifeTime = 0;
+        if (isParticleStart)
+        {
+            if (lightSourse != null)
+                lightSourse.enabled = true;
+
+            col.enabled = true;
+            rb.constraints = RigidbodyConstraints.None;
+        }
+    }
+
+    private void Update()
+    {
+        currentLifeTime += Time.deltaTime;
+        if(currentLifeTime >= 5.0f)
+            GameManager.Instance._pool.ReturnObj(instigator.name, this);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        DestroyProjectileByTime();
+
         MoveToTarget();
         if (isHoaming)
             HoamingTarget();
@@ -91,17 +155,15 @@ public class Projectile : MonoBehaviour
     }
 
     // 일정 거리 이상 날아갔을때 비활성화
-    void DestroyProjectileByTime()
+    protected IEnumerator DisableAfterTime(float time)
     {
-        currentLifeTime += Time.deltaTime;
-
-        if (currentLifeTime >= maxLifeTime)
-        {
-            currentLifeTime = 0;
+        yield return new WaitForSeconds(time);
+        if (gameObject.activeSelf)
             GameManager.Instance._pool.ReturnObj(instigator.name, this);
-        }
-
+        yield break;
     }
+
+
 
     // SphereCast를 통해 목표 탐색 후 가장 가까운 목표를 향해 유도
     void HoamingTarget()

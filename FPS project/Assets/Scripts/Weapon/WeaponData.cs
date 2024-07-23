@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -69,10 +70,12 @@ public class WeaponData : ItemData
         Transform muzzleTransform = instigator.GetComponent<Fighter>().muzzleTransform;
         Vector2 reboundRayPos = Random.insideUnitCircle * rebound * 0.033f;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2 - 1 + reboundRayPos.x, Screen.height / 2 - 1 + reboundRayPos.y));
+        
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, fireRange))
         {
-            IDamageable target = hit.collider.GetComponent<IDamageable>();
+            Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red, 3.0f);
+            IDamageable target = hit.collider.transform.root.GetComponent<IDamageable>();
             if (target == null) return;
 
             // 탄흔효과
@@ -81,6 +84,7 @@ public class WeaponData : ItemData
         }
         else
         {
+            Debug.DrawLine(muzzleTransform.position,  muzzleTransform.position + muzzleTransform.TransformDirection(reboundRayPos.x, reboundRayPos.y, 15), Color.red, 3.0f);
             bulletEffect.SetPosition(1, muzzleTransform.position + muzzleTransform.TransformDirection(reboundRayPos.x, reboundRayPos.y, 15));
         }
     }

@@ -126,9 +126,9 @@ namespace FPS.Control
 
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-            // 상하로 돌릴때는 고개만
+
             firstPersonCameraObject.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-            // 좌우로 돌릴때는 몸이 같이
+            
             transform.rotation = Quaternion.Euler(0, yRotation, 0);
         }
 

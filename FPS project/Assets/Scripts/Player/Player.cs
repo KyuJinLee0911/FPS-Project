@@ -95,7 +95,7 @@ public class Player : Creature
     public void PlayerLevelUp()
     {
         level++;
-        Debug.Log($"Level Up! Current Level : {level}");
+        // Debug.Log($"Level Up! Current Level : {level}");
         OnPlayerLevelUp();
     }
 

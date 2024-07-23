@@ -11,7 +11,7 @@ public class MagText : MonoBehaviour
 
     void Start()
     {
-        fighter = GameObject.FindGameObjectWithTag("Player").GetComponent<Fighter>();
+        fighter = GameManager.Instance.player.transform.GetComponent<Fighter>();
 
     }
 

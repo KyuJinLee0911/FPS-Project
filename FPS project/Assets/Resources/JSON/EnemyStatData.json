@@ -1,6 +1,12 @@
 {
     "stats": [
         {
+            "level": "0",
+            "hp": "100",
+            "defence": "0.05",
+            "expToNextLevel": "10"
+        },
+        {
             "level": "1",
             "hp": "100",
             "defence": "0.05",

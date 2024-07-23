@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SendCurrentPosition : MonoBehaviour
 {
-    private Weapon weapon;
+    [SerializeField] private Weapon weapon;
 
     private void OnEnable()
     {
-        weapon = transform.parent.GetComponent<Weapon>();
+        // weapon = transform.parent.GetComponent<Weapon>();
         weapon.weaponData.bulletEffect = GetComponent<LineRenderer>();
     }
 }

@@ -18,6 +18,7 @@ public class Fighter : MonoBehaviour
     public Transform GunPosition;
     public GameObject gunModel;
     Vector3 defaultGunPos;
+    Vector3 defaultGunRot;
     bool isRebound = false;
 
 
@@ -27,11 +28,12 @@ public class Fighter : MonoBehaviour
         if (currentWeapon.WeaponType == WeaponType.WT_PROJECTILE)
         {
             GameManager.Instance._pool.AddNewObj(gameObject.name, currentWeapon.Projectile.gameObject);
-            GameManager.Instance._pool.Initialize(gameObject.name, currentWeapon.Mag);
+            GameManager.Instance._pool.Initialize(gameObject.name, 20);
         }
         weaponSlots.Add(GunPosition.GetChild(0).gameObject);
         gunModel = weaponSlots[0];
         defaultGunPos = gunModel.transform.localPosition;
+        defaultGunRot = gunModel.transform.localRotation.eulerAngles;
         currentWeaponIndex = 0;
     }
     void FixedUpdate()
@@ -200,9 +202,12 @@ public class Fighter : MonoBehaviour
 
     public void MakeRebound()
     {
-        gunModel.transform.localPosition = defaultGunPos;
-        gunModel.transform.Translate(Vector3.forward * -0.1f);
         currentWeapon.Rebound += 3;
+        gunModel.transform.localPosition = defaultGunPos;
+        Vector3 targetRotation = gunModel.transform.localRotation.eulerAngles - new Vector3(currentWeapon.Rebound * 5,0,0);
+        gunModel.transform.Translate(Vector3.forward * -0.1f);
+        gunModel.transform.Rotate(targetRotation, Space.Self);
+        
         if (!isRebound)
         {
             StartCoroutine(Rebound());
@@ -215,6 +220,7 @@ public class Fighter : MonoBehaviour
         while(true)
         {
             gunModel.transform.localPosition = Vector3.Lerp(gunModel.transform.localPosition, defaultGunPos, Time.deltaTime * 3.0f);
+            gunModel.transform.localRotation = Quaternion.Lerp(gunModel.transform.localRotation, Quaternion.Euler(defaultGunRot), Time.deltaTime* 3.0f);
             currentWeapon.Rebound = Mathf.Lerp(currentWeapon.Rebound, 0, Time.deltaTime * 3.0f);
             if(Vector3.Distance(gunModel.transform.localPosition, defaultGunPos) < 0.001f)
             {

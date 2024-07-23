@@ -22,12 +22,12 @@ MonoBehaviour:
   damage: 20
   criticalMultiples: 2
   mag: 15
-  currentMag: 15
+  currentMag: 3
   reloadTime: 2
   fireRate: 2
-  fireRange: 30
+  fireRange: 50
   weaponType: 2
   projectile: {fileID: 0}
   weaponPrefab: {fileID: 4243271525775095593, guid: 24782bd632106e648a24b3c21ee59a78, type: 3}
   bulletEffect: {fileID: 0}
-  rebound: 3
+  rebound: 0

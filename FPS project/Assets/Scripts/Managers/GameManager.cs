@@ -55,11 +55,13 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+
+        Init();
     }
 
     void Start()
     {
-        Init();
+        
     }
 
     public void AdjustTimeScale(float scale)
