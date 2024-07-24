@@ -6,16 +6,16 @@ using UnityEngine.TextCore.Text;
 
 public class Enemy : Creature
 {
-    [SerializeField] Transform targetTransform;
-    [SerializeField] float moveSpeed;
-    [SerializeField] float attackRange;
-    [SerializeField] float chaseRange;
+    [SerializeField] protected Transform targetTransform;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float attackRange;
+    [SerializeField] protected float chaseRange;
     [SerializeField] private bool isInsideBattleZone;
-    [SerializeField] Animator animator;
-    bool isMoving;
-    private BTSelector root;
-    private Fighter fighter;
-    private event Action OnGetHit;
+    [SerializeField] protected Animator animator;
+    protected bool isMoving;
+    protected BTSelector root;
+    protected Fighter fighter;
+    protected event Action OnGetHit;
 
 
 
@@ -26,7 +26,7 @@ public class Enemy : Creature
         int playerLevel = GameManager.Instance.player.level;
         fighter = GetComponent<Fighter>();
         hp = GameManager.Instance._data.enemyStats[playerLevel].hp;
-        totalHp = hp;
+        maxHp = hp;
         defence = GameManager.Instance._data.enemyStats[playerLevel].defence;
         level = playerLevel;
         exp = GameManager.Instance._data.enemyStats[playerLevel].expToNextLevel;
@@ -78,6 +78,8 @@ public class Enemy : Creature
         fighter.isWeaponFire = false;
         instigator.GetComponent<IStat>().exp += exp;
         Debug.Log(instigator.GetComponent<IStat>().exp);
+        isMoving = false;
+        animator.SetTrigger("Die");
         if(isInsideBattleZone && GameManager.Instance.battleZoneCtrl != null)
         {
             GameManager.Instance.battleZoneCtrl.SubtractEnemyCount(this);
@@ -88,22 +90,22 @@ public class Enemy : Creature
     public override void TakeDamage(GameObject instigator, float damage)
     {
         if (isDead) return;
-        OnGetHit();
+        // OnGetHit();
         base.TakeDamage(instigator, damage);
     }
 
-    private bool IsPlayerInRange()
+    protected virtual bool IsPlayerInRange()
     {
         float distance = Vector3.Distance(transform.position, targetTransform.position);
         return distance <= attackRange;
     }
 
-    private bool IsPlayerInChaseRange()
+    protected virtual bool IsPlayerInChaseRange()
     {
         float distance = Vector3.Distance(transform.position, targetTransform.position);
         return distance <= chaseRange;
     }
-    private BTNodeState Attack()
+    protected virtual BTNodeState Attack()
     {
         if (isDead) return BTNodeState.Failure;
         Transform gunTransform = fighter.GunPosition.GetChild(0);
@@ -116,7 +118,7 @@ public class Enemy : Creature
         return BTNodeState.Success;
     }
 
-    private BTNodeState Chase()
+    protected virtual BTNodeState Chase()
     {
         if (isDead) return BTNodeState.Failure;
         if (fighter.isWeaponFire) fighter.isWeaponFire = false;

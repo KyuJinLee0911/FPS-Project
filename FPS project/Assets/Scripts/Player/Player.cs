@@ -38,7 +38,7 @@ public class Player : Creature
         }
 
         GameManager.Instance._data.LoadIngameData();
-        totalHp = hp;
+        maxHp = hp;
         SetPlayerPosition();
 
         Debug.Log($"User created, level : {level}, hp : {hp}, defence : {defence}");

@@ -4,9 +4,7 @@ using UnityEngine;
 public enum ItemRarity
 {
     IR_NORMAL,
-    IR_RARE,
     IR_SUPERIOR,
-    IR_EPIC,
     IR_LEGENDARY
 }
 
@@ -28,4 +26,5 @@ public class ItemData : ScriptableObject
     [TextArea]
     public string itemDescription;
     public Sprite itemImage;
+    public int Weight;
 }

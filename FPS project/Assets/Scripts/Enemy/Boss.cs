@@ -1,0 +1,167 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
+
+public class Boss : Enemy
+{
+    List<BossSkillData> skillDatas = new List<BossSkillData>
+    {
+        new BossSkillData("Skill_1", 25.0f, 1),
+        new BossSkillData("Skill_2", 20.0f, 2),
+        new BossSkillData("Skill_3", 15.0f, 3),
+        new BossSkillData("Skill_4", 50.0f, 4),
+        new BossSkillData("Skill_5", 10.0f, 5),
+    };
+    int highestPriority = int.MaxValue;
+    BossSkillData nextSkill = null;
+    public override void Initialize()
+    {
+        targetTransform = GameManager.Instance.player.transform;
+
+        int playerLevel = GameManager.Instance.player.level;
+        fighter = GetComponent<Fighter>();
+        animator = GetComponent<Animator>();
+        hp = 500;
+        maxHp = 500;
+        defence = 0.2f;
+        autoCriticalRate = 0.0f;
+        autoCriticalMagnification = 1f;
+        isDead = false;
+
+        root = new BTSelector();
+        
+        BTSequence closeAttackSequence = new BTSequence();
+        BTSequence chaseSequence = new BTSequence();
+        BTSequence farAttackSequence = new BTSequence();
+
+        BTAction closeAttackAction = new BTAction(Attack);
+        BTAction chaseAction = new BTAction(Chase);
+        BTAction farAttackAction = new BTAction(FarAttack);
+
+        BTCondition playerInCloseRange = new BTCondition(IsPlayerInRange);
+        BTCondition playerInChaseRange = new BTCondition(IsPlayerInChaseRange);
+
+
+        root.AddChild(closeAttackSequence);
+        root.AddChild(chaseSequence);
+        root.AddChild(farAttackSequence);
+
+        closeAttackSequence.AddChild(playerInCloseRange);
+        closeAttackSequence.AddChild(closeAttackAction);
+        chaseSequence.AddChild(playerInChaseRange);
+        chaseSequence.AddChild(chaseAction);
+        farAttackSequence.AddChild(farAttackAction);
+        
+        root.Evaluate();
+    }
+
+    public override void TakeDamage(GameObject instigator, float damage)
+    {
+        base.TakeDamage(instigator, damage);
+        // animator.SetTrigger("GetHit");
+    }
+
+    public override void Die(GameObject instigator)
+    {
+        base.Die(instigator);
+        animator.SetTrigger("Die");
+    }
+
+    private void Start()
+    {
+        Initialize();
+    }
+
+    private void Update()
+    {
+        foreach (BossSkillData skill in skillDatas)
+        {
+            skill.UpdateDeltaTime(Time.deltaTime);
+        }
+
+        root.Evaluate();
+        animator.SetBool("isMoving", isMoving);
+    }
+
+    // 근거리 스킬 (1, 5) 혹은 일반 공격 사용
+    protected override BTNodeState Attack()
+    {
+        if (isDead) return BTNodeState.Failure;
+        isMoving = false;
+        transform.LookAt(targetTransform);
+        // fighter.Fire();
+        if(skillDatas[0].IsReady())
+        {
+            animator.SetTrigger("0");
+            skillDatas[0].currentCoolTime = skillDatas[0].coolTime;
+        }
+        else if(skillDatas[4].IsReady())
+        {
+            animator.SetTrigger("4");
+            skillDatas[4].currentCoolTime = skillDatas[4].coolTime;
+        }
+        else
+            animator.SetTrigger("Attack");
+        Debug.Log("Attack Action");
+        return BTNodeState.Success;
+    }
+
+    protected override BTNodeState Chase()
+    {
+        if (isDead) return BTNodeState.Failure;
+        // if (fighter.isWeaponFire) fighter.isWeaponFire = false;
+        transform.LookAt(targetTransform);
+        Debug.Log("Chase Action");
+        transform.position = Vector3.MoveTowards(transform.position, targetTransform.position, moveSpeed * Time.deltaTime);
+        isMoving = true;
+        return BTNodeState.Running;
+    }
+
+    // 2, 3번 스킬 사용
+    protected BTNodeState FarAttack()
+    {
+        if(skillDatas[1].IsReady())
+        {
+            animator.SetTrigger("1");
+            skillDatas[1].currentCoolTime = skillDatas[1].coolTime;
+        }
+        else if(skillDatas[2].IsReady())
+        {
+            animator.SetTrigger("2");
+            skillDatas[2].currentCoolTime = skillDatas[2].coolTime;
+        }
+        else
+            return BTNodeState.Failure;
+        return BTNodeState.Running;
+    }
+}
+
+public class BossSkillData
+{
+    string name;
+    public float coolTime;
+    public float currentCoolTime;
+    public int priority;
+
+    public BossSkillData(string name, float coolTime, int priority)
+    {
+        this.name = name;
+        this.coolTime = coolTime;
+        this.priority = priority;
+        currentCoolTime = 0;
+    }
+
+    public void UpdateDeltaTime(float deltaTime)
+    {
+        if (currentCoolTime > 0)
+        {
+            currentCoolTime -= deltaTime;
+        }
+    }
+
+    public bool IsReady()
+    {
+        return currentCoolTime <= 0;
+    }
+}

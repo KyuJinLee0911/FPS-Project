@@ -1,0 +1,19 @@
+{
+    "dropDatas": [
+        {
+            "name": "none",
+            "type": "0",
+            "rate": "0.5"
+        },
+        {
+            "name": "item",
+            "type": "0",
+            "rate": "0.25"
+        },
+        {
+            "name": "weapon",
+            "type": "1",
+            "rate": "0.25"
+        }
+    ]
+}

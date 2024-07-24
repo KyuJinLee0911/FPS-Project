@@ -9,6 +9,8 @@ namespace FPS.Control
     public class PlayerController : MonoBehaviour
     {
         public bool isControlable = true;
+        [SerializeField] Animator bodyAnimator;
+        [SerializeField] Animator gunAnimator;
         [Header("Look")]
         [SerializeField] GameObject firstPersonCameraObject;
         Vector2 lookInputValue;
@@ -24,11 +26,12 @@ namespace FPS.Control
         [SerializeField] float moveSpeed = 5f;
         [SerializeField] float runningSpeedModifier = 1.5f;
         Vector2 moveInputValue;
+        float isMoving;
 
         [Header("Jump")]
         [SerializeField] float jumpPower = 5f;
         [SerializeField] int maxJumpCount = 2;
-        [SerializeField] int currentJumpCount;
+        [SerializeField] public int currentJumpCount { get; private set; }
         [SerializeField] LayerMask groundLayer;
 
         [Header("UI")]
@@ -65,6 +68,8 @@ namespace FPS.Control
             if (!isControlable) return;
 
             moveInputValue = value.Get<Vector2>();
+
+            isMoving = moveInputValue.magnitude;
         }
 
         void OnLook(InputValue value)
@@ -117,7 +122,8 @@ namespace FPS.Control
         {
             Look();
             Move();
-
+            // bodyAnimator.SetFloat("isMoving", isMoving);
+            gunAnimator.SetFloat("isMoving", isMoving);
         }
         private void Look()
         {
@@ -128,7 +134,7 @@ namespace FPS.Control
 
 
             firstPersonCameraObject.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-            
+
             transform.rotation = Quaternion.Euler(0, yRotation, 0);
         }
 

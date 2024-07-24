@@ -10,6 +10,7 @@ public class Item : MonoBehaviour, IInteractable
     [SerializeField] protected GameObject itemInfoWorldSpaceUI;
     public GameObject worldSpaceUI { get => itemInfoWorldSpaceUI; }
     public bool canInteract { get; set; }
+    public GameObject itemPrefab;
     
     public CanvasType canvasType;
     public Text itemNameTxt;
@@ -32,6 +33,7 @@ public class Item : MonoBehaviour, IInteractable
     public virtual void DoInteraction()
     {
         DoItem();
+        Instantiate(itemPrefab, GameManager.Instance._item.transform);
         GameManager.Instance._item.activatedItem.Add(itemData);
         SetDescription();
         Debug.Log($"item {itemData.itemKey} activated");

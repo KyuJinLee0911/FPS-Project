@@ -71,7 +71,7 @@ public class BattleZoneCtrl : MonoBehaviour
     public void SubtractEnemyCount(Enemy enemy)
     {
         enemyCount--;
-        totalHpBar.value -= enemy.totalHp;
+        totalHpBar.value -= enemy.maxHp;
         spawnedEnemyCount--;
 
         if (spawnedEnemyCount <= enemySpawnAmount && enemySpawnQueue.Count > 0)

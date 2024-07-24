@@ -8,7 +8,7 @@ public abstract class Creature : MonoBehaviour, IDamageable, IStat
     public float autoCriticalMagnification { get; set; }
     public int level { get; set; }
     public float hp { get; set; }
-    public float totalHp { get; protected set; }
+    public float maxHp { get; protected set; }
     public float defence { get; set; }
     public bool isDead { get; set; }
     public int exp { get; set; }

@@ -189,6 +189,8 @@ public class Fighter : MonoBehaviour
 
     public IEnumerator ShowBulletEffect(Transform muzzleTransform)
     {
+        if(currentWeapon.WeaponType != WeaponType.WT_HITSCAN)
+            yield break;
         WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
         currentWeapon.bulletEffect.SetPosition(0, muzzleTransform.position);
         currentWeapon.bulletEffect.gameObject.SetActive(true);

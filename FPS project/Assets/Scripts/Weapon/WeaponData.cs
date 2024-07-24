@@ -15,7 +15,7 @@ public enum WeaponType
 public class WeaponData : ItemData
 {
     [SerializeField] private float damage;
-    public float Damage { get => damage; }
+    public float Damage { get => damage; set => damage = value; }
     [SerializeField] private float criticalMultiples;
     public float CriticalMultiples { get => criticalMultiples; }
     [SerializeField] private int mag;

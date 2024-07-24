@@ -22,7 +22,7 @@ public class Weapon : Item
     public override void DoInteraction()
     {
         itemInfoWorldSpaceUI.SetActive(false);
-        Fighter fighter = GameObject.FindGameObjectWithTag("Player").GetComponent<Fighter>();
+        Fighter fighter = GameManager.Instance.player.transform.GetComponent<Fighter>();
         GameObject newWeapon = Instantiate(weaponData.weaponPrefab, fighter.GunPosition);
         fighter.PickUpWeapon(newWeapon);
     }

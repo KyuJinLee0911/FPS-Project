@@ -43,7 +43,7 @@ public class Projectile : MonoBehaviour
         // 폭발하는 투사체의 경우, 폭발은 triggerEnter시에 항상 발생
         if (isExplode)
             Explode();
-        if (other.collider.CompareTag(gameObject.tag))
+        if (other.collider.CompareTag(instigator.tag))
         {
             GameManager.Instance._pool.ReturnObj(instigator.name, this);
             return;
@@ -76,6 +76,7 @@ public class Projectile : MonoBehaviour
         else if (other.collider.gameObject.layer == 10)
             _damage = fighter.CalculateDamage(projectileDamage, DamageType.DT_WEAKNESS);
 
+        Debug.Log(_damage);
         if (_damage != 0)
             damageable.TakeDamage(instigator, _damage);
 
@@ -84,7 +85,7 @@ public class Projectile : MonoBehaviour
 
     private void EnableVfx(Collision other)
     {
-        rb.constraints = RigidbodyConstraints.FreezeAll;
+        // rb.constraints = RigidbodyConstraints.FreezeAll;
         if (lightSourse != null)
             lightSourse.enabled = false;
         col.enabled = false;
@@ -119,21 +120,26 @@ public class Projectile : MonoBehaviour
                 lightSourse.enabled = true;
 
             col.enabled = true;
-            rb.constraints = RigidbodyConstraints.None;
+            // rb.constraints = RigidbodyConstraints.None;
         }
+    }
+
+    private void OnDisable()
+    {
+        rb.angularVelocity = Vector3.zero;
     }
 
     private void Update()
     {
         currentLifeTime += Time.deltaTime;
-        if(currentLifeTime >= 5.0f)
+        if (currentLifeTime >= 5.0f)
             GameManager.Instance._pool.ReturnObj(instigator.name, this);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        // Debug.Log(rb.angularVelocity);
         MoveToTarget();
         if (isHoaming)
             HoamingTarget();
@@ -142,6 +148,7 @@ public class Projectile : MonoBehaviour
     void MoveToTarget()
     {
         transform.Translate(Vector3.forward * projectileSpeed * Time.deltaTime);
+        // rb.velocity = transform.forward * projectileSpeed;    
     }
 
     // 대미지와 크리티컬 배율(무기의), 공격자를 무기로부터 전달받음
@@ -162,8 +169,6 @@ public class Projectile : MonoBehaviour
             GameManager.Instance._pool.ReturnObj(instigator.name, this);
         yield break;
     }
-
-
 
     // SphereCast를 통해 목표 탐색 후 가장 가까운 목표를 향해 유도
     void HoamingTarget()
