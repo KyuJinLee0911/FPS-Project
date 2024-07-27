@@ -17,12 +17,12 @@ public class HitBox : MonoBehaviour
 
     void Init()
     {
-        root = transform.root;
+        // root = transform.root;
     }
 
     private void Start()
     {
-        Init();
+        // Init();
     }
 
     public float CalculateDamage(float damage, float damageMagnifier)

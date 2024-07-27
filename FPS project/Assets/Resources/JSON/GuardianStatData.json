@@ -1,42 +1,49 @@
 {
-    "stats": [
+    "datas": [
         {
+            "key": "1",
             "level": "1",
             "hp": "100",
             "defence": "0.1",
             "expToNextLevel" : "100"
         },
         {
+            "key": "2",
             "level": "2",
             "hp": "110",
             "defence": "0.11",
             "expToNextLevel" : "150"
         },
         {
+            "key": "3",
             "level": "3",
             "hp": "120",
             "defence": "0.12",
             "expToNextLevel" : "250"
         },
         {
+            "key": "4",
             "level": "4",
             "hp": "130",
             "defence": "0.13",
             "expToNextLevel" : "400"
         },
         {
+            "key": "5",
             "level": "5",
             "hp": "140",
             "defence": "0.14",
             "expToNextLevel" : "600"
         },
         {
+            "key": "6",
             "level": "6",
             "hp": "150",
             "defence": "0.15",
             "expToNextLevel" : "850"
         },
         {
+            "key": "7",
             "level": "7",
             "hp": "160",
             "defence": "0.16",

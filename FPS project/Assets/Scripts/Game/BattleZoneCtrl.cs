@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class BattleZoneCtrl : MonoBehaviour
 {
-    [SerializeField] private Animator gateAnim;
+    [SerializeField] private Animator enterGateAnim;
+    [SerializeField] private Animator exitGateAnim;
     [SerializeField] private int enemyCount;
     [SerializeField] private int spawnedEnemyCount;
     [SerializeField] private bool hasPlayerEnteredBattleZone = false;
@@ -20,7 +21,7 @@ public class BattleZoneCtrl : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         hasPlayerEnteredBattleZone = true;
         SetActiveHPBar(true);
-        gateAnim.Play("Close");
+        enterGateAnim.Play("Close");
     }
 
     public void InitSpawn()
@@ -38,7 +39,8 @@ public class BattleZoneCtrl : MonoBehaviour
 
     private void Init()
     {
-        int childCount = transform.childCount;
+        // int childCount = transform.childCount;
+        int childCount = 8;
         for(int i = 0; i < childCount; i++)
         {
             Enemy enemy = transform.GetChild(i).GetComponent<Enemy>();
@@ -86,11 +88,12 @@ public class BattleZoneCtrl : MonoBehaviour
     {
         Enemy newEnemy = enemySpawnQueue.Dequeue();
         newEnemy.gameObject.SetActive(true);
+        spawnedEnemyCount++;
     }
 
     void OpenZoneExitGate()
     {
-        gateAnim.Play("Open");
+        exitGateAnim.Play("Open");
         SetActiveHPBar(false);
     }
 }

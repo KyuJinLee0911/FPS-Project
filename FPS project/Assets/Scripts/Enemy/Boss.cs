@@ -26,7 +26,7 @@ public class Boss : Enemy
         int playerLevel = GameManager.Instance.player.level;
         fighter = GetComponent<Fighter>();
         animator = GetComponent<Animator>();
-        hp = 1500;
+        hp = 15; // 테스트용 체력
         maxHp = 1500;
         defence = 0.2f;
         autoCriticalRate = 0.0f;
@@ -75,10 +75,14 @@ public class Boss : Enemy
 
     public override void Die(GameObject instigator)
     {
+        if(isDead) return;
+        isDead = true;
         isMoving = false;
         animator.SetTrigger("Die");
-        base.Die(instigator);
-        
+        if(!GameManager.Instance._achivement.achievedDict.ContainsKey("reboot"))
+        {
+            GameManager.Instance._achivement.Achived("reboot");
+        }
     }
 
     private void Start()

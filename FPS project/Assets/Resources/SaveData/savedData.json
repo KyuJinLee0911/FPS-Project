@@ -1,5 +1,6 @@
 {
     "hp": 100.0,
+    "maxHp": 0.0,
     "defence": 0.10000000149011612,
     "level": 1,
     "currentExp": 0,

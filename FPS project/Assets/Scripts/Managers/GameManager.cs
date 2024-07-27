@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     public void Init()
     {
-        
+
         _class.Init();
         _data.Init();
         _achivement.Init();
@@ -63,9 +63,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
+    #region About Pause and Resume
     public void AdjustTimeScale(float scale)
     {
         Time.timeScale = scale;
@@ -87,19 +88,6 @@ public class GameManager : MonoBehaviour
         SetCursorState(false, CursorLockMode.Locked);
     }
 
-    public void SetCursorState(bool isCursorVisible, CursorLockMode lockMode)
-    {
-        Cursor.visible = isCursorVisible;
-        Cursor.lockState = lockMode;
-    }
-
-    public void RestartGame()
-    {
-        AdjustTimeScale(1);
-        _data.DeleteData();
-        StartCoroutine(LoadSceneAsyncWithLoadingUI("TestScene"));
-    }
-
     void OnPause()
     {
         if (pauseUIObj == null) return;
@@ -112,7 +100,23 @@ public class GameManager : MonoBehaviour
             PauseGame();
         }
     }
+    #endregion
 
+    public void SetCursorState(bool isCursorVisible, CursorLockMode lockMode)
+    {
+        Cursor.visible = isCursorVisible;
+        Cursor.lockState = lockMode;
+    }
+
+    public void RestartGame()
+    {
+        AdjustTimeScale(1);
+        _data.DeleteIngameData();
+        currentStageIndex = 1;
+        StartCoroutine(LoadSceneAsyncWithLoadingUI(stageNames[1]));
+    }
+
+    #region Change Stages
     IEnumerator LoadSceneAsyncWithLoadingUI(string sceneName)
     {
         loadingUIObj.SetActive(true);
@@ -139,9 +143,16 @@ public class GameManager : MonoBehaviour
     public void ToFortress()
     {
         SetCursorState(false, CursorLockMode.Locked);
-        currentStageIndex--;
-        if (currentStageIndex < 0)
-            currentStageIndex = stageNames.Length - 1;
+        // currentStageIndex--;
+        // if (currentStageIndex < 0)
+        //     currentStageIndex = stageNames.Length - 1;
+        if (currentStageIndex == 3)
+        {
+            _data.DeleteIngameData();
+            player.level = 1;
+            player.Initialize();
+        }
+        currentStageIndex = 4;
 
         StartCoroutine(LoadSceneAsyncWithLoadingUI(stageNames[currentStageIndex]));
     }
@@ -156,14 +167,23 @@ public class GameManager : MonoBehaviour
     // 0 = 시작화면
     // 1 = 스테이지 1
     // 2 = 스테이지 2
-    // 3 = 스테이지 3
+    // 3 = 스테이지 3 (보스)
     // 4 = 거점
     // 거점에서 스테이지 1, 스테이지 1에서 2, 2에서 3, 3에서 거점으로 복귀하는 함수
     public void ToNextStage()
     {
+        // 이미 움직일 수 없음 = 다음 스테이지로 이미 이동 중
+        // 중복 입력을 통해 스테이지를 건너뛰는 것을 막기 위함
+        if (!controller.isControlable)
+        {
+            Debug.Log("Already moving");
+            return;
+        }
+
         // 다음스테이지로 가기 전에 현재 데이터 저장
         controller.isControlable = false;
         _data.SaveIngameData();
+
         currentStageIndex++;
 
         if (currentStageIndex >= stageNames.Length)
@@ -171,10 +191,11 @@ public class GameManager : MonoBehaviour
             currentStageIndex = 1;
         }
         StartCoroutine(LoadSceneAsyncWithLoadingUI(stageNames[currentStageIndex]));
-        
+
         // 컷씬 재생
         StartCoroutine(PlayCutScene());
     }
+    #endregion
 
     IEnumerator PlayCutScene()
     {

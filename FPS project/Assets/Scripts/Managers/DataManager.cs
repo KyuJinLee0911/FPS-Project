@@ -10,17 +10,19 @@ public class DataManager : MonoBehaviour
     string path;
     private SaveData data = new SaveData();
 
-    Dictionary<int, Stat> LoadJson(string path)
+
+    public Dictionary<TKey, TValue> LoadJson<TKey, TValue>(string path) where TValue : Data<TKey>
     {
-        Dictionary<int, Stat> newStatList = new Dictionary<int, Stat>();
+        Dictionary<TKey, TValue> newStatList = new Dictionary<TKey, TValue>();
         var loadedJson = Resources.Load<TextAsset>(path);
 
-        StatData myStat = JsonUtility.FromJson<StatData>(loadedJson.ToString());
+        JsonWrapper<TValue> wrapper = JsonUtility.FromJson<JsonWrapper<TValue>>(loadedJson.ToString());
 
-        foreach (var stat in myStat.stats)
+        foreach (var data in wrapper.datas)
         {
-            newStatList.Add(stat.level, stat);
+            newStatList.Add(data.key, data);
         }
+        Debug.Log(path);
         return newStatList;
     }
 
@@ -32,9 +34,10 @@ public class DataManager : MonoBehaviour
     public void Init()
     {
         string userClassStatPath = "JSON/" + GameManager.Instance._class.currentClass.className + "StatData";
-        userStats = LoadJson(userClassStatPath);
+        if (userStats.Count == 0)
+            userStats = LoadJson<int, Stat>(userClassStatPath);
         if (enemyStats.Count == 0)
-            enemyStats = LoadJson("JSON/EnemyStatData");
+            enemyStats = LoadJson<int, Stat>("JSON/EnemyStatData");
         path = Path.Combine(Application.dataPath + "/Resources/SaveData/", "savedData.json");
         Debug.Log(path);
     }
@@ -65,6 +68,7 @@ public class DataManager : MonoBehaviour
             Debug.Log("No file exist. Create new save file");
             player.level = userStats[1].level;
             player.hp = userStats[1].hp;
+            player.maxHp = userStats[1].hp;
             player.defence = userStats[1].defence;
             player.exp = 0;
             player.expToNextLevel = userStats[1].expToNextLevel;
@@ -81,6 +85,7 @@ public class DataManager : MonoBehaviour
 
             player.level = data.level;
             player.hp = data.hp;
+            player.maxHp = userStats[player.level].hp;
             player.defence = data.defence;
             player.exp = data.currentExp;
             player.expToNextLevel = userStats[data.level].expToNextLevel;
@@ -97,11 +102,11 @@ public class DataManager : MonoBehaviour
         return File.Exists(path);
     }
 
-    public void DeleteData()
+    public void DeleteIngameData()
     {
-        if(!File.Exists(path))
+        if (!File.Exists(path))
             return;
-        
+
         File.Delete(path);
     }
 }
@@ -110,10 +115,20 @@ public class DataManager : MonoBehaviour
 public class SaveData
 {
     public float hp;
+    public float maxHp;
     public float defence;
     public int level;
     public int currentExp;
     public int currentClass;
     public float autoCriticalRate;
     public float autoCriticalMagnification;
+}
+
+public class JsonWrapper<T>
+{
+    public JsonWrapper(List<T> datas)
+    {
+        this.datas = datas;
+    }
+    public List<T> datas;
 }

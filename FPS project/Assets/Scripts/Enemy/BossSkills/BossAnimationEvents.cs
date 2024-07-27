@@ -78,7 +78,8 @@ public class BossAnimationEvents : MonoBehaviour
     {
         ParticleSystem expEffect = newEffectObj.GetComponent<ParticleSystem>();
         yield return new WaitUntil(() => expEffect.isStopped);
-
+        
+        GameManager.Instance.ToNextStage(); // 결과창 제작 후 결과창 활성화하는 코드로 교체 예정
         if(expEffect.isStopped)
             Destroy(boss.gameObject);
     }

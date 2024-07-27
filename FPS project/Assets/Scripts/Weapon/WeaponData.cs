@@ -89,7 +89,7 @@ public class WeaponData : ItemData
             float _damage = hitBox.CalculateDamage(damage, criticalMultiples) * effectiveRangeMultiplier;
 
             hitBox.damage = _damage;
-
+            Debug.DrawLine(muzzleTransform.position, hit.point, Color.red);
             hitBox.GetHit(instigator, _damage);
         }
         else

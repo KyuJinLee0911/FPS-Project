@@ -38,8 +38,6 @@ public class Player : Creature
         }
 
         GameManager.Instance._data.LoadIngameData();
-        maxHp = hp;
-        SetPlayerPosition();
 
         Debug.Log($"User created, level : {level}, hp : {hp}, defence : {defence}");
         isDead = false;
@@ -51,17 +49,31 @@ public class Player : Creature
         OnPlayerLevelUp += GainAbilityPoint;
         OnPlayerLevelUp += GameManager.Instance._class.OpenSelectAbilityUI;
         OnPlayerLevelUp += SetStats;
+
+        // SetPlayerPosition();
     }
 
     void SetPlayerPosition()
     {
+        Debug.Log("Player Position Set");
         transform.position = GameManager.Instance.startPos.position;
         transform.localRotation = GameManager.Instance.startPos.localRotation;
     }
 
-    void Start()
+    void OnEnable()
     {
         Initialize();
+    }
+
+    private void Start()
+    {
+        SetPlayerPosition();
+    }
+
+    private void OnDestroy()
+    {
+        if (GameManager.Instance.player != null)
+            GameManager.Instance.player = null;
     }
 
     public override void TakeDamage(GameObject instigator, float damage)
@@ -85,7 +97,7 @@ public class Player : Creature
     }
     private void Update()
     {
-        if(exp >= expToNextLevel)
+        if (exp >= expToNextLevel)
         {
             exp -= expToNextLevel;
             PlayerLevelUp();
@@ -109,7 +121,7 @@ public class Player : Creature
         Dictionary<int, Stat> statDict = GameManager.Instance._data.userStats;
         hp = statDict[level].hp;
         defence = statDict[level].defence;
-        exp = 0;
+        exp -= expToNextLevel;
         expToNextLevel = statDict[level].expToNextLevel;
     }
 }

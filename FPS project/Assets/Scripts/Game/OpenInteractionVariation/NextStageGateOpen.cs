@@ -8,7 +8,8 @@ public class NextStageGateOpen : OpenInteraction
     public override void DoInteraction()
     {
         base.DoInteraction();
-
+        // StopMoving();
+        FinishGateOpen();
         
     }
 

@@ -1,0 +1,9 @@
+{
+    "datas": [
+        {
+            "key": "reboot",
+            "name": "재부팅",
+            "description": "게임을 클리어한다."
+        }
+    ]
+}

@@ -847,7 +847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instigator: {fileID: 0}
   damage: 0
-  root: {fileID: 0}
+  root: {fileID: 4787168552029872431}
 --- !u!1 &3887596004562862313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,7 +1142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instigator: {fileID: 0}
   damage: 0
-  root: {fileID: 0}
+  root: {fileID: 4787168552029872431}
 --- !u!1 &5814725096972968655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instigator: {fileID: 0}
   damage: 0
-  root: {fileID: 0}
+  root: {fileID: 4787168552029872431}
 --- !u!1 &6571224047980021511
 GameObject:
   m_ObjectHideFlags: 0

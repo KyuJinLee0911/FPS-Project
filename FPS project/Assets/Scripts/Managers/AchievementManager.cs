@@ -1,46 +1,41 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AchievementManager : MonoBehaviour
 {
     Dictionary<string, Achievement> achievements = new Dictionary<string, Achievement>();
-    Dictionary<string, Achievement> achievedAchievements = new Dictionary<string, Achievement>();
+    public Dictionary<string, Achievement> achievedDict = new Dictionary<string, Achievement>();
     [SerializeField] GameObject achievementUIObj;
     [SerializeField] Text nameTxt;
     [SerializeField] Text descriptionTxt;
-
-    Dictionary<string, Achievement> LoadAchievementJson(string path)
-    {
-        Dictionary<string, Achievement> newAchievementDict = new Dictionary<string, Achievement>();
-        var loadedJson = Resources.Load<TextAsset>(path);
-        AchievementData myAchievement = JsonUtility.FromJson<AchievementData>(loadedJson.ToString());
-        foreach (var achievement in myAchievement.achievements)
-        {
-            newAchievementDict.Add(achievement.key, achievement);
-        }
-        return newAchievementDict;
-    }
-
+    string path;
+    
     public void Init()
     {
+        path = Path.Combine(Application.dataPath + "/Resources/SaveData/", "achievementData.json");
         if (achievements.Count == 0)
-            achievements = LoadAchievementJson("JSON/AchievementData");
+            achievements = GameManager.Instance._data.LoadJson<string, Achievement>("JSON/AchievementData");
+        if (achievedDict.Count == 0)
+            LoadAchievedData();
     }
 
+    #region Add Achievement Data and Activate UI
     public void Achived(string key)
     {
-        if(achievedAchievements[key] == null)
-            achievedAchievements.Add(key, achievements[key]);
-        
+        if (achievedDict.ContainsKey(key)) return;
+
+        achievedDict.Add(key, achievements[key]);
+        SaveAchievedData();
         StartCoroutine(EnableAchievementUI(key));
     }
 
     public IEnumerator EnableAchievementUI(string key)
     {
-        if(!achievementUIObj.activeSelf)
+        if (!achievementUIObj.activeSelf)
             achievementUIObj.SetActive(true);
         nameTxt.text = achievements[key].name;
         descriptionTxt.text = achievements[key].description;
@@ -49,19 +44,52 @@ public class AchievementManager : MonoBehaviour
 
         achievementUIObj.SetActive(false);
     }
+    #endregion
 
+    #region Achieved Data Save
+    public void SaveAchievedData()
+    {
+        List<Achievement> achievedList = new List<Achievement>();
+        foreach (KeyValuePair<string, Achievement> achievement in achievedDict)
+        {
+            achievedList.Add(achievement.Value);
+        }
+        JsonWrapper<Achievement> newData = new JsonWrapper<Achievement>(achievedList);
+        string _listToJson = JsonUtility.ToJson(newData, true);
+        
+        File.WriteAllText(path, _listToJson);
+        Debug.Log("Successfully Saved Achievement Data");
+    }
+
+    public void LoadAchievedData()
+    {
+        
+        if(!File.Exists(path))
+        {
+            Debug.Log("You achieved nothing yet");
+            return;
+        }
+        var jsonText = Resources.Load<TextAsset>("SaveData/achievementData");
+        JsonWrapper<Achievement> myAchievement = JsonUtility.FromJson<JsonWrapper<Achievement>>(jsonText.ToString());
+        foreach (Achievement achiv in myAchievement.datas)
+        {
+            if (achievedDict.ContainsKey(achiv.key))
+                continue;
+
+            achievedDict.Add(achiv.key, achiv);
+            Debug.Log($"{achiv.key} has added to achieved Dictionary");
+        }
+    }
+    #endregion
 }
 
 [Serializable]
-public class Achievement
+public class Achievement : Data<string>
 {
-    public string key;
+    public Achievement(string key)
+    {
+        this.key = key;
+    }
     public string name;
     public string description;
-}
-
-[Serializable]
-public class AchievementData
-{
-    public List<Achievement> achievements;
 }

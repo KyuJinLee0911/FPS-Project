@@ -2,8 +2,12 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class Stat
+public class Stat: Data<int>
 {
+    public Stat()
+    {
+        key = level;
+    }
     public int level; // ID
     public float hp;
     public float defence;
@@ -11,7 +15,7 @@ public class Stat
 }
 
 [Serializable]
-public class StatData
+public class Data<T>
 {
-    public List<Stat> stats;
+    public T key;
 }
