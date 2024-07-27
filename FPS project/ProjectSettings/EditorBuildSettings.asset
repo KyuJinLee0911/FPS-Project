@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Stage2.unity
     guid: 4f749c433db8e974a8d2ec64f4551b38
   - enabled: 1
+    path: Assets/Scenes/BossStage.unity
+    guid: e39b51ed0a2f3e343b8eca7964f21cfb
+  - enabled: 1
     path: Assets/Scenes/Fortress.unity
     guid: 2f85b9d010150904896c90f9d0026fa1
   m_configObjects: {}

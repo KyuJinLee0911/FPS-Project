@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public DataManager _data;
     public ItemManager _item;
     public ObjectPool _pool;
+    public AchievementManager _achivement;
     public Player player;
     public PlayerController controller;
     public GameObject pauseUIObj;
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
         
         _class.Init();
         _data.Init();
+        _achivement.Init();
     }
 
     void Awake()

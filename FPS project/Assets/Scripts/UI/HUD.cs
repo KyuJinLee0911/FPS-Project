@@ -27,7 +27,7 @@ public class HUD : MonoBehaviour
     {
         hpBar.maxValue = player.maxHp;
         hpBar.value = player.hp;
-        hpText.text = $"{player.hp} / {player.maxHp}";
+        hpText.text = $"{Mathf.FloorToInt(player.hp)} / {player.maxHp}";
 
         expBar.maxValue = player.expToNextLevel;
         expBar.value = player.exp;

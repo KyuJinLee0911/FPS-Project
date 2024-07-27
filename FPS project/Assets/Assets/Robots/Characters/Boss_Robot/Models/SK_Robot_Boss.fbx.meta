@@ -1,0 +1,1460 @@
+fileFormatVersion: 2
+guid: 4874e74eab781624e970ea85c97d467b
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_gradient
+    second: {fileID: 2100000, guid: 02588c979fdff5f4cb1f8961227e91a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_gradient.001
+    second: {fileID: 2100000, guid: 02588c979fdff5f4cb1f8961227e91a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m_gradient_02
+    second: {fileID: 2100000, guid: 02588c979fdff5f4cb1f8961227e91a3, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: SK_Robot_Boss|TPose
+      takeName: SK_Robot_Boss|TPose
+      internalID: 3447251626643186295
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Walking_Default
+      takeName: SK_Robot_Boss|Walking_Default
+      internalID: 4814558159573119287
+      firstFrame: 0
+      lastFrame: 251
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Walking_02
+      takeName: SK_Robot_Boss|Walking_02
+      internalID: -5204760151595767942
+      firstFrame: 0
+      lastFrame: 131
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Spawn_Quick
+      takeName: SK_Robot_Boss|Spawn_Quick
+      internalID: 7905698786830090356
+      firstFrame: 0
+      lastFrame: 87
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Spawn
+      takeName: SK_Robot_Boss|Spawn
+      internalID: -4873937539851496127
+      firstFrame: 0
+      lastFrame: 132
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Running_05
+      takeName: SK_Robot_Boss|Running_05
+      internalID: 8960896833939866531
+      firstFrame: 0
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Running_04
+      takeName: SK_Robot_Boss|Running_04
+      internalID: -3633958979636934011
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Running_03
+      takeName: SK_Robot_Boss|Running_03
+      internalID: 6249053052736883147
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Running_01
+      takeName: SK_Robot_Boss|Running_01
+      internalID: 3852394272418956583
+      firstFrame: 0
+      lastFrame: 52
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Jump
+      takeName: SK_Robot_Boss|Jump
+      internalID: 7960622030360476332
+      firstFrame: 0
+      lastFrame: 166
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Idle_BattleReady
+      takeName: SK_Robot_Boss|Idle_BattleReady
+      internalID: 3111645142145371669
+      firstFrame: 0
+      lastFrame: 172
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Idle_Action
+      takeName: SK_Robot_Boss|Idle_Action
+      internalID: 9134214389197095470
+      firstFrame: 0
+      lastFrame: 230
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Idle_02
+      takeName: SK_Robot_Boss|Idle_02
+      internalID: 4451274123946307758
+      firstFrame: 0
+      lastFrame: 105
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Idle
+      takeName: SK_Robot_Boss|Idle
+      internalID: -5836576720642594954
+      firstFrame: 0
+      lastFrame: 202
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|GettingHit_03
+      takeName: SK_Robot_Boss|GettingHit_03
+      internalID: 1154790542122934519
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|GettingHit_02
+      takeName: SK_Robot_Boss|GettingHit_02
+      internalID: 5546632236307925816
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|GettingHit_01
+      takeName: SK_Robot_Boss|GettingHit_01
+      internalID: 6330853774626359987
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|DyingRotation
+      takeName: SK_Robot_Boss|DyingRotation
+      internalID: -1715544941936570086
+      firstFrame: 0
+      lastFrame: 92
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Dying_02
+      takeName: SK_Robot_Boss|Dying_02
+      internalID: 5023252620074548974
+      firstFrame: 0
+      lastFrame: 119
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Dying
+      takeName: SK_Robot_Boss|Dying
+      internalID: 7178375993757871955
+      firstFrame: 0
+      lastFrame: 62
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.9968254
+        functionName: OnBossDead
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: e60f13308f2601f42b87b5f0a7d5661e, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Attack_Punch_02
+      takeName: SK_Robot_Boss|Attack_Punch_02
+      internalID: -8923543834443450390
+      firstFrame: 0
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.0025
+        functionName: OnAttackStarted
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: e60f13308f2601f42b87b5f0a7d5661e, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 1
+        functionName: OnAttackEnded
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: e60f13308f2601f42b87b5f0a7d5661e, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Attack_Punch
+      takeName: SK_Robot_Boss|Attack_Punch
+      internalID: -1944015813536485672
+      firstFrame: 0
+      lastFrame: 64
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Attack_Head
+      takeName: SK_Robot_Boss|Attack_Head
+      internalID: 996511714497820563
+      firstFrame: 0
+      lastFrame: 44
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Skill_01
+      takeName: SK_Robot_Boss|Skill_01
+      internalID: -1212483533869300473
+      firstFrame: 0
+      lastFrame: 418
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Skill_02
+      takeName: SK_Robot_Boss|Skill_02
+      internalID: 1310051649594070766
+      firstFrame: 0
+      lastFrame: 181
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Skill_03
+      takeName: SK_Robot_Boss|Skill_03
+      internalID: -7793313819868805694
+      firstFrame: 0
+      lastFrame: 192
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Skill_04
+      takeName: SK_Robot_Boss|Skill_04
+      internalID: -5957103113907028601
+      firstFrame: 0
+      lastFrame: 64
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.39499998
+        functionName: OnSelfHealed
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: e60f13308f2601f42b87b5f0a7d5661e, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SK_Robot_Boss|Skill_05
+      takeName: SK_Robot_Boss|Skill_05
+      internalID: 794668087906578114
+      firstFrame: 0
+      lastFrame: 93
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.48999998
+        functionName: OnHitGround
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: e60f13308f2601f42b87b5f0a7d5661e, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0
+        functionName: OnSkill5Started
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: e60f13308f2601f42b87b5f0a7d5661e, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.99249995
+        functionName: OnSkill5Ended
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: e60f13308f2601f42b87b5f0a7d5661e, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: SK_Robot_Boss(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SM_Boss_Robot
+      parentName: SK_Robot_Boss(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.9999995, y: 1, z: 1}
+    - name: SK_Boss_Robot
+      parentName: SK_Robot_Boss(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root_A
+      parentName: SK_Boss_Robot
+      position: {x: -0, y: -0.14776003, z: -0.002299698}
+      rotation: {x: -0, y: -6.617445e-24, z: -1.69455e-16, w: 1}
+      scale: {x: 1, y: 0.9999999, z: 0.9999999}
+    - name: pelvis
+      parentName: Root_A
+      position: {x: -1.8338545e-17, y: 0.05411029, z: 1.4223548}
+      rotation: {x: 0.78119546, y: 0.00000011314838, z: -0.00000009832873, w: 0.6242866}
+      scale: {x: 1, y: 0.9999843, z: 0.99998426}
+    - name: thigh_L
+      parentName: pelvis
+      position: {x: -0.42166746, y: -0.10249983, z: 0.06635516}
+      rotation: {x: 0.9922714, y: -0.029600922, z: 0.0029174227, w: 0.12046878}
+      scale: {x: 1.0000005, y: 1.0000007, z: 1.0000068}
+    - name: thigh_twist_L
+      parentName: thigh_L
+      position: {x: -0.000000057742, y: 0.2856511, z: 0.00000012293458}
+      rotation: {x: -0.03670826, y: -0.056186914, z: -0.0019633842, w: 0.9977433}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000002}
+    - name: knee_L
+      parentName: thigh_twist_L
+      position: {x: -0.0000000037252903, y: 0.26928362, z: 0}
+      rotation: {x: 0.2379156, y: -0.03838846, z: 0.034352224, w: 0.96991885}
+      scale: {x: 1.0000011, y: 1.0000008, z: 0.99999875}
+    - name: calf_L
+      parentName: knee_L
+      position: {x: -0.00000007892959, y: 0.049523164, z: 0.00000006891787}
+      rotation: {x: -0.051731054, y: -0.034586605, z: -0.042231485, w: 0.99716806}
+      scale: {x: 0.9999997, y: 1.0000029, z: 0.9999992}
+    - name: calf_twist_L
+      parentName: calf_L
+      position: {x: 0.0000000066356733, y: 0.3656764, z: 0.000000019557774}
+      rotation: {x: -0.19838908, y: -0.14993262, z: 0.06440443, w: 0.966444}
+      scale: {x: 1.0000019, y: 1.0000021, z: 0.9999956}
+    - name: foot_L
+      parentName: calf_twist_L
+      position: {x: -0.000000004656613, y: 0.30609757, z: 0.000000007916242}
+      rotation: {x: -0.6568237, y: 0.11001423, z: 0.10761152, w: 0.738173}
+      scale: {x: 1.0000038, y: 0.9999961, z: 0.9999996}
+    - name: foot_L_end
+      parentName: foot_L
+      position: {x: -0, y: 0.06375658, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: thigh_R
+      parentName: pelvis
+      position: {x: 0.42166755, y: -0.10249956, z: 0.06635514}
+      rotation: {x: 0.9922714, y: 0.029601084, z: -0.002917405, w: 0.12046878}
+      scale: {x: 0.99999905, y: 1.0000001, z: 0.9999929}
+    - name: thigh_twist_R
+      parentName: thigh_R
+      position: {x: 0.000000055879354, y: 0.28565162, z: 0.00000014528632}
+      rotation: {x: -0.03670829, y: 0.056186687, z: 0.0019634177, w: 0.99774337}
+      scale: {x: 0.99999994, y: 1.0000008, z: 1.0000011}
+    - name: knee_R
+      parentName: thigh_twist_R
+      position: {x: 0.0000000055879354, y: 0.26928377, z: -0.000000022351742}
+      rotation: {x: 0.23791583, y: 0.038388394, z: -0.03435256, w: 0.9699187}
+      scale: {x: 1.0000011, y: 0.99999845, z: 1.000002}
+    - name: calf_R
+      parentName: knee_R
+      position: {x: -0.0000000069849193, y: 0.04952315, z: 0.0000000055879354}
+      rotation: {x: -0.05173113, y: 0.034586437, z: 0.04223161, w: 0.9971681}
+      scale: {x: 0.9999993, y: 1.0000011, z: 0.9999997}
+    - name: calf_twist_R
+      parentName: calf_R
+      position: {x: -0.000000053201802, y: 0.36567637, z: -0.0000000088475645}
+      rotation: {x: -0.19838898, y: 0.1499261, z: -0.06440378, w: 0.96644515}
+      scale: {x: 1.0000025, y: 0.99999774, z: 0.99999887}
+    - name: foot_R
+      parentName: calf_twist_R
+      position: {x: -0.00000005075708, y: 0.30609775, z: 0.0000000055879354}
+      rotation: {x: -0.6568235, y: -0.11001346, z: -0.107610114, w: 0.7381735}
+      scale: {x: 1.0000021, y: 0.9999976, z: 1}
+    - name: foot_R_end
+      parentName: foot_R
+      position: {x: -0, y: 0.06375658, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: CB_spine_01
+      parentName: pelvis
+      position: {x: -0.000000014977559, y: 0.3913034, z: -0.011043126}
+      rotation: {x: -0.124114186, y: -0.000000017496546, z: -0.0000000040008885, w: 0.99226797}
+      scale: {x: 1, y: 1, z: 0.9999998}
+    - name: spine_01
+      parentName: CB_spine_01
+      position: {x: -2.401066e-10, y: 0.0000000193251, z: 3.5919356e-10}
+      rotation: {x: -0, y: -3.5527137e-15, z: -2.1760371e-14, w: 1}
+      scale: {x: 1.0000005, y: 1.0000006, z: 1.0000002}
+    - name: spine_02
+      parentName: spine_01
+      position: {x: -3.783498e-10, y: 0.23213108, z: -0.00000004195249}
+      rotation: {x: -0.061242186, y: -0.000000025582619, z: -0.000000057730304, w: 0.99812293}
+      scale: {x: 1, y: 0.9999997, z: 0.99999994}
+    - name: spine_03
+      parentName: spine_02
+      position: {x: -4.0745363e-10, y: 0.31212935, z: 0.0000000791174}
+      rotation: {x: 0.012738079, y: -0.00000001477788, z: -0.0000000422262, w: 0.99991894}
+      scale: {x: 0.99999994, y: 1.0000002, z: 0.99999994}
+    - name: clavicle_L
+      parentName: spine_03
+      position: {x: -0.01648552, y: 0.4744976, z: -0.098138876}
+      rotation: {x: -0.5293526, y: 0.3985419, z: 0.6171556, w: 0.42434567}
+      scale: {x: 1.0000001, y: 0.9999999, z: 1}
+    - name: upperarm_L
+      parentName: clavicle_L
+      position: {x: 0.000000006519258, y: 0.72869146, z: -0.00000020908556}
+      rotation: {x: -0.12670088, y: -0.4159523, z: -0.014078998, w: -0.9004068}
+      scale: {x: 1, y: 1.000001, z: 0.99999905}
+    - name: upperarm_twist_L
+      parentName: upperarm_L
+      position: {x: -0.00000015459955, y: 0.24176958, z: -0.000000095926225}
+      rotation: {x: 0.0023870838, y: -0.0012080072, z: 0.014599619, w: 0.9998899}
+      scale: {x: 1.0000002, y: 0.9999999, z: 1.0000005}
+    - name: lowerarm_L
+      parentName: upperarm_twist_L
+      position: {x: -0.00000004284084, y: 0.24003382, z: 0.0000000433065}
+      rotation: {x: -0.09741856, y: 0.71189845, z: 0.034513824, w: 0.694636}
+      scale: {x: 0.9999981, y: 1.0000013, z: 1.0000029}
+    - name: lowerarm_twist_L
+      parentName: lowerarm_L
+      position: {x: 0.00000009406358, y: 0.22353843, z: 0.000000044703484}
+      rotation: {x: -0.020213673, y: -0.34366632, z: -0.018594962, w: 0.93869007}
+      scale: {x: 0.9999998, y: 1.000001, z: 0.9999995}
+    - name: hand_L
+      parentName: lowerarm_twist_L
+      position: {x: 0.004943244, y: 0.46312618, z: 0.120427}
+      rotation: {x: -0.020887902, y: 0.71214396, z: 0.07534577, w: -0.69766587}
+      scale: {x: 1.0000019, y: 0.99999964, z: 0.9999984}
+    - name: thumb_01_L
+      parentName: hand_L
+      position: {x: -0.1349878, y: 0.42780614, z: -0.15193167}
+      rotation: {x: -0.17570621, y: 0.1567887, z: 0.2900205, w: 0.9275952}
+      scale: {x: 0.9999998, y: 1.0000077, z: 0.9999931}
+    - name: thumb_02_L
+      parentName: thumb_01_L
+      position: {x: -0.000000029802322, y: 0.199305, z: -0.00000012665987}
+      rotation: {x: -0.024697913, y: -0.12670885, z: 0.02617988, w: -0.99128675}
+      scale: {x: 1.0000011, y: 0.9999962, z: 1.0000013}
+    - name: thumb_03_L
+      parentName: thumb_02_L
+      position: {x: -0.000000029802322, y: 0.15758951, z: -0.00000031292439}
+      rotation: {x: 0.009168654, y: 0.103284806, z: -0.038736, w: 0.993855}
+      scale: {x: 0.9999999, y: 1.0000002, z: 1.000001}
+    - name: thumb_03_L_end
+      parentName: thumb_03_L
+      position: {x: -0, y: 0.15759052, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pinky_01_L
+      parentName: hand_L
+      position: {x: 0.1666159, y: 0.7344593, z: 0.093653366}
+      rotation: {x: -0.013600058, y: -0.634691, z: 0.09365131, w: -0.7669497}
+      scale: {x: 0.999995, y: 0.9999999, z: 1.0000046}
+    - name: pinky_02_L
+      parentName: pinky_01_L
+      position: {x: 0.00000008940697, y: 0.13861099, z: -0.000000029802322}
+      rotation: {x: 0.02291731, y: 0.060735486, z: -0.030171432, w: 0.99743456}
+      scale: {x: 0.9999978, y: 1.0000026, z: 0.99999976}
+    - name: pinky_03_L
+      parentName: pinky_02_L
+      position: {x: 0.00000036880374, y: 0.15387428, z: 0.0000019017607}
+      rotation: {x: 0.019305144, y: 0.06756244, z: -0.023079382, w: 0.9972612}
+      scale: {x: 1.0000004, y: 1.0000013, z: 0.9999995}
+    - name: pinky_03_L_end
+      parentName: pinky_03_L
+      position: {x: -0, y: 0.13347398, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: middle_01_L
+      parentName: hand_L
+      position: {x: 0.032452434, y: 0.8072213, z: -0.017279703}
+      rotation: {x: 0.015376151, y: -0.68434304, z: 0.09307197, w: -0.72303236}
+      scale: {x: 0.99999464, y: 1.0000036, z: 1.0000027}
+    - name: middle_02_L
+      parentName: middle_01_L
+      position: {x: 0.00000020861626, y: 0.16693142, z: -0.000000033527613}
+      rotation: {x: 0.02266522, y: -0.02134721, z: -0.031567957, w: 0.9990165}
+      scale: {x: 0.99999744, y: 1.0000019, z: 1.0000005}
+    - name: middle_03_L
+      parentName: middle_02_L
+      position: {x: -0.00000013411045, y: 0.15812366, z: -0.000000014901161}
+      rotation: {x: 0.008871717, y: 0.0017176415, z: -0.022248248, w: 0.99971175}
+      scale: {x: 0.9999991, y: 1.0000013, z: 1.0000005}
+    - name: middle_03_L_end
+      parentName: middle_03_L
+      position: {x: -0, y: 0.1532444, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: index_01_L
+      parentName: hand_L
+      position: {x: -0.074056596, y: 0.7193958, z: -0.0824859}
+      rotation: {x: 0.045013737, y: -0.63443524, z: 0.07733487, w: -0.76777923}
+      scale: {x: 0.99999464, y: 1.0000052, z: 1.0000005}
+    - name: index_02_L
+      parentName: index_01_L
+      position: {x: -0.000000059604645, y: 0.18492372, z: 0.000000007450581}
+      rotation: {x: 0.039128933, y: 0.016441604, z: -0.0039917673, w: 0.9990909}
+      scale: {x: 0.9999995, y: 0.99999946, z: 1.0000021}
+    - name: index_03_L
+      parentName: index_02_L
+      position: {x: -0.000000074505806, y: 0.16761088, z: -0.000000024214387}
+      rotation: {x: 0.024990544, y: -0.07218923, z: -0.032372195, w: 0.9965522}
+      scale: {x: 0.99999917, y: 1.0000014, z: 1.0000008}
+    - name: index_03_L_end
+      parentName: index_03_L
+      position: {x: -0, y: 0.15142013, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hand_L.001
+      parentName: hand_L
+      position: {x: 0.18724418, y: 0.1891905, z: -0.47539803}
+      rotation: {x: 0.56988686, y: -0.25207573, z: -0.4248347, w: -0.65666}
+      scale: {x: 1.0000017, y: 1.0000002, z: 0.99999833}
+    - name: hand_L.001_end
+      parentName: hand_L.001
+      position: {x: -0, y: 0.5399676, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: upperarm_L_Ghost
+      parentName: clavicle_L
+      position: {x: 0.0000000027939677, y: 0.7286915, z: -0.00000017923594}
+      rotation: {x: 0.15214202, y: -0.41763282, z: 0.08867348, w: -0.89138806}
+      scale: {x: 0.9999956, y: 1.000012, z: 0.99999666}
+    - name: upperarm_twist_L_Ghost
+      parentName: upperarm_L_Ghost
+      position: {x: -0.00000012479722, y: 0.23323815, z: 0.000000018626451}
+      rotation: {x: 0.0026008785, y: -0.0031502545, z: 0.0145631805, w: 0.9998857}
+      scale: {x: 1.0000013, y: 0.99999934, z: 1.0000007}
+    - name: lowerarm_L_Ghost
+      parentName: upperarm_twist_L_Ghost
+      position: {x: -0.00000018067658, y: 0.23156393, z: -0.00000007962808}
+      rotation: {x: -0.20265898, y: 0.6674499, z: 0.01735055, w: 0.7163372}
+      scale: {x: 0.99999183, y: 1.0000019, z: 1.0000054}
+    - name: lowerarm_twist_L_Ghost
+      parentName: lowerarm_L_Ghost
+      position: {x: -0.0000005066395, y: 0.21565053, z: 0.00000008940697}
+      rotation: {x: -0.022293858, y: -0.34919262, z: -0.016041117, w: 0.9366484}
+      scale: {x: 0.9999949, y: 1.0000023, z: 1.0000043}
+    - name: hand_L_Ghost
+      parentName: lowerarm_twist_L_Ghost
+      position: {x: 0.0054071024, y: 0.486821, z: 0.12413894}
+      rotation: {x: -0.0123240845, y: 0.7024996, z: 0.07720939, w: -0.7073762}
+      scale: {x: 1.0000049, y: 1.0000049, z: 0.9999919}
+    - name: hand_L_Ghost_end
+      parentName: hand_L_Ghost
+      position: {x: -0, y: 0.27134547, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: clavicle_R
+      parentName: spine_03
+      position: {x: 0.016484428, y: 0.47449747, z: -0.09813888}
+      rotation: {x: 0.5293524, y: 0.3985423, z: 0.61715525, w: -0.42434585}
+      scale: {x: 1.0000005, y: 1.0000006, z: 1.0000002}
+    - name: upperarm_R
+      parentName: clavicle_R
+      position: {x: -0.0000000018626451, y: 0.72869164, z: -0.00000021567394}
+      rotation: {x: 0.12670097, y: -0.41595232, z: -0.014078883, w: 0.90040684}
+      scale: {x: 1.0000006, y: 1.0000008, z: 1.0000002}
+    - name: upperarm_twist_R
+      parentName: upperarm_R
+      position: {x: 0.00000015646219, y: 0.24176954, z: -0.00000026728958}
+      rotation: {x: 0.0023872214, y: 0.0012079773, z: -0.014599554, w: 0.99988985}
+      scale: {x: 1.0000012, y: 0.99999976, z: 1.0000004}
+    - name: lowerarm_R
+      parentName: upperarm_twist_R
+      position: {x: -0.00000002142042, y: 0.24003388, z: -0.000000019557774}
+      rotation: {x: -0.08594692, y: -0.70591086, z: -0.0717495, w: 0.6993962}
+      scale: {x: 0.9999977, y: 1.0000008, z: 1.0000024}
+    - name: lowerarm_twist_R
+      parentName: lowerarm_R
+      position: {x: 0.00000010617077, y: 0.22353834, z: -0.000000022351742}
+      rotation: {x: -0.020213664, y: 0.3436663, z: 0.01859504, w: 0.9386902}
+      scale: {x: 1.0000005, y: 1.0000019, z: 0.99999905}
+    - name: hand_R
+      parentName: lowerarm_twist_R
+      position: {x: -0.06856121, y: 0.45958278, z: 0.115703255}
+      rotation: {x: 0.020888105, y: 0.71214414, z: 0.07534581, w: 0.69766575}
+      scale: {x: 1.0000049, y: 1.0000002, z: 0.9999957}
+    - name: thumb_01_R
+      parentName: hand_R
+      position: {x: 0.13498765, y: 0.4278062, z: -0.1519317}
+      rotation: {x: -0.17269956, y: -0.15748946, z: -0.2914859, w: 0.9275817}
+      scale: {x: 0.99999976, y: 1.000008, z: 0.99999326}
+    - name: thumb_02_R
+      parentName: thumb_01_R
+      position: {x: -0.000000059604645, y: 0.19930498, z: -0.000000044703484}
+      rotation: {x: 0.024700353, y: -0.12670855, z: 0.026181974, w: 0.99128675}
+      scale: {x: 1.0000007, y: 0.99999595, z: 1.000002}
+    - name: thumb_03_R
+      parentName: thumb_02_R
+      position: {x: 0.000000044703484, y: 0.15758957, z: -0.000000014901161}
+      rotation: {x: 0.009168681, y: -0.10328513, z: 0.03873505, w: 0.993855}
+      scale: {x: 0.9999998, y: 1.0000001, z: 1.0000006}
+    - name: thumb_03_R_end
+      parentName: thumb_03_R
+      position: {x: -0, y: 0.15759052, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pinky_01_R
+      parentName: hand_R
+      position: {x: -0.16661608, y: 0.73445916, z: 0.09365346}
+      rotation: {x: 0.013600981, y: -0.6346918, z: 0.09364883, w: 0.7669493}
+      scale: {x: 0.9999951, y: 1.0000008, z: 1.0000044}
+    - name: pinky_02_R
+      parentName: pinky_01_R
+      position: {x: 0.000000037252903, y: 0.13861093, z: 0}
+      rotation: {x: 0.02291739, y: -0.06073556, z: 0.03017369, w: 0.9974345}
+      scale: {x: 0.99999756, y: 1.0000026, z: 1.0000001}
+    - name: pinky_03_R
+      parentName: pinky_02_R
+      position: {x: -0.0000005662441, y: 0.15387426, z: 0.0000018943101}
+      rotation: {x: 0.019305294, y: -0.06756252, z: 0.02307941, w: 0.9972613}
+      scale: {x: 1.0000006, y: 1.0000006, z: 0.99999857}
+    - name: pinky_03_R_end
+      parentName: pinky_03_R
+      position: {x: -0, y: 0.13347398, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: middle_01_R
+      parentName: hand_R
+      position: {x: -0.032452524, y: 0.80722106, z: -0.017279504}
+      rotation: {x: -0.015376611, y: -0.6843433, z: 0.09306939, w: 0.7230325}
+      scale: {x: 0.9999945, y: 1.000004, z: 1.0000027}
+    - name: middle_02_R
+      parentName: middle_01_R
+      position: {x: 0.00000008940697, y: 0.16693145, z: 0.000000022351742}
+      rotation: {x: 0.022665659, y: 0.021347146, z: 0.031569123, w: 0.9990166}
+      scale: {x: 0.9999972, y: 1.000002, z: 1.0000008}
+    - name: middle_03_R
+      parentName: middle_02_R
+      position: {x: 0.00000009685755, y: 0.15812357, z: 0.00000001094304}
+      rotation: {x: 0.008871677, y: -0.0017175132, z: 0.022248248, w: 0.9997117}
+      scale: {x: 0.99999905, y: 1.0000015, z: 1.0000012}
+    - name: middle_03_R_end
+      parentName: middle_03_R
+      position: {x: -0, y: 0.1532444, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: index_01_R
+      parentName: hand_R
+      position: {x: 0.074056596, y: 0.71939564, z: -0.082485944}
+      rotation: {x: -0.045013182, y: -0.6344355, z: 0.077333376, w: 0.76777923}
+      scale: {x: 0.99999464, y: 1.0000056, z: 1.000001}
+    - name: index_02_R
+      parentName: index_01_R
+      position: {x: -0.0000001937151, y: 0.18492375, z: -0.00000008195639}
+      rotation: {x: 0.039128847, y: -0.016441807, z: 0.003989909, w: 0.9990909}
+      scale: {x: 0.99999976, y: 0.9999989, z: 1.0000017}
+    - name: index_03_R
+      parentName: index_02_R
+      position: {x: -0.0000001937151, y: 0.16761073, z: -0.000000020489097}
+      rotation: {x: 0.024991566, y: 0.07218925, z: 0.032373942, w: 0.99655217}
+      scale: {x: 0.99999845, y: 1.0000013, z: 1.000001}
+    - name: index_03_R_end
+      parentName: index_03_R
+      position: {x: -0, y: 0.15142013, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: HandGunSocket
+      parentName: hand_R
+      position: {x: 0.21539608, y: 0.6081341, z: -0.4443662}
+      rotation: {x: 0.299113, y: -0.43237737, z: -0.5986892, w: -0.6042785}
+      scale: {x: 1.0000056, y: 0.9999995, z: 0.99999577}
+    - name: HandGunSocket_end
+      parentName: HandGunSocket
+      position: {x: -0, y: 0.55971867, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: upperarm_R_Ghost
+      parentName: clavicle_R
+      position: {x: -0.000000013038516, y: 0.7286918, z: -0.00000040927262}
+      rotation: {x: -0.15214202, y: -0.41763273, z: 0.08867345, w: 0.89138806}
+      scale: {x: 0.99999493, y: 1.0000149, z: 0.9999973}
+    - name: upperarm_twist_R_Ghost
+      parentName: upperarm_R_Ghost
+      position: {x: 0.00000024121255, y: 0.23323843, z: 0.00000012060627}
+      rotation: {x: 0.0026008335, y: 0.0031500752, z: -0.014562992, w: 0.9998857}
+      scale: {x: 1.0000021, y: 0.99999875, z: 1.0000006}
+    - name: lowerarm_R_Ghost
+      parentName: upperarm_twist_R_Ghost
+      position: {x: -0.000000029802322, y: 0.23156382, z: -0.00000042305328}
+      rotation: {x: -0.202659, y: -0.6674498, z: -0.017350515, w: 0.7163373}
+      scale: {x: 0.9999911, y: 1.0000004, z: 1.0000061}
+    - name: lowerarm_twist_R_Ghost
+      parentName: lowerarm_R_Ghost
+      position: {x: 0.00000012665987, y: 0.21565032, z: 0.000000074505806}
+      rotation: {x: -0.022294004, y: 0.34919253, z: 0.016040958, w: 0.9366484}
+      scale: {x: 0.9999939, y: 1.0000024, z: 1.0000014}
+    - name: hand_R_Ghost
+      parentName: lowerarm_twist_R_Ghost
+      position: {x: -0.07882075, y: 0.48666266, z: 0.121238425}
+      rotation: {x: 0.01232428, y: 0.7024998, z: 0.077209175, w: 0.70737606}
+      scale: {x: 1.0000088, y: 1.000005, z: 0.99998707}
+    - name: hand_R_Ghost_end
+      parentName: hand_R_Ghost
+      position: {x: -0, y: 0.27134547, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: neck_01
+      parentName: spine_03
+      position: {x: -0.00000024690235, y: 0.53748643, z: 0.0043045674}
+      rotation: {x: 0.16320975, y: 0.000000064623556, z: -0.00000015901715, w: 0.98659146}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: head
+      parentName: neck_01
+      position: {x: -0.000000024912879, y: 0.14047273, z: 0.028717827}
+      rotation: {x: -0.11625547, y: 0.000000002972953, z: 0.00000021994194, w: 0.99321944}
+      scale: {x: 1, y: 0.99999994, z: 1.0000001}
+    - name: head_end
+      parentName: head
+      position: {x: -0, y: 0.3367349, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Gun_Socket_Controller
+      parentName: spine_03
+      position: {x: -0.00000006391201, y: 0.31349954, z: -0.13469754}
+      rotation: {x: 0.7494263, y: 0.00000019503541, z: 0.00000015892655, w: 0.6620879}
+      scale: {x: 1, y: 0.7413184, z: 1}
+    - name: Gun_Socket_Controller_end
+      parentName: Gun_Socket_Controller
+      position: {x: -0, y: 1.0000001, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Gun_Socket
+      parentName: SK_Boss_Robot
+      position: {x: 0.0022570863, y: 0.07005954, z: 2.6378555}
+      rotation: {x: 1, y: 3.5527137e-15, z: -0.000000043711392, w: -0.00000008940697}
+      scale: {x: 1.0000004, y: 0.74130726, z: 0.9999853}
+    - name: SM_Gun
+      parentName: Gun_Socket
+      position: {x: 0.0016425195, y: 0.06956053, z: 0.00011159328}
+      rotation: {x: -0.7067183, y: -0.03430435, z: -0.016868867, w: 0.70646155}
+      scale: {x: 1.0002282, y: 0.9999887, z: 0.9998633}
+    - name: Gun_Socket_end
+      parentName: Gun_Socket
+      position: {x: -0, y: 1.0000001, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: lowerarm_twist_Pole_L
+      parentName: SK_Boss_Robot
+      position: {x: -1.3605751, y: -0.09215935, z: 2.2645667}
+      rotation: {x: 0.76364154, y: -0.31336024, z: -0.41048068, w: -0.38750815}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: lowerarm_twist_Pole_L_end
+      parentName: lowerarm_twist_Pole_L
+      position: {x: -0, y: 0.21697381, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: lowerarm_twist_Pole_R
+      parentName: SK_Boss_Robot
+      position: {x: 1.3605751, y: -0.09215935, z: 2.2645667}
+      rotation: {x: 0.76364154, y: 0.31336024, z: 0.41048068, w: -0.38750815}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: lowerarm_twist_Pole_R_end
+      parentName: lowerarm_twist_Pole_R
+      position: {x: -0, y: 0.21697381, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

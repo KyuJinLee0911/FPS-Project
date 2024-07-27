@@ -19,15 +19,18 @@ MonoBehaviour:
   itemDescription: tw2 description tw2 description tw2 description tw2 description
     tw2 description tw2 description tw2 description
   itemImage: {fileID: 0}
+  Weight: 0
   damage: 20
   criticalMultiples: 2
   mag: 15
-  currentMag: 3
+  currentMag: 15
   reloadTime: 2
   fireRate: 2
-  fireRange: 50
+  fireRange: 150
+  effectiveRange: 50
   weaponType: 2
   projectile: {fileID: 0}
   weaponPrefab: {fileID: 4243271525775095593, guid: 24782bd632106e648a24b3c21ee59a78, type: 3}
   bulletEffect: {fileID: 0}
-  rebound: 0
+  rebound: 0.0757899
+  reboundMagnifier: 4

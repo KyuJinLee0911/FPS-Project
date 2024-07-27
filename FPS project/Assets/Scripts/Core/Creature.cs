@@ -31,6 +31,7 @@ public abstract class Creature : MonoBehaviour, IDamageable, IStat
         // OnPlayerDamage();
         if (hp <= 0)
         {
+            hp = 0;
             Die(instigator);
         }
         Debug.Log($"ouch! HP : {hp}");

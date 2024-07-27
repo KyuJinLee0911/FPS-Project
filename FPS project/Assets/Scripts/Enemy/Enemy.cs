@@ -77,7 +77,6 @@ public class Enemy : Creature
         base.Die(instigator);
         fighter.isWeaponFire = false;
         instigator.GetComponent<IStat>().exp += exp;
-        Debug.Log(instigator.GetComponent<IStat>().exp);
         isMoving = false;
         animator.SetTrigger("Die");
         if(isInsideBattleZone && GameManager.Instance.battleZoneCtrl != null)

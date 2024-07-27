@@ -12,8 +12,6 @@ public class Fighter : MonoBehaviour
     public int currentWeaponIndex;
     public bool isWeaponFire = false;
     [SerializeField] private float timeSinceLastFire = float.MaxValue;
-    // 히트 스캔에 필요한 타겟
-    [SerializeField] private IDamageable target;
     public Transform muzzleTransform;
     public Transform GunPosition;
     public GameObject gunModel;
@@ -107,29 +105,6 @@ public class Fighter : MonoBehaviour
         player.subSkill.DoSkill();
     }
 
-    public float CalculateDamage(float damage, DamageType damageType)
-    {
-        if (damageType == DamageType.DT_WEAKNESS)
-        {
-            float criticalDamage = damage * currentWeapon.CriticalMultiples;
-            Debug.Log("Critical!");
-            return criticalDamage;
-        }
-        else
-        {
-            float randomRate = UnityEngine.Random.Range(0.0f, 1.0f);
-            float autoCriticalDamage = damage * gameObject.GetComponent<IStat>().autoCriticalMagnification;
-            float autoCriticalRate = gameObject.GetComponent<IStat>().autoCriticalRate;
-
-            if (randomRate < autoCriticalRate)
-            {
-                Debug.Log($"Auto Critical! Rate : {randomRate}");
-                return autoCriticalDamage;
-            }
-            else
-                return damage;
-        }
-    }
 
     void OnSwapToWeapon1()
     {
@@ -204,7 +179,7 @@ public class Fighter : MonoBehaviour
 
     public void MakeRebound()
     {
-        currentWeapon.Rebound += 3;
+        currentWeapon.Rebound += currentWeapon.reboundMagnifier;
         gunModel.transform.localPosition = defaultGunPos;
         Vector3 targetRotation = gunModel.transform.localRotation.eulerAngles - new Vector3(currentWeapon.Rebound * 5,0,0);
         gunModel.transform.Translate(Vector3.forward * -0.1f);

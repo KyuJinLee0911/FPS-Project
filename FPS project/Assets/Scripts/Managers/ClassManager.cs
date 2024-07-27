@@ -13,12 +13,18 @@ public enum ClassType
 
 public class ClassManager : MonoBehaviour
 {
-    
+
     public PlayerClassData[] playerClassDatas;
+    public List<PlayerClassData> unlockedClasses;
     public PlayerClassData currentClass;
     public Dictionary<string, Ability> activatedAbilityDict = new Dictionary<string, Ability>();
+
+    [Header("UI")]
     public GameObject abilityUI;
-    
+    public GameObject unlockUI;
+    public Text unlockTxt;
+
+
     // 어빌리티 UI를 열 때
     // 현재 클래스에 맞는 어빌리티 데이터 중 중복없이 3개를 골라
     // 어빌리티 선택 버튼에 할당해주고
@@ -65,8 +71,8 @@ public class ClassManager : MonoBehaviour
             temp.gameObject.SetActive(true);
             GameManager.Instance.SetCursorState(true, CursorLockMode.None);
             // 어빌리티 선택시 일시정지 해제 및 커서 숨기고, 버튼 다시 비활성화
-            temp.GetComponent<Button>().onClick.AddListener(()=>GameManager.Instance.AdjustTimeScale(1));
-            temp.GetComponent<Button>().onClick.AddListener(()=>GameManager.Instance.SetCursorState(false, CursorLockMode.Locked));
+            temp.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.AdjustTimeScale(1));
+            temp.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.SetCursorState(false, CursorLockMode.Locked));
             temp.GetComponent<Button>().onClick.AddListener(() => temp.gameObject.SetActive(false));
 
             // 카운트 증가
@@ -76,5 +82,31 @@ public class ClassManager : MonoBehaviour
 
         // 어빌리티 창 켜질때 일시정지
         GameManager.Instance.AdjustTimeScale(0);
+    }
+
+    public void UnlockClass(string className)
+    {
+        foreach (var playerClass in playerClassDatas)
+        {
+            if (playerClass.className == className)
+            {
+                unlockedClasses.Add(playerClass);
+                break;
+            }
+            else
+                continue;
+        }
+
+        StartCoroutine(EnableUnlockClassUI(className));
+    }
+
+    IEnumerator EnableUnlockClassUI(string className)
+    {
+        if(!unlockUI.activeSelf)
+            unlockUI.SetActive(true);
+        unlockTxt.text = $"{className}을 잠금해제 했습니다";
+        yield return new WaitForSeconds(3);
+
+        unlockUI.SetActive(false);
     }
 }

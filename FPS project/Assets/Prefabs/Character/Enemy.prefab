@@ -240,9 +240,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1001348912038141925}
-  - {fileID: 3147503676260564971}
-  - {fileID: 3694514720803441667}
-  - {fileID: 6165805967680101781}
+  - {fileID: 984324669127101528}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &3636547905035553210
@@ -789,6 +787,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3694514720803441667}
   - component: {fileID: 6486842085358573891}
+  - component: {fileID: 6825959157320749183}
   m_Layer: 10
   m_Name: WeaknessHurtBox (1)
   m_TagString: Untagged
@@ -804,12 +803,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3576065069853042785}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.246, y: 0.555, z: -1.66}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.2460022, y: 0.55500007, z: -1.6600037}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4787168552029872431}
+  m_Father: {fileID: 984324669127101528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6486842085358573891
 CapsuleCollider:
@@ -834,6 +833,21 @@ CapsuleCollider:
   m_Height: 0.6
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6825959157320749183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3576065069853042785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea3623ce934e6a84fbc922e7b49a347b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instigator: {fileID: 0}
+  damage: 0
+  root: {fileID: 0}
 --- !u!1 &3887596004562862313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,6 +1038,40 @@ Transform:
   - {fileID: 634894003569646144}
   m_Father: {fileID: 8099745220308401538}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5303699309843101653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 984324669127101528}
+  m_Layer: 9
+  m_Name: HurtBoxes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &984324669127101528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5303699309843101653}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3147503676260564971}
+  - {fileID: 3694514720803441667}
+  - {fileID: 6165805967680101781}
+  m_Father: {fileID: 4787168552029872431}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &5712885772971059718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1082,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3147503676260564971}
   - component: {fileID: 6197816396746888048}
+  - component: {fileID: 4348402141961809468}
   m_Layer: 10
   m_Name: WeaknessHurtBox
   m_TagString: Untagged
@@ -1049,12 +1098,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5712885772971059718}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.258, y: 0.555, z: -1.66}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.2580032, y: 0.55500007, z: -1.6600037}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4787168552029872431}
+  m_Father: {fileID: 984324669127101528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6197816396746888048
 CapsuleCollider:
@@ -1079,6 +1128,21 @@ CapsuleCollider:
   m_Height: 0.6
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4348402141961809468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5712885772971059718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea3623ce934e6a84fbc922e7b49a347b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instigator: {fileID: 0}
+  damage: 0
+  root: {fileID: 0}
 --- !u!1 &5814725096972968655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,6 +1188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6165805967680101781}
   - component: {fileID: 4357941082524295739}
+  - component: {fileID: 7987435231113633468}
   m_Layer: 8
   m_Name: NormalHurtBox
   m_TagString: Untagged
@@ -1139,12 +1204,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5948951626193983950}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4787168552029872431}
+  m_Father: {fileID: 984324669127101528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &4357941082524295739
 CapsuleCollider:
@@ -1169,6 +1234,21 @@ CapsuleCollider:
   m_Height: 0
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7987435231113633468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5948951626193983950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea3623ce934e6a84fbc922e7b49a347b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instigator: {fileID: 0}
+  damage: 0
+  root: {fileID: 0}
 --- !u!1 &6571224047980021511
 GameObject:
   m_ObjectHideFlags: 0

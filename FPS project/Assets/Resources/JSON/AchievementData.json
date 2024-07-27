@@ -1,0 +1,34 @@
+{
+    "achievements": [
+        {
+            "key": "fastFurious",
+            "name": "분노의 질주",
+            "description": "리콘으로 게임을 클리어한다."
+        },
+        {
+            "key": "lastFortress",
+            "name": "마지막 요새",
+            "description": "가디언으로 게임을 클리어한다."
+        },
+        {
+            "key": "longHunt",
+            "name": "긴 사냥",
+            "description": "레인저로 게임을 클리어한다."
+        },
+        {
+            "key": "yay",
+            "name": "신난다",
+            "description": "코만도로 게임을 클리어한다."
+        },
+        {
+            "key": "reboot",
+            "name": "재부팅",
+            "description": "게임을 클리어한다."
+        },
+        {
+            "key": "robotEnforcementOfficer",
+            "name": "로봇 단속관",
+            "description": "적 로봇 50명을 제압한다."
+        }
+    ]
+}

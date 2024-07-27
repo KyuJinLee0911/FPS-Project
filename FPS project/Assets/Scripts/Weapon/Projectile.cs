@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
 {
     // IDamageable target;
     [Header("Projectile Data")]
+    WeaponData currentWeaponData;
     [SerializeField] float projectileSpeed = 15f;
     [SerializeField] float projectileDamage = 0f;
     // 약점 공격 시의 크리티컬 배율 (무기의 크리티컬 배율을 따라감)
@@ -19,6 +20,9 @@ public class Projectile : MonoBehaviour
     public float range;
     GameObject instigator = null;
     [SerializeField] float currentLifeTime = 0.0f;
+    [SerializeField] float movedDistance = 0.0f;
+    [SerializeField] float effectiveRange = 0.0f;
+    bool isDamageDecreased = false;
 
     [Header("Particle System and Effect")]
     [SerializeField] protected float hitOffset = 0f;
@@ -38,47 +42,38 @@ public class Projectile : MonoBehaviour
 
     bool isParticleStart = false;
 
+    public Projectile(float damage, float criticalMultiples, GameObject instigator)
+    {
+        projectileDamage = damage;
+        criticalMagnification = criticalMultiples;
+        this.instigator = instigator;
+    }
+
     private void OnCollisionEnter(Collision other)
     {
-        // 폭발하는 투사체의 경우, 폭발은 triggerEnter시에 항상 발생
+        // 충돌 이펙트
+        EnableVfx(other);
+
         if (isExplode)
             Explode();
+
+        // 본인의 투사체에는 데미지를 입지 않음
         if (other.collider.CompareTag(instigator.tag))
         {
             GameManager.Instance._pool.ReturnObj(instigator.name, this);
             return;
         }
 
-        EnableVfx(other);
-
-        Transform rootTransform = other.collider.transform.root;
-        Fighter fighter = instigator.GetComponent<Fighter>();
-        IDamageable damageable = rootTransform.GetComponent<IDamageable>();
-
-
-        // 데미지를 입힐 수 없는 오브젝트이거나, 이미 죽은 적이거나, 약점을 판단하는 checkweakness가 없는 경우
-        // 오브젝트를 풀에 바로 리턴
-        if (damageable == null || damageable.isDead)
+        HitBox hitbox = other.collider.transform.GetComponent<HitBox>();
+        if (hitbox == null)
         {
             GameManager.Instance._pool.ReturnObj(instigator.name, this);
             return;
         }
 
-        WeaponData weaponData = fighter.CurrentWeapon;
-
-        if (!isExplode)
-            // 넉백
-            weaponData.ApplyImpack(Vector3.zero, 0);
-
-        float _damage = 0;
-        if (other.collider.gameObject.layer == 8)
-            _damage = fighter.CalculateDamage(projectileDamage, DamageType.DT_NORMAL);
-        else if (other.collider.gameObject.layer == 10)
-            _damage = fighter.CalculateDamage(projectileDamage, DamageType.DT_WEAKNESS);
-
-        Debug.Log(_damage);
-        if (_damage != 0)
-            damageable.TakeDamage(instigator, _damage);
+        // 히트박스에 정보 전달
+        hitbox.instigator = instigator;
+        hitbox.damage = hitbox.CalculateDamage(projectileDamage, currentWeaponData.CriticalMultiples);
 
         GameManager.Instance._pool.ReturnObj(instigator.name, this);
     }
@@ -113,6 +108,12 @@ public class Projectile : MonoBehaviour
 
     private void OnEnable()
     {
+        if (instigator != null)
+        {
+            currentWeaponData = instigator.GetComponent<Fighter>().CurrentWeapon;
+            effectiveRange = currentWeaponData.EffectiveRange;
+        }
+
         currentLifeTime = 0;
         if (isParticleStart)
         {
@@ -127,11 +128,19 @@ public class Projectile : MonoBehaviour
     private void OnDisable()
     {
         rb.angularVelocity = Vector3.zero;
+        instigator = null;
     }
 
     private void Update()
     {
         currentLifeTime += Time.deltaTime;
+        movedDistance = currentLifeTime * projectileSpeed;
+        if (movedDistance > effectiveRange && !isDamageDecreased)
+        {
+            projectileDamage *= 0.6f;
+            isDamageDecreased = true;
+        }
+
         if (currentLifeTime >= 5.0f)
             GameManager.Instance._pool.ReturnObj(instigator.name, this);
     }

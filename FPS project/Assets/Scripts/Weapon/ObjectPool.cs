@@ -37,11 +37,12 @@ public class ObjectPool : MonoBehaviour
         
     }
 
-    public Projectile GetObj(string key)
+    public Projectile GetProjectile(string key, float damage, float criticalMultiples, GameObject instigator)
     {
         if(poolingObjQueueDict[key].Count > 0)
         {
             var obj = poolingObjQueueDict[key].Dequeue();
+            obj.SetProjectileDamage(damage, criticalMultiples, instigator);
             obj.transform.SetParent(null);
             obj.gameObject.SetActive(true);
             return obj;
@@ -49,6 +50,7 @@ public class ObjectPool : MonoBehaviour
         else
         {
             var newObj = CreateNewObj(key);
+            newObj.SetProjectileDamage(damage, criticalMultiples, instigator);
             newObj.gameObject.SetActive(true);
             newObj.transform.SetParent(null);
             return newObj;

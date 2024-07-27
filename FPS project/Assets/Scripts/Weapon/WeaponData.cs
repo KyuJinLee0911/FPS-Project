@@ -28,6 +28,8 @@ public class WeaponData : ItemData
     public float FireRate { get => fireRate; }
     [SerializeField] private float fireRange;
     public float FireRange { get => fireRange; }
+    [SerializeField] private float effectiveRange;
+    public float EffectiveRange { get => effectiveRange; }
     [SerializeField] private WeaponType weaponType;
     public WeaponType WeaponType { get => weaponType; }
     [SerializeField] private Projectile projectile;
@@ -36,6 +38,7 @@ public class WeaponData : ItemData
     public LineRenderer bulletEffect;
     [SerializeField] private float rebound;
     public float Rebound { get => rebound; set => rebound = value; }
+    public float reboundMagnifier;
 
 
     public void FireArm(Transform transform, GameObject instigator)
@@ -60,9 +63,8 @@ public class WeaponData : ItemData
     public void LaunchProjectile(Transform gunTransform, GameObject instigator)
     {
         projectile.range = fireRange;
-        Projectile projectileInstance = GameManager.Instance._pool.GetObj(instigator.name);
+        Projectile projectileInstance = GameManager.Instance._pool.GetProjectile(instigator.name, damage, criticalMultiples, instigator);
         projectileInstance.transform.SetPositionAndRotation(gunTransform.position, gunTransform.rotation);
-        projectileInstance.SetProjectileDamage(damage, criticalMultiples, instigator);
     }
 
     public void FireHitScan(GameObject instigator)
@@ -74,13 +76,21 @@ public class WeaponData : ItemData
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, fireRange))
         {
-            Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red, 3.0f);
-            IDamageable target = hit.collider.transform.root.GetComponent<IDamageable>();
-            if (target == null) return;
-
             // 탄흔효과
             bulletEffect.SetPosition(1, hit.point);
-            target.TakeDamage(instigator, damage);
+
+            HitBox hitBox = hit.collider.transform.GetComponent<HitBox>();
+            if (hitBox == null) return;
+
+            hitBox.instigator = instigator;
+
+            // 유효사거리보다 멀면 데미지 40% 감소
+            float effectiveRangeMultiplier = Vector3.Distance(muzzleTransform.position, hit.point) <= effectiveRange ? 1 : 0.6f;
+            float _damage = hitBox.CalculateDamage(damage, criticalMultiples) * effectiveRangeMultiplier;
+
+            hitBox.damage = _damage;
+
+            hitBox.GetHit(instigator, _damage);
         }
         else
         {

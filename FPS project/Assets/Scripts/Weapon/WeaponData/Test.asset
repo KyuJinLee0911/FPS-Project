@@ -19,14 +19,18 @@ MonoBehaviour:
   itemDescription: twdescription twdescription twdescription twdescription twdescription
     twdescription twdescription twdescription
   itemImage: {fileID: 0}
-  weaponName: testWeapon
+  Weight: 0
   damage: 10
   criticalMultiples: 2
   mag: 30
-  currentMag: 30
+  currentMag: 27
   reloadTime: 2
   fireRate: 10
-  fireRange: 30
+  fireRange: 150
+  effectiveRange: 100
   weaponType: 0
   projectile: {fileID: 4138816894924396826, guid: 2b328852af457b846a937da2c39f4ad3, type: 3}
   weaponPrefab: {fileID: 4243271525775095593, guid: 65119681e5b1b264d9081d42b4a80a89, type: 3}
+  bulletEffect: {fileID: 0}
+  rebound: 0
+  reboundMagnifier: 3
