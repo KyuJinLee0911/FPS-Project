@@ -4,24 +4,17 @@ using System.Collections.Generic;
 using FPS.Control;
 using UnityEngine;
 
-public enum UnitCode
-{
-    UC_GUARDIAN,
-    UC_COMMANDO,
-    UC_WALKING,
-    UC_FLYING,
-    UC_BOSS
-}
-
 public class Player : Creature
 {
-    public UnitCode unitCode;
     public PlayerClassData classData;
+    public Transform playerSkillsParent;
     public Skill mainSkill;
     public Skill subSkill;
     private int abilityPoint;
     public int currentTotalExp;
     public int expToNextLevel;
+    public Collider playerHurtBox;
+    public HitBox hitbox;
 
     public event Action OnPlayerDamage;
     public event Action OnPlayerDie;
@@ -41,9 +34,19 @@ public class Player : Creature
 
         Debug.Log($"User created, level : {level}, hp : {hp}, defence : {defence}");
         isDead = false;
-        mainSkill = classData.mainSkill;
+
+        // 처음 플레이어를 활성화 할 때는 메인 스킬을 새로 만들고
+        // 클래스 변경 시에는 이미 만들어진 스킬을 변경된 스킬로 바꾼다
+        if (mainSkill == null)
+            mainSkill = Instantiate(classData.mainSkill, playerSkillsParent);
+        else
+            mainSkill = classData.mainSkill;
         mainSkill.Initialize();
-        subSkill = classData.subSkill;
+
+        if (subSkill == null)
+            subSkill = Instantiate(classData.subSkill, playerSkillsParent);
+        else
+            subSkill = classData.subSkill;
         subSkill.Initialize();
 
         OnPlayerLevelUp += GainAbilityPoint;
@@ -70,6 +73,8 @@ public class Player : Creature
         SetPlayerPosition();
     }
 
+
+
     private void OnDestroy()
     {
         if (GameManager.Instance.player != null)
@@ -92,7 +97,6 @@ public class Player : Creature
         classData = GameManager.Instance._class.playerClassDatas[index];
         GameManager.Instance._class.currentClass = classData;
         GameManager.Instance._data.Init();
-        unitCode = classData.unitCode;
         Initialize();
     }
     private void Update()
@@ -102,6 +106,9 @@ public class Player : Creature
             exp -= expToNextLevel;
             PlayerLevelUp();
         }
+
+        if (!mainSkill.IsReady()) mainSkill.CountSkillCooltime();
+        if (!subSkill.IsReady()) subSkill.CountSkillCooltime();
     }
 
     public void PlayerLevelUp()

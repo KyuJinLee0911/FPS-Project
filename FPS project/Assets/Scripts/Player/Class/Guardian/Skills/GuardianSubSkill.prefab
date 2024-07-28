@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2070443927374567563}
   - component: {fileID: 8432331294738534537}
-  - component: {fileID: 1925306267204357829}
   m_Layer: 0
   m_Name: GuardianSubSkill
   m_TagString: Untagged
@@ -46,23 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 0
-  skillDamage: 0
-  skillRange: 0
-  targetLocation: {x: 0, y: 0, z: 0}
-  skillName: 
---- !u!114 &1925306267204357829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 727230689223332234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25532204152ee18418101d70dae1e228, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coolTime: 0
+  currentCoolTime: 0
   skillDamage: 0
   skillRange: 0
   targetLocation: {x: 0, y: 0, z: 0}

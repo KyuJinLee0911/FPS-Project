@@ -13,6 +13,7 @@ public class BossFist : MonoBehaviour
         target = other.collider.transform.GetComponent<HitBox>();
         if (target == null) return;
 
+        if(target.enabled == false) return;
         target.instigator = transform.root.gameObject;
         target.damage = fistDamage;
     }

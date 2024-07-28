@@ -19,6 +19,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] bool isExplode = false;
     public float range;
     GameObject instigator = null;
+    public GameObject Instigator { get => instigator; }
     [SerializeField] float currentLifeTime = 0.0f;
     [SerializeField] float movedDistance = 0.0f;
     [SerializeField] float effectiveRange = 0.0f;

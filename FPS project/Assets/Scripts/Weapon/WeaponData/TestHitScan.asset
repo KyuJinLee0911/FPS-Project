@@ -32,5 +32,5 @@ MonoBehaviour:
   projectile: {fileID: 0}
   weaponPrefab: {fileID: 4243271525775095593, guid: 24782bd632106e648a24b3c21ee59a78, type: 3}
   bulletEffect: {fileID: 0}
-  rebound: 0.0757899
+  rebound: 0
   reboundMagnifier: 4

@@ -8,7 +8,8 @@ public enum ClassType
 {
     CT_GUARDIAN = 0,
     CT_COMMANDO = 1,
-    CT_REACON = 2
+    CT_REACON = 2,
+    CT_RANGER = 3
 }
 
 public class ClassManager : MonoBehaviour

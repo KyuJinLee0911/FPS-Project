@@ -2172,6 +2172,10 @@ PrefabInstance:
       propertyPath: uiObj
       value: 
       objectReference: {fileID: 1055925690}
+    - target: {fileID: 5082406248110731655, guid: 7ab9b4d4611103746ab545d46faa93c6, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 3353756575577545474}
     - target: {fileID: 8172973351643194242, guid: 7ab9b4d4611103746ab545d46faa93c6, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2181,6 +2185,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ab9b4d4611103746ab545d46faa93c6, type: 3}
+--- !u!95 &3353756575577545474 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1115654180797822977, guid: 7ab9b4d4611103746ab545d46faa93c6, type: 3}
+  m_PrefabInstance: {fileID: 3353756575577545473}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4804356959201870044
 PrefabInstance:
   m_ObjectHideFlags: 0

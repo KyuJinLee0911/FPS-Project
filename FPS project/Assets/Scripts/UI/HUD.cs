@@ -11,11 +11,23 @@ public class HUD : MonoBehaviour
     [SerializeField] Text expText;
     [SerializeField] Text levelText;
     [SerializeField] Image profileImage;
+    [SerializeField] Text mainSkillCoolTimeTxt;
+    [SerializeField] Text subSkillCoolTimeTxt;
+    [SerializeField] private GameObject mainSkillCoolTimeUIObj;
+    [SerializeField] private GameObject subSkillCoolTimeUIObj;
+    [SerializeField] Image mainSkillImage;
+    [SerializeField] Image subSkillImage;
     Player player;
 
     private void Start()
     {
         player = GameManager.Instance.player;
+        
+        player.mainSkill.skillCoolTimeUI = mainSkillCoolTimeUIObj;
+        player.mainSkill.uiSkillImage = mainSkillImage;
+        player.subSkill.skillCoolTimeUI = subSkillCoolTimeUIObj;
+        player.subSkill.uiSkillImage = subSkillImage;
+        
     }
 
     private void Update()
@@ -35,6 +47,9 @@ public class HUD : MonoBehaviour
         expText.text = $"{player.exp} / {player.expToNextLevel} ({percentage}%)";
 
         levelText.text = $"Lv.{player.level}";
+
+        mainSkillCoolTimeTxt.text = player.mainSkill.currentCoolTime.ToString("N1");
+        subSkillCoolTimeTxt.text = player.subSkill.currentCoolTime.ToString("N1");
     }
 
 }

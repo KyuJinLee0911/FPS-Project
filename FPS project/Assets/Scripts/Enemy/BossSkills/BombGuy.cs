@@ -82,7 +82,8 @@ public class BombGuy : Enemy
     public void OnExplosionEnded()
     {
         playerGameObject.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRadious, expUpwardModifier);
-        if (Vector3.Distance(transform.position, playerGameObject.transform.position) < explosionRadious)
+        HitBox playerHitBox = GameManager.Instance.player.hitbox;
+        if (Vector3.Distance(transform.position, playerGameObject.transform.position) < explosionRadious && hitBox.enabled == true)
         {
             playerGameObject.GetComponent<IDamageable>().TakeDamage(gameObject, 10);
         }

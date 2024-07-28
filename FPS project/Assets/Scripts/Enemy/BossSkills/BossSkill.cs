@@ -44,11 +44,13 @@ public class BossSkill : MonoBehaviour
     // 8틱(2초)를 다 채우거나 플레이어가 콜라이더에서 나가면 멈춤
     private IEnumerator DoDamage(HitBox target)
     {
+        
         int tick = 0;
         if (target == null)
             yield break;
         while (tick < maximumTick)
         {
+            if(target.enabled == false) yield return new WaitUntil(() => target.enabled == true);
             target.GetHit(transform.root.gameObject, damagePerTick);
             tick++;
             yield return new WaitForSeconds(0.25f);

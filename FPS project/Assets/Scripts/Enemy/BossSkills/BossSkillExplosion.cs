@@ -22,6 +22,8 @@ public class BossSkillExplosion : MonoBehaviour
 
             Debug.Log("BOOM");
             col.attachedRigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadious, expUpwardModifier);
+
+            if(target.enabled == false) return;
             target.GetHit(transform.root.gameObject, 15);
         }
     }
