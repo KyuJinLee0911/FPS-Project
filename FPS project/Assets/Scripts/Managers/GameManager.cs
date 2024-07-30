@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Data;
 using FPS.Control;
-using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -29,6 +27,7 @@ public class GameManager : MonoBehaviour
     public ObjectPool _pool;
     public AchievementManager _achivement;
     public Player player;
+    public Fighter playerFighter;
     public PlayerController controller;
     public GameObject pauseUIObj;
     public GameObject loadingUIObj;
@@ -38,6 +37,7 @@ public class GameManager : MonoBehaviour
     public Transform startPos;
     public Transform endPos;
     public BattleZoneCtrl battleZoneCtrl;
+    public UnityEvent<Transform> onChangeTarget;
 
     public void Init()
     {

@@ -8,7 +8,7 @@ public class FrogPrince : Item
     public override void DoItem()
     {
         base.DoItem();
-        float additionalDamage = GameManager.Instance.player.transform.GetComponent<Fighter>().CurrentWeapon.Damage * 0.15f;
+        // GameManager.Instance.playerFighter.additionalDamageMagnifier += 0.15f;
 
     }
 }

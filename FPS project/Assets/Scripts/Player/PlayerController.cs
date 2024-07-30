@@ -10,7 +10,10 @@ namespace FPS.Control
     {
         public bool isControlable = true;
         [SerializeField] Animator bodyAnimator;
-        [SerializeField] Animator gunAnimator;
+        public Animator gunAnimator;
+        public Animator leftHandAnimator;
+        public Transform leftHandTransform;
+
         [Header("Look")]
         [SerializeField] GameObject firstPersonCameraObject;
         Vector2 lookInputValue;
@@ -23,7 +26,7 @@ namespace FPS.Control
         public float playerYAxisSensitivity = 1f;
 
         [Header("Move")]
-        [SerializeField] float moveSpeed = 5f;
+        public float moveSpeed = 5f;
         [SerializeField] float runningSpeedModifier = 1.5f;
         Vector2 moveInputValue;
         float isMoving;

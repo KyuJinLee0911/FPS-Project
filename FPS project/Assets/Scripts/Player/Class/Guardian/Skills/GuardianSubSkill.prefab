@@ -50,3 +50,11 @@ MonoBehaviour:
   skillRange: 0
   targetLocation: {x: 0, y: 0, z: 0}
   skillName: 
+  skillCoolTimeUI: {fileID: 0}
+  skillSprite: {fileID: 0}
+  uiSkillImage: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1280
+  power: 5
+  rootObj: {fileID: 0}

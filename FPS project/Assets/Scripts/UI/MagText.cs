@@ -7,18 +7,18 @@ public class MagText : MonoBehaviour
 {
     public Text magText;
     private WeaponData currentWeapon;
-    Fighter fighter;
+
 
     void Start()
     {
-        fighter = GameManager.Instance.player.transform.GetComponent<Fighter>();
-
+        currentWeapon = GameManager.Instance.playerFighter.currentWeapon;
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentWeapon = fighter.CurrentWeapon;
-        magText.text = $"{currentWeapon.currentMag} / {currentWeapon.Mag}";
+        if (currentWeapon != GameManager.Instance.playerFighter.currentWeapon)
+            currentWeapon = GameManager.Instance.playerFighter.currentWeapon;
+        magText.text = $"{currentWeapon.currentMag} / {currentWeapon.mag}";
     }
 }

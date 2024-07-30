@@ -35,6 +35,8 @@ public class BombGuy : Enemy
         isMoving = true;
         hpBar.maxValue = maxHp;
         hpBar.value = hp;
+
+        GameManager.Instance.onChangeTarget.AddListener(ChangeTarget);
     }
 
     public override void Die(GameObject instigator)
@@ -81,8 +83,10 @@ public class BombGuy : Enemy
 
     public void OnExplosionEnded()
     {
-        playerGameObject.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRadious, expUpwardModifier);
         HitBox playerHitBox = GameManager.Instance.player.hitbox;
+        if(playerHitBox.enabled == false) return;
+
+        playerGameObject.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRadious, expUpwardModifier);
         if (Vector3.Distance(transform.position, playerGameObject.transform.position) < explosionRadious && hitBox.enabled == true)
         {
             playerGameObject.GetComponent<IDamageable>().TakeDamage(gameObject, 10);

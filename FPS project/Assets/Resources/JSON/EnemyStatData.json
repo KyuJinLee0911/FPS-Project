@@ -12,7 +12,7 @@
             "level": "1",
             "hp": "100",
             "defence": "0.05",
-            "expToNextLevel": "10"
+            "expToNextLevel": "100"
         },
         {
             "key": "2",

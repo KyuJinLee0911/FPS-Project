@@ -6,7 +6,7 @@ using UnityEngine.TextCore.Text;
 
 public class Enemy : Creature
 {
-    [SerializeField] protected Transform targetTransform;
+    public Transform targetTransform;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float attackRange;
     [SerializeField] protected float chaseRange;
@@ -17,11 +17,9 @@ public class Enemy : Creature
     protected Fighter fighter;
     protected event Action OnGetHit;
 
-
-
     public override void Initialize()
     {
-        targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        targetTransform = GameManager.Instance.player.transform;
         
         int playerLevel = GameManager.Instance.player.level;
         fighter = GetComponent<Fighter>();
@@ -59,6 +57,12 @@ public class Enemy : Creature
         root.Evaluate();
 
         OnGetHit += ShowHitEffect;
+        GameManager.Instance.onChangeTarget.AddListener(ChangeTarget);
+    }
+
+    public void ChangeTarget(Transform newTarget)
+    {
+        targetTransform = newTarget;
     }
 
     private void Update()

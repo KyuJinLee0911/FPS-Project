@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8500296628662772922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4451960063690761712}
+  - component: {fileID: 7731701417423514718}
+  m_Layer: 0
+  m_Name: RangerMainSkill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4451960063690761712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8500296628662772922}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7731701417423514718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8500296628662772922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d26c0cade914044484c7072a750256e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolTime: 0
+  currentCoolTime: 0
+  skillDamage: 0
+  skillRange: 0
+  targetLocation: {x: 0, y: 0, z: 0}
+  skillName: 
+  skillCoolTimeUI: {fileID: 0}
+  skillSprite: {fileID: 0}
+  uiSkillImage: {fileID: 0}
+  stealthTime: 4
+  decoyTime: 5
+  decoyPrefab: {fileID: 4230876511792860406, guid: c5715750a8c5bf24b8bb85883e807b4d, type: 3}

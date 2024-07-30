@@ -52,21 +52,21 @@
                 },
                 {
                     "name": "MainSkill",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "827543a6-950c-4e8b-ab1c-f06e43d9b496",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "SubSkill",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "0d7b2613-284e-40e2-8264-29c55ce2b7c2",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Interaction",

@@ -20,14 +20,8 @@ public class AbilityUI : MonoBehaviour
     private void AddAndSetAbility()
     {
         GetComponent<Button>().onClick.AddListener(() => ability.DoAbility());
-        AbilityData data = null;
-        for(int i = 0; i < ability.datas.Length; i++)
-        {
-            if(GameManager.Instance._class.activatedAbilityDict.ContainsKey(ability.datas[i].Key)) continue;
-
-            data = ability.datas[i];
-            break;
-        }
+        AbilityData data = ability.data;
+        
         if(data == null) return;
         
         nameText.text = data.AbilityName;

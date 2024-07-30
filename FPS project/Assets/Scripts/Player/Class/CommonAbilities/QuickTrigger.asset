@@ -9,15 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce538786340cc7b4eaa592ec46ec2ae2, type: 3}
-  m_Name: Ranger
+  m_Script: {fileID: 11500000, guid: 3c50c1a9ed5b1034681eb5cbdf8d0591, type: 3}
+  m_Name: QuickTrigger
   m_EditorClassIdentifier: 
-  unitCode: 0
-  classType: 0
-  className: 
-  hp: 0
-  defence: 0
-  autoCriticalRate: 0
-  mainSkill: {fileID: 0}
-  subSkill: {fileID: 0}
-  allAbilities: []
+  abilityGrade: 0
+  key: QuickTrigger
+  abilityName: "\uD035 \uD2B8\uB9AC\uAC70"
+  abilityDescription: "\uC5F0\uC0AC\uB825\uC774 15% \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  abilitySprite: {fileID: 0}

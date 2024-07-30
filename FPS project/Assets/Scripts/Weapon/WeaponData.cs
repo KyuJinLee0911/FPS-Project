@@ -14,32 +14,83 @@ public enum WeaponType
 [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make new Weapon", order = 0)]
 public class WeaponData : ItemData
 {
+    [Header("Damage")]
     [SerializeField] private float damage;
-    public float Damage { get => damage; set => damage = value; }
+    [SerializeField] private float additionalDamage;
+    public float totalDamage;
     [SerializeField] private float criticalMultiples;
-    public float CriticalMultiples { get => criticalMultiples; }
-    [SerializeField] private int mag;
-    public int Mag { get => mag; }
+    [SerializeField] private float additionalCriticalMultiples;
+    public float totalCriticalMultiples;
+
+    [Header("Magazine")]
+    public int mag;
     public int currentMag;
-    public bool canFireWeapon { get; set; }
     [SerializeField] private float reloadTime;
-    public float ReloadTime { get => reloadTime; }
+    [SerializeField] private float totalReloadTime;
+    [SerializeField] private float additionalReloadTime;
+
+    [Header("Weapon Info")]
+    public bool canFireWeapon;
     [SerializeField] private float fireRate;
-    public float FireRate { get => fireRate; }
+    [SerializeField] private float additionalFireRate;
+    [SerializeField] private float totalFireRate;
     [SerializeField] private float fireRange;
-    public float FireRange { get => fireRange; }
     [SerializeField] private float effectiveRange;
     public float EffectiveRange { get => effectiveRange; }
     [SerializeField] private WeaponType weaponType;
     public WeaponType WeaponType { get => weaponType; }
-    [SerializeField] private Projectile projectile;
-    public Projectile Projectile { get => projectile; }
+    public Projectile projectile;
     public GameObject weaponPrefab;
     public LineRenderer bulletEffect;
-    [SerializeField] private float rebound;
-    public float Rebound { get => rebound; set => rebound = value; }
+    public float rebound;
     public float reboundMagnifier;
 
+
+    // 아이템이 생성될 때 한 번만 호출
+    public void Init()
+    {
+        totalReloadTime = reloadTime;
+        totalDamage = damage;
+        totalFireRate = fireRate;
+        totalCriticalMultiples = criticalMultiples;
+        additionalDamage = 0;
+        additionalCriticalMultiples = 0;
+        additionalFireRate = 0;
+        additionalReloadTime = 0;
+    }
+
+    public void AddCriticalMultiples(float value)
+    {
+        additionalCriticalMultiples += value;
+        totalCriticalMultiples = criticalMultiples + additionalCriticalMultiples;
+    }
+
+    public void ChangeWeaponDamage(float magnifier)
+    {
+        ChangeValue(ref totalDamage, ref additionalDamage, damage, magnifier);
+    }
+
+    public void ChangeReloadSpeed(float magnifier)
+    {
+        ChangeValue(ref totalReloadTime, ref additionalReloadTime, reloadTime, magnifier);
+    }
+    public void ChangeFireRate(float magnifier)
+    {
+        ChangeValue(ref totalFireRate, ref additionalFireRate, fireRate, magnifier);
+    }
+
+    public void ChangeValue(ref float valueToChange, ref float additionalValue, float originalValue, float magnifier)
+    {
+        if (magnifier == 0) return;
+
+        additionalValue = originalValue * magnifier;
+        valueToChange = additionalValue + originalValue;
+    }
+
+    public float TimeBetweenFires()
+    {
+        return 1 / totalFireRate;
+    }
 
     public void FireArm(Transform transform, GameObject instigator)
     {
@@ -63,7 +114,7 @@ public class WeaponData : ItemData
     public void LaunchProjectile(Transform gunTransform, GameObject instigator)
     {
         projectile.range = fireRange;
-        Projectile projectileInstance = GameManager.Instance._pool.GetProjectile(instigator.name, damage, criticalMultiples, instigator);
+        Projectile projectileInstance = GameManager.Instance._pool.GetProjectile(instigator.name, totalDamage, totalCriticalMultiples, instigator);
         projectileInstance.transform.SetPositionAndRotation(gunTransform.position, gunTransform.rotation);
     }
 
@@ -72,7 +123,7 @@ public class WeaponData : ItemData
         Transform muzzleTransform = instigator.GetComponent<Fighter>().muzzleTransform;
         Vector2 reboundRayPos = Random.insideUnitCircle * rebound * 0.033f;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2 - 1 + reboundRayPos.x, Screen.height / 2 - 1 + reboundRayPos.y));
-        
+
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, fireRange))
         {
@@ -86,7 +137,7 @@ public class WeaponData : ItemData
 
             // 유효사거리보다 멀면 데미지 40% 감소
             float effectiveRangeMultiplier = Vector3.Distance(muzzleTransform.position, hit.point) <= effectiveRange ? 1 : 0.6f;
-            float _damage = hitBox.CalculateDamage(damage, criticalMultiples) * effectiveRangeMultiplier;
+            float _damage = hitBox.CalculateDamage(totalDamage, totalCriticalMultiples) * effectiveRangeMultiplier;
 
             hitBox.damage = _damage;
             Debug.DrawLine(muzzleTransform.position, hit.point, Color.red);
@@ -94,7 +145,7 @@ public class WeaponData : ItemData
         }
         else
         {
-            Debug.DrawLine(muzzleTransform.position,  muzzleTransform.position + muzzleTransform.TransformDirection(reboundRayPos.x, reboundRayPos.y, 15), Color.red, 3.0f);
+            Debug.DrawLine(muzzleTransform.position, muzzleTransform.position + muzzleTransform.TransformDirection(reboundRayPos.x, reboundRayPos.y, 15), Color.red, 3.0f);
             bulletEffect.SetPosition(1, muzzleTransform.position + muzzleTransform.TransformDirection(reboundRayPos.x, reboundRayPos.y, 15));
         }
     }
@@ -108,7 +159,7 @@ public class WeaponData : ItemData
     {
         canFireWeapon = false;
         Debug.Log("Reloading...");
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(totalReloadTime);
         currentMag = mag;
         canFireWeapon = true;
     }

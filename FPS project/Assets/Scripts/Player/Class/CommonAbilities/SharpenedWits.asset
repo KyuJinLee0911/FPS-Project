@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c50c1a9ed5b1034681eb5cbdf8d0591, type: 3}
+  m_Name: SharpenedWits
+  m_EditorClassIdentifier: 
+  abilityGrade: 0
+  key: SharpenedWits
+  abilityName: "\uBC88\uB729\uC774\uB294 \uC7AC\uCE58"
+  abilityDescription: "\uD06C\uB9AC\uD2F0\uCEEC \uB370\uBBF8\uC9C0\uAC00 10% \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  abilitySprite: {fileID: 0}

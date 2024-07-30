@@ -74,7 +74,7 @@ public class Projectile : MonoBehaviour
 
         // 히트박스에 정보 전달
         hitbox.instigator = instigator;
-        hitbox.damage = hitbox.CalculateDamage(projectileDamage, currentWeaponData.CriticalMultiples);
+        hitbox.damage = hitbox.CalculateDamage(projectileDamage, currentWeaponData.totalCriticalMultiples);
 
         GameManager.Instance._pool.ReturnObj(instigator.name, this);
     }
@@ -111,7 +111,7 @@ public class Projectile : MonoBehaviour
     {
         if (instigator != null)
         {
-            currentWeaponData = instigator.GetComponent<Fighter>().CurrentWeapon;
+            currentWeaponData = instigator.GetComponent<Fighter>().currentWeapon;
             effectiveRange = currentWeaponData.EffectiveRange;
         }
 

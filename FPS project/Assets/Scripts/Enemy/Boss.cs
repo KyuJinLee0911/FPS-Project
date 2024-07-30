@@ -65,6 +65,8 @@ public class Boss : Enemy
 
         hpBar.maxValue = maxHp;
         hpBar.value = hp;
+
+        GameManager.Instance.onChangeTarget.AddListener(ChangeTarget);
     }
 
     public override void TakeDamage(GameObject instigator, float damage)

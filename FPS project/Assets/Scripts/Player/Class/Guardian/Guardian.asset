@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce538786340cc7b4eaa592ec46ec2ae2, type: 3}
   m_Name: Guardian
   m_EditorClassIdentifier: 
-  unitCode: 0
+  classType: 0
   className: Guardian
   hp: 100
   defence: 10
@@ -20,6 +20,8 @@ MonoBehaviour:
   mainSkill: {fileID: 1628043387786768075, guid: 118d613dd2c90a842aa581357d7857ac, type: 3}
   subSkill: {fileID: 8432331294738534537, guid: 79f8da56d7b000a438f16f99aff10077, type: 3}
   allAbilities:
-  - {fileID: 2791440842733047449, guid: 3995acf10009f9845989ff770048add1, type: 3}
-  - {fileID: 6047071159243697702, guid: 5204e437547508847b33aab27c47cce9, type: 3}
-  - {fileID: 7920360056512729223, guid: 4a0ddca180c810a428a6a5d9c61624e8, type: 3}
+  - {fileID: 8598920790296966188, guid: a8178f46e02ff9e4ebbcfcdec8a2ab74, type: 3}
+  - {fileID: 2125820374476552886, guid: 224998eda674e8b459af6c4b05511588, type: 3}
+  - {fileID: 3958642133572247868, guid: bae27a5229050184bb8f56db5c3330e2, type: 3}
+  - {fileID: 3820241760862401496, guid: 57927ba08fd1bbe40afd64c001123062, type: 3}
+  - {fileID: 8274624717396536097, guid: 5f0dc441b6fa6614fb2ca7e264dc7047, type: 3}

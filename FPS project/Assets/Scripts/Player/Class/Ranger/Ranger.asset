@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce538786340cc7b4eaa592ec46ec2ae2, type: 3}
+  m_Name: Ranger
+  m_EditorClassIdentifier: 
+  classType: 3
+  className: Ranger
+  hp: 100
+  defence: 10
+  autoCriticalRate: 0.1
+  mainSkill: {fileID: 7731701417423514718, guid: 66b493795599da944a19d8ef23422bda, type: 3}
+  subSkill: {fileID: 6355139509113125497, guid: e90fab5a990946046a6892ae0befbb53, type: 3}
+  allAbilities:
+  - {fileID: 2711683533812251085, guid: 3995acf10009f9845989ff770048add1, type: 3}
+  - {fileID: 6047071159243697702, guid: 5204e437547508847b33aab27c47cce9, type: 3}
+  - {fileID: 7920360056512729223, guid: 4a0ddca180c810a428a6a5d9c61624e8, type: 3}

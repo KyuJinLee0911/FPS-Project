@@ -4,23 +4,11 @@ using UnityEngine;
 
 public class Ability : MonoBehaviour
 {
-    public AbilityData[] datas = new AbilityData[3];
-    public int currentIdx;
+    public AbilityData data;
+    public int currentIdx = 0;
     public virtual void DoAbility()
     {
-        SelectAbility();
+        GameManager.Instance._class.activatedAbilityDict.Add(data.Key, this);
     }
 
-    private void SelectAbility()
-    {
-        for (int i = 0; i < datas.Length; i++)
-        {
-            if (GameManager.Instance._class.activatedAbilityDict.ContainsKey(datas[i].Key)) continue;
-
-            GameManager.Instance._class.activatedAbilityDict.Add(datas[i].Key, this);
-            Debug.Log($"Name : {datas[i].AbilityName}, Grade : {datas[i].AbilityGrade} added and activated");
-            currentIdx = i;
-            break;
-        }
-    }
 }

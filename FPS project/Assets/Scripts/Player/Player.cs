@@ -53,6 +53,7 @@ public class Player : Creature
         OnPlayerLevelUp += GameManager.Instance._class.OpenSelectAbilityUI;
         OnPlayerLevelUp += SetStats;
 
+        GameManager.Instance.playerFighter = transform.GetComponent<Fighter>();
         // SetPlayerPosition();
     }
 
@@ -103,7 +104,6 @@ public class Player : Creature
     {
         if (exp >= expToNextLevel)
         {
-            exp -= expToNextLevel;
             PlayerLevelUp();
         }
 

@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using FPS.Control;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class Fighter : MonoBehaviour
 {
-    [SerializeField] private WeaponData currentWeapon;
-    public WeaponData CurrentWeapon { get => currentWeapon; set => currentWeapon = value; }
+    public WeaponData currentWeapon;
     public List<GameObject> weaponSlots = new List<GameObject>();
     public int currentWeaponIndex;
     public bool isWeaponFire = false;
@@ -18,14 +19,20 @@ public class Fighter : MonoBehaviour
     Vector3 defaultGunPos;
     Vector3 defaultGunRot;
     bool isRebound = false;
+    public bool isSubSkillSet = false;
 
+    public float additionalDamageMagnifier = 0;
+    public float additionalReloadSpeedMagnifier = 0;
+    public float additionalFireRateMagnifier = 0;
 
     private void Start()
     {
         currentWeapon.canFireWeapon = true;
+        currentWeapon.Init();
+
         if (currentWeapon.WeaponType == WeaponType.WT_PROJECTILE)
         {
-            GameManager.Instance._pool.AddNewObj(gameObject.name, currentWeapon.Projectile.gameObject);
+            GameManager.Instance._pool.AddNewObj(gameObject.name, currentWeapon.projectile.gameObject);
             GameManager.Instance._pool.Initialize(gameObject.name, 20);
         }
         weaponSlots.Add(GunPosition.GetChild(0).gameObject);
@@ -34,8 +41,10 @@ public class Fighter : MonoBehaviour
         defaultGunRot = gunModel.transform.localRotation.eulerAngles;
         currentWeaponIndex = 0;
     }
+
     void FixedUpdate()
     {
+        Debug.Log($"is sub skill set? {isSubSkillSet}");
         if (isWeaponFire)
             Fire();
     }
@@ -50,7 +59,6 @@ public class Fighter : MonoBehaviour
         }
         else
         {
-
             isWeaponFire = false;
         }
     }
@@ -58,7 +66,7 @@ public class Fighter : MonoBehaviour
     public void Fire()
     {
         if (!currentWeapon.canFireWeapon) return;
-        float _timeBetweenFires = 1 / currentWeapon.FireRate;
+        float _timeBetweenFires = currentWeapon.TimeBetweenFires();
 
         timeSinceLastFire += Time.deltaTime;
         if (timeSinceLastFire >= _timeBetweenFires)
@@ -80,7 +88,7 @@ public class Fighter : MonoBehaviour
         StartCoroutine(currentWeapon.ReloadMag());
     }
 
-    void OnMainSkill()
+    void OnMainSkill(InputValue input)
     {
         if (!GetComponent<PlayerController>().isControlable) return;
 
@@ -92,11 +100,20 @@ public class Fighter : MonoBehaviour
         player.mainSkill.DoSkill();
     }
 
-    void OnSubSkill()
+    void OnSubSkill(InputValue input)
     {
         if (!GetComponent<PlayerController>().isControlable) return;
 
-        UseSubSkill();
+        if (input.Get<float>() == 1)
+        {
+            isSubSkillSet = true;
+        }
+        else if (input.Get<float>() == 0)
+        {
+            isSubSkillSet = false;
+            UseSubSkill();
+        }
+
     }
 
     void UseSubSkill()
@@ -146,7 +163,7 @@ public class Fighter : MonoBehaviour
             weaponSlots[currentWeaponIndex].transform.SetParent(null);
             weaponSlots[currentWeaponIndex].transform.SetPositionAndRotation(transform.position, Quaternion.identity);
             weaponSlots[currentWeaponIndex] = newWeapon;
-            CurrentWeapon = newWeapon.GetComponent<Weapon>().weaponData;
+            currentWeapon = newWeapon.GetComponent<Weapon>().weaponData;
         }
         // 무기 슬롯이 가득차있지 않을 때
         // 새 무기를 새로운 슬롯에 장착하고
@@ -155,16 +172,20 @@ public class Fighter : MonoBehaviour
         {
             weaponSlots[currentWeaponIndex].SetActive(false);
             weaponSlots.Add(newWeapon);
-            CurrentWeapon = newWeapon.GetComponent<Weapon>().weaponData;
+            currentWeapon = newWeapon.GetComponent<Weapon>().weaponData;
             timeSinceLastFire = float.MaxValue;
             currentWeaponIndex = 1;
         }
         muzzleTransform = newWeapon.transform.GetChild(0);
+        currentWeapon.Init();
+        currentWeapon.ChangeWeaponDamage(additionalDamageMagnifier);
+        currentWeapon.ChangeReloadSpeed(additionalReloadSpeedMagnifier);
+        currentWeapon.ChangeFireRate(additionalFireRateMagnifier);
     }
 
     public IEnumerator ShowBulletEffect(Transform muzzleTransform)
     {
-        if(currentWeapon.WeaponType != WeaponType.WT_HITSCAN)
+        if (currentWeapon.WeaponType != WeaponType.WT_HITSCAN)
             yield break;
         WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
         currentWeapon.bulletEffect.SetPosition(0, muzzleTransform.position);
@@ -179,12 +200,12 @@ public class Fighter : MonoBehaviour
 
     public void MakeRebound()
     {
-        currentWeapon.Rebound += currentWeapon.reboundMagnifier;
+        currentWeapon.rebound += currentWeapon.reboundMagnifier;
         gunModel.transform.localPosition = defaultGunPos;
-        Vector3 targetRotation = gunModel.transform.localRotation.eulerAngles - new Vector3(currentWeapon.Rebound * 5,0,0);
+        Vector3 targetRotation = gunModel.transform.localRotation.eulerAngles - new Vector3(currentWeapon.rebound * 5, 0, 0);
         gunModel.transform.Translate(Vector3.forward * -0.1f);
         gunModel.transform.Rotate(targetRotation, Space.Self);
-        
+
         if (!isRebound)
         {
             StartCoroutine(Rebound());
@@ -194,15 +215,15 @@ public class Fighter : MonoBehaviour
     IEnumerator Rebound()
     {
         isRebound = true;
-        while(true)
+        while (true)
         {
             gunModel.transform.localPosition = Vector3.Lerp(gunModel.transform.localPosition, defaultGunPos, Time.deltaTime * 3.0f);
-            gunModel.transform.localRotation = Quaternion.Lerp(gunModel.transform.localRotation, Quaternion.Euler(defaultGunRot), Time.deltaTime* 3.0f);
-            currentWeapon.Rebound = Mathf.Lerp(currentWeapon.Rebound, 0, Time.deltaTime * 3.0f);
-            if(Vector3.Distance(gunModel.transform.localPosition, defaultGunPos) < 0.001f)
+            gunModel.transform.localRotation = Quaternion.Lerp(gunModel.transform.localRotation, Quaternion.Euler(defaultGunRot), Time.deltaTime * 3.0f);
+            currentWeapon.rebound = Mathf.Lerp(currentWeapon.rebound, 0, Time.deltaTime * 3.0f);
+            if (Vector3.Distance(gunModel.transform.localPosition, defaultGunPos) < 0.001f)
             {
                 gunModel.transform.localPosition = defaultGunPos;
-                currentWeapon.Rebound = 0;
+                currentWeapon.rebound = 0;
                 isRebound = false;
                 break;
             }
