@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using FPS.Control;
 using UnityEngine;
 
 public class Player : Creature
 {
     public PlayerClassData classData;
-    public Transform playerSkillsParent;
+    public Transform mainSkillParent;
+    public Transform subSkillParent;
     public Skill mainSkill;
     public Skill subSkill;
     private int abilityPoint;
@@ -20,66 +22,69 @@ public class Player : Creature
     public event Action OnPlayerDie;
     public event Action OnPlayerLevelUp;
 
-    // 스테이지 별로 플레이어 오브젝트 존재
-    // 각 스테이지가 시작될때마다 호출
+    // 최초 플레이어 생성 시, 클래스 변경 시, 게임을 클리어하고 다시 거점으로 돌아올 때 호출
+    // 플레이어의 레벨을 1로, 스탯을 1레벨 기준으로 초기화
     public override void Initialize()
+    {
+        level = 1;
+        Stat stat = GameManager.Instance._data.userStats[level];
+        hp = stat.hp;
+        maxHp = stat.hp;
+        exp = 0;
+        expToNextLevel = stat.expToNextLevel;
+        autoCriticalMagnification = 1.75f;
+        autoCriticalRate = 0.1f;
+        defence = stat.defence;
+
+        Debug.Log($"User created, level : {level}, hp : {hp}, defence : {defence}");
+        isDead = false;
+
+        Debug.Log($"{mainSkillParent.childCount}");
+        if (mainSkillParent.childCount == 0)
+            mainSkill = Instantiate(classData.mainSkill, mainSkillParent);
+        else
+            mainSkill = mainSkillParent.GetComponentInChildren<Skill>();
+        
+        if (subSkillParent.childCount == 0)
+            subSkill = Instantiate(classData.subSkill, subSkillParent);
+        else
+            subSkill = subSkillParent.GetComponentInChildren<Skill>();
+
+        mainSkill.Initialize();
+        subSkill.Initialize();
+
+
+        OnPlayerLevelUp += SetStats;
+        // OnPlayerLevelUp += GainAbilityPoint;
+        OnPlayerLevelUp += GameManager.Instance._class.OpenSelectAbilityUI;
+
+        GameManager.Instance.playerFighter = transform.GetComponent<Fighter>();
+    }
+
+    public void SetPlayerPosition()
+    {
+        Debug.Log("Player Position Set");
+        transform.position = GameManager.Instance.startPos.position;
+        transform.localRotation = GameManager.Instance.startPos.localRotation;
+    }
+    void Awake()
     {
         if (GameManager.Instance.player == null)
         {
             GameManager.Instance.player = this;
             GameManager.Instance.controller = GetComponent<PlayerController>();
         }
-
-        GameManager.Instance._data.LoadIngameData();
-
-        Debug.Log($"User created, level : {level}, hp : {hp}, defence : {defence}");
-        isDead = false;
-
-        // 처음 플레이어를 활성화 할 때는 메인 스킬을 새로 만들고
-        // 클래스 변경 시에는 이미 만들어진 스킬을 변경된 스킬로 바꾼다
-        if (mainSkill == null)
-            mainSkill = Instantiate(classData.mainSkill, playerSkillsParent);
         else
-            mainSkill = classData.mainSkill;
-        mainSkill.Initialize();
+        {
+            if (GameManager.Instance.player != this)
+                Destroy(gameObject);
+        }
 
-        if (subSkill == null)
-            subSkill = Instantiate(classData.subSkill, playerSkillsParent);
-        else
-            subSkill = classData.subSkill;
-        subSkill.Initialize();
-
-        OnPlayerLevelUp += GainAbilityPoint;
-        OnPlayerLevelUp += GameManager.Instance._class.OpenSelectAbilityUI;
-        OnPlayerLevelUp += SetStats;
-
-        GameManager.Instance.playerFighter = transform.GetComponent<Fighter>();
-        // SetPlayerPosition();
+        DontDestroyOnLoad(gameObject);
     }
-
-    void SetPlayerPosition()
-    {
-        Debug.Log("Player Position Set");
-        transform.position = GameManager.Instance.startPos.position;
-        transform.localRotation = GameManager.Instance.startPos.localRotation;
-    }
-
     void OnEnable()
     {
         Initialize();
-    }
-
-    private void Start()
-    {
-        SetPlayerPosition();
-    }
-
-
-
-    private void OnDestroy()
-    {
-        if (GameManager.Instance.player != null)
-            GameManager.Instance.player = null;
     }
 
     public override void TakeDamage(GameObject instigator, float damage)
@@ -95,15 +100,26 @@ public class Player : Creature
 
     public void ChangePlayerClass(int index)
     {
+        GameObject oldMainSkill = mainSkill.gameObject;
+        GameObject oldSubSkill = subSkill.gameObject;
+        oldMainSkill.transform.SetParent(null);
+        oldSubSkill.transform.SetParent(null);
+        Destroy(oldMainSkill);
+        Destroy(oldSubSkill);
         classData = GameManager.Instance._class.playerClassDatas[index];
         GameManager.Instance._class.currentClass = classData;
         GameManager.Instance._data.Init();
         Initialize();
+        GameManager.Instance.hud.Init();
     }
+
+
+
     private void Update()
     {
         if (exp >= expToNextLevel)
         {
+            exp -= expToNextLevel;
             PlayerLevelUp();
         }
 
@@ -114,21 +130,25 @@ public class Player : Creature
     public void PlayerLevelUp()
     {
         level++;
-        // Debug.Log($"Level Up! Current Level : {level}");
+
         OnPlayerLevelUp();
     }
 
-    public void GainAbilityPoint()
-    {
-        abilityPoint++;
-    }
+    // public void GainAbilityPoint()
+    // {
+    //     abilityPoint++;
+    // }
 
     public void SetStats()
     {
+
         Dictionary<int, Stat> statDict = GameManager.Instance._data.userStats;
-        hp = statDict[level].hp;
+        // 레벨업 시 증가하는 최대 hp만큼 현재 hp에 더해줌
+        float additionalHp = statDict[level].hp - maxHp;
+        hp += additionalHp;
+        maxHp = statDict[level].hp;
         defence = statDict[level].defence;
-        exp -= expToNextLevel;
         expToNextLevel = statDict[level].expToNextLevel;
+        Debug.Log($"Level Up! Current Level : {level}, current exp : {exp}");
     }
 }

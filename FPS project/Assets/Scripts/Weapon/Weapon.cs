@@ -9,7 +9,7 @@ public class Weapon : Item
 
     private void Awake()
     {
-        weaponData.currentMag = weaponData.mag;
+        weaponData.currentMag = weaponData.totalMag;
         if (weaponData.WeaponType == WeaponType.WT_HITSCAN)
         {
             weaponData.bulletEffect = bulletEffect;

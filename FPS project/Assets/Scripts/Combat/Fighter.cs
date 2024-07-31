@@ -8,9 +8,11 @@ using UnityEngine.InputSystem;
 
 public class Fighter : MonoBehaviour
 {
+    public WeaponData basicWeapon;
     public WeaponData currentWeapon;
+    public WeaponData[] currentWeapons = new WeaponData[2];
     public List<GameObject> weaponSlots = new List<GameObject>();
-    public int currentWeaponIndex;
+    public int currentWeaponIndex = 0;
     public bool isWeaponFire = false;
     [SerializeField] private float timeSinceLastFire = float.MaxValue;
     public Transform muzzleTransform;
@@ -21,9 +23,13 @@ public class Fighter : MonoBehaviour
     bool isRebound = false;
     public bool isSubSkillSet = false;
 
+    // 무기의 추가 수치 (씬 변경시 저장하여 넘겨주는 데이터)
+    [Header("Additional Weapon Data Values")]
     public float additionalDamageMagnifier = 0;
     public float additionalReloadSpeedMagnifier = 0;
     public float additionalFireRateMagnifier = 0;
+    public float additionalMagMagnifier = 0;
+    public float additionalCriticalMultiples = 0;
 
     private void Start()
     {
@@ -35,11 +41,12 @@ public class Fighter : MonoBehaviour
             GameManager.Instance._pool.AddNewObj(gameObject.name, currentWeapon.projectile.gameObject);
             GameManager.Instance._pool.Initialize(gameObject.name, 20);
         }
-        weaponSlots.Add(GunPosition.GetChild(0).gameObject);
-        gunModel = weaponSlots[0];
+        weaponSlots.Add(GunPosition.GetChild(currentWeaponIndex).gameObject);
+        gunModel = weaponSlots[currentWeaponIndex];
         defaultGunPos = gunModel.transform.localPosition;
         defaultGunRot = gunModel.transform.localRotation.eulerAngles;
-        currentWeaponIndex = 0;
+        
+        currentWeapons[currentWeaponIndex] = currentWeapon;
     }
 
     void FixedUpdate()
@@ -177,10 +184,17 @@ public class Fighter : MonoBehaviour
             currentWeaponIndex = 1;
         }
         muzzleTransform = newWeapon.transform.GetChild(0);
+        InitializeNewWeapon();
+    }
+
+    private void InitializeNewWeapon()
+    {
         currentWeapon.Init();
         currentWeapon.ChangeWeaponDamage(additionalDamageMagnifier);
         currentWeapon.ChangeReloadSpeed(additionalReloadSpeedMagnifier);
         currentWeapon.ChangeFireRate(additionalFireRateMagnifier);
+        currentWeapon.AddMag(additionalMagMagnifier);
+        currentWeapon.AddCriticalMultiples(additionalCriticalMultiples);
     }
 
     public IEnumerator ShowBulletEffect(Transform muzzleTransform)

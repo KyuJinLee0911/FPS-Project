@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 524447387584159072}
   m_Layer: 0
   m_Name: Nature
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 866674283713195704}
   m_Layer: 0
   m_Name: S2_Z2
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

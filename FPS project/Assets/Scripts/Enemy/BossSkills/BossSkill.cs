@@ -27,7 +27,7 @@ public class BossSkill : MonoBehaviour
 
     private void Start()
     {
-        
+        targetHitBox = GameManager.Instance.player.hitbox;
     }
 
     private void OnEnable()

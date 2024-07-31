@@ -35,14 +35,13 @@ public class GameManager : MonoBehaviour
     public string[] stageNames;
     public int currentStageIndex = 0;
     public Transform startPos;
-    public Transform endPos;
     public BattleZoneCtrl battleZoneCtrl;
     public UnityEvent<Transform> onChangeTarget;
+    public event Action onSceneChange;
+    public HUD hud;
 
     public void Init()
     {
-
-        _class.Init();
         _data.Init();
         _achivement.Init();
     }
@@ -59,11 +58,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         Init();
-    }
-
-    void Start()
-    {
-
     }
 
     #region About Pause and Resume
@@ -111,9 +105,11 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         AdjustTimeScale(1);
-        _data.DeleteIngameData();
+
         currentStageIndex = 1;
+        player.Initialize();
         StartCoroutine(LoadSceneAsyncWithLoadingUI(stageNames[1]));
+        if(!controller.isControlable) controller.isControlable = true;
     }
 
     #region Change Stages
@@ -122,6 +118,8 @@ public class GameManager : MonoBehaviour
         loadingUIObj.SetActive(true);
         Slider loadingGauge = loadingUIObj.transform.GetComponentInChildren<Slider>();
         Text loadingText = loadingUIObj.transform.GetComponentInChildren<Text>();
+
+        onSceneChange?.Invoke();
 
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
 
@@ -135,6 +133,9 @@ public class GameManager : MonoBehaviour
         }
 
         Init();
+        startPos = GameObject.FindGameObjectWithTag("Start").transform;
+        yield return new WaitUntil(() => startPos != null);
+        player.SetPlayerPosition();
         loadingUIObj.SetActive(false);
     }
 
@@ -143,13 +144,9 @@ public class GameManager : MonoBehaviour
     public void ToFortress()
     {
         SetCursorState(false, CursorLockMode.Locked);
-        // currentStageIndex--;
-        // if (currentStageIndex < 0)
-        //     currentStageIndex = stageNames.Length - 1;
+
         if (currentStageIndex == 3)
         {
-            _data.DeleteIngameData();
-            player.level = 1;
             player.Initialize();
         }
         currentStageIndex = 4;
@@ -182,7 +179,7 @@ public class GameManager : MonoBehaviour
 
         // 다음스테이지로 가기 전에 현재 데이터 저장
         controller.isControlable = false;
-        _data.SaveIngameData();
+        // _data.SaveIngameData();
 
         currentStageIndex++;
 

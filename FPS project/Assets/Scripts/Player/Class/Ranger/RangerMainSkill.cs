@@ -8,7 +8,8 @@ public class RangerMainSkill : Skill
     [SerializeField] float stealthTime;
     [SerializeField] float decoyTime;
     [SerializeField] GameObject decoyPrefab;
-    GameObject decoy;
+    [SerializeField] GameObject decoy;
+    IEnumerator coroutine;
 
     public override void DoSkill()
     {
@@ -18,7 +19,7 @@ public class RangerMainSkill : Skill
         currentCoolTime = coolTime;
         Debug.Log(skillName);
 
-        StartCoroutine(Stealth());
+        StartCoroutine(coroutine);
     }
 
     public override void Initialize()
@@ -28,13 +29,22 @@ public class RangerMainSkill : Skill
         currentCoolTime = 0;
         skillRange = 5;
         skillDamage = 55;
-        decoy = Instantiate(decoyPrefab, transform);
+        if (decoy == null)
+            decoy = Instantiate(decoyPrefab, transform);
         decoy.SetActive(false);
         root = transform.root;
+        coroutine = Stealth();
+        GameManager.Instance.onSceneChange += OnChangeScene;
     }
-    
+
+    private void OnDestroy()
+    {
+        Destroy(decoy);
+    }
+
     IEnumerator Stealth()
     {
+        Debug.Log($"Start coroutine... {coroutine}");
         GameManager.Instance.onChangeTarget.Invoke(decoy.transform);
         decoy.SetActive(true);
         decoy.transform.parent = null;
@@ -45,6 +55,20 @@ public class RangerMainSkill : Skill
         GameManager.Instance.onChangeTarget.Invoke(root);
         decoy.transform.SetParent(transform);
         decoy.SetActive(false);
+        coroutine = Stealth();
     }
 
+    public void OnChangeScene()
+    {
+        StopCoroutine(coroutine);
+        currentCoolTime = 0;
+        if (decoy.transform.parent == null)
+        {
+            GameManager.Instance.onChangeTarget.Invoke(root);
+            decoy.transform.SetParent(transform);
+            // decoy.SetActive(false);
+            Initialize();
+        }
+        coroutine = Stealth();
+    }
 }

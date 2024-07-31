@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4180742230109540208}
   m_Layer: 0
   m_Name: Nature
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 7891967454681651328}
   m_Layer: 0
   m_Name: S2_Z3
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1643,6 +1643,10 @@ PrefabInstance:
     - target: {fileID: 8979650726366604455, guid: 7889ad0a8a9258d4589e0604edb933d4, type: 3}
       propertyPath: m_Name
       value: 1x2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979650726366604455, guid: 7889ad0a8a9258d4589e0604edb933d4, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 8979650726366604455, guid: 7889ad0a8a9258d4589e0604edb933d4, type: 3}
       propertyPath: m_StaticEditorFlags

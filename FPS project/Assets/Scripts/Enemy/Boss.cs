@@ -16,7 +16,7 @@ public class Boss : Enemy
     };
     int highestPriority = int.MaxValue;
     BossSkillData nextSkill = null;
-    [SerializeField] UnityEngine.UI.Slider hpBar;
+    // [SerializeField] UnityEngine.UI.Slider hpBar;
     [SerializeField] Text hpText;
     bool isAttacking = false;
     public override void Initialize()
@@ -84,6 +84,7 @@ public class Boss : Enemy
         if(!GameManager.Instance._achivement.achievedDict.ContainsKey("reboot"))
         {
             GameManager.Instance._achivement.Achived("reboot");
+            GameManager.Instance._class.UnlockClass("Ranger");
         }
     }
 

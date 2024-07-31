@@ -12,6 +12,8 @@ public class BossSkillExplosion : MonoBehaviour
     [SerializeField] Collider[] colliders;
     private void OnEnable()
     {
+        target = GameManager.Instance.player.hitbox;
+
         colliders = Physics.OverlapSphere(transform.position, explosionRadious);
 
         foreach (var col in colliders)

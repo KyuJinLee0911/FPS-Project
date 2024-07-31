@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7843140437103010072}
   m_Layer: 0
   m_Name: DesertTerrainT2
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,6 +51,14 @@ PrefabInstance:
     - target: {fileID: 1266489080518696106, guid: 61b2dac7d0dfa5c4890c7cba5faffd1e, type: 3}
       propertyPath: m_Name
       value: prefab_Terrain_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266489080518696106, guid: 61b2dac7d0dfa5c4890c7cba5faffd1e, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596829689359681181, guid: 61b2dac7d0dfa5c4890c7cba5faffd1e, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 8342814278498875626, guid: 61b2dac7d0dfa5c4890c7cba5faffd1e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -114,6 +122,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: prefab_Terrain_02_TR
       objectReference: {fileID: 0}
+    - target: {fileID: 5051652976204279524, guid: c879fde2878fe994e8fc57d7024a684a, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     - target: {fileID: 7024102582695567776, guid: c879fde2878fe994e8fc57d7024a684a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -99.95
@@ -154,6 +166,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7733399716754944995, guid: c879fde2878fe994e8fc57d7024a684a, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -175,6 +191,14 @@ PrefabInstance:
     - target: {fileID: 4421723165388978449, guid: 54f85c4ce66e5b1478d2595a79cc9e2e, type: 3}
       propertyPath: m_Name
       value: prefab_Terrain_02_BL
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421723165388978449, guid: 54f85c4ce66e5b1478d2595a79cc9e2e, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624254926391208222, guid: 54f85c4ce66e5b1478d2595a79cc9e2e, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 9209080075542365162, guid: 54f85c4ce66e5b1478d2595a79cc9e2e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -234,6 +258,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7843140437103010072}
     m_Modifications:
+    - target: {fileID: 5080097476032190844, guid: 1e71d9de2ed51634f96a53992f76228d, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     - target: {fileID: 5761893896305907762, guid: 1e71d9de2ed51634f96a53992f76228d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -277,6 +305,10 @@ PrefabInstance:
     - target: {fileID: 7325643416986826936, guid: 1e71d9de2ed51634f96a53992f76228d, type: 3}
       propertyPath: m_Name
       value: prefab_Terrain_02_TM
+      objectReference: {fileID: 0}
+    - target: {fileID: 7325643416986826936, guid: 1e71d9de2ed51634f96a53992f76228d, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -340,6 +372,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: prefab_Terrain_02_BM
       objectReference: {fileID: 0}
+    - target: {fileID: 4784221745840777025, guid: b1ac91ec4153b434e984a3f640ec201f, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 9038244548632831110, guid: b1ac91ec4153b434e984a3f640ec201f, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -361,6 +401,10 @@ PrefabInstance:
     - target: {fileID: 647659135446282159, guid: ca3596bdc32203a44acbd2bd04266ef4, type: 3}
       propertyPath: m_Name
       value: prefab_Terrain_02_ML
+      objectReference: {fileID: 0}
+    - target: {fileID: 647659135446282159, guid: ca3596bdc32203a44acbd2bd04266ef4, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 6270460162528818393, guid: ca3596bdc32203a44acbd2bd04266ef4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -401,6 +445,10 @@ PrefabInstance:
     - target: {fileID: 6270460162528818393, guid: ca3596bdc32203a44acbd2bd04266ef4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7698396793190630229, guid: ca3596bdc32203a44acbd2bd04266ef4, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -464,6 +512,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: prefab_Terrain_02_MR
       objectReference: {fileID: 0}
+    - target: {fileID: 309401233264766221, guid: 60675c6d6308dd84b9c2f5b36136eb1f, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 8546791166553886337, guid: 60675c6d6308dd84b9c2f5b36136eb1f, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -485,6 +541,10 @@ PrefabInstance:
     - target: {fileID: 1209355705369393772, guid: 343824e58dbbc744b841ff9c10fb7f87, type: 3}
       propertyPath: m_Name
       value: prefab_Terrain_02_TL
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209355705369393772, guid: 343824e58dbbc744b841ff9c10fb7f87, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 3395704558621359655, guid: 343824e58dbbc744b841ff9c10fb7f87, type: 3}
       propertyPath: m_LocalPosition.x
@@ -525,6 +585,10 @@ PrefabInstance:
     - target: {fileID: 3395704558621359655, guid: 343824e58dbbc744b841ff9c10fb7f87, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712222376357705265, guid: 343824e58dbbc744b841ff9c10fb7f87, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -548,6 +612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: prefab_Terrain_02_BR
       objectReference: {fileID: 0}
+    - target: {fileID: 2641441805014571207, guid: 3e236488a3f8e3d459dfde21bb5ca402, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     - target: {fileID: 7563050201484749260, guid: 3e236488a3f8e3d459dfde21bb5ca402, type: 3}
       propertyPath: m_LocalPosition.x
       value: -99.95
@@ -587,6 +655,10 @@ PrefabInstance:
     - target: {fileID: 7563050201484749260, guid: 3e236488a3f8e3d459dfde21bb5ca402, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211715957573156058, guid: 3e236488a3f8e3d459dfde21bb5ca402, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

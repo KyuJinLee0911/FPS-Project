@@ -36,70 +36,15 @@ public class DataManager : MonoBehaviour
         string userClassStatPath = "JSON/" + GameManager.Instance._class.currentClass.className + "StatData";
         if (userStats.Count == 0)
             userStats = LoadJson<int, Stat>(userClassStatPath);
+        else
+        {
+            userStats.Clear();
+            userStats = LoadJson<int, Stat>(userClassStatPath);
+        }
         if (enemyStats.Count == 0)
             enemyStats = LoadJson<int, Stat>("JSON/EnemyStatData");
         path = Path.Combine(Application.dataPath + "/Resources/SaveData/", "savedData.json");
         Debug.Log(path);
-    }
-
-    public void SaveIngameData()
-    {
-        Player player = GameManager.Instance.player;
-        data.hp = player.hp;
-        data.defence = player.defence;
-        data.level = player.level;
-        data.currentExp = player.exp;
-        data.currentClass = (int)GameManager.Instance._class.currentClass.classType;
-        data.autoCriticalRate = player.autoCriticalRate;
-        data.autoCriticalMagnification = player.autoCriticalMagnification;
-
-        string json = JsonUtility.ToJson(data, true);
-
-        File.WriteAllText(path, json);
-        Debug.Log("Save Complete");
-    }
-
-    public void LoadIngameData()
-    {
-
-        Player player = GameManager.Instance.player;
-        if (!File.Exists(path))
-        {
-            Debug.Log("No file exist. Create new save file");
-            player.level = userStats[1].level;
-            player.hp = userStats[1].hp;
-            player.maxHp = userStats[1].hp;
-            player.defence = userStats[1].defence;
-            player.exp = 0;
-            player.expToNextLevel = userStats[1].expToNextLevel;
-            GameManager.Instance._class.currentClass = GameManager.Instance._class.playerClassDatas[0];
-            player.autoCriticalRate = 0.1f;
-            player.autoCriticalMagnification = 1.75f;
-
-            SaveIngameData();
-        }
-        else
-        {
-            string loadedJson = File.ReadAllText(path);
-            data = JsonUtility.FromJson<SaveData>(loadedJson);
-
-            player.level = data.level;
-            player.hp = data.hp;
-            player.maxHp = userStats[player.level].hp;
-            player.defence = data.defence;
-            player.exp = data.currentExp;
-            player.expToNextLevel = userStats[data.level].expToNextLevel;
-            GameManager.Instance._class.currentClass = GameManager.Instance._class.playerClassDatas[data.currentClass];
-            player.autoCriticalRate = data.autoCriticalRate;
-            player.autoCriticalMagnification = data.autoCriticalMagnification;
-
-            Debug.Log("Successfully Loaded");
-        }
-    }
-
-    public bool IsSaveDataExist()
-    {
-        return File.Exists(path);
     }
 
     public void DeleteIngameData()

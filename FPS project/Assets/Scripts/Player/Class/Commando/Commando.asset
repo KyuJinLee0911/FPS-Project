@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce538786340cc7b4eaa592ec46ec2ae2, type: 3}
   m_Name: Commando
   m_EditorClassIdentifier: 
-  unitCode: 0
-  classType: 0
-  className: 
-  hp: 0
-  defence: 0
-  autoCriticalRate: 0
+  classType: 1
+  className: Commando
+  hp: 200
+  defence: 0.1
+  autoCriticalRate: 0.1
   mainSkill: {fileID: 0}
   subSkill: {fileID: 0}
   allAbilities: []

@@ -7,7 +7,7 @@ public class SharpenedWits : Ability
     public override void DoAbility()
     {
         base.DoAbility();
-        
-        GameManager.Instance.playerFighter.currentWeapon.AddCriticalMultiples(0.1f);
+        GameManager.Instance.playerFighter.additionalCriticalMultiples += 0.1f;
+        GameManager.Instance.playerFighter.currentWeapon.AddCriticalMultiples(GameManager.Instance.playerFighter.additionalCriticalMultiples);
     }
 }

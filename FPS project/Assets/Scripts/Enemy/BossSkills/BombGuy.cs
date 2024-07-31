@@ -9,8 +9,6 @@ public class BombGuy : Enemy
     [SerializeField] Animator anim;
     [SerializeField] float explosionForce, explosionRadious, expUpwardModifier;
     [SerializeField] float bombGuySpeed;
-    [SerializeField] GameObject hpBarParent;
-    [SerializeField] Slider hpBar;
     public HitBox hitBox;
     GameObject playerGameObject;
 
@@ -48,10 +46,6 @@ public class BombGuy : Enemy
 
     public override void TakeDamage(GameObject instigator, float damage)
     {
-        if(hp == maxHp)
-        {
-            hpBarParent.SetActive(true);
-        }
         base.TakeDamage(instigator, damage);
     }
 

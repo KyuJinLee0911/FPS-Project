@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 2250371208815039226}
   m_Layer: 0
   m_Name: S2_Z5(Exit)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -334,11 +334,39 @@ PrefabInstance:
       propertyPath: m_Name
       value: prefab_GateWall_Stage2_Exit
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6570527896886782149, guid: 3c5cf7db22ab97445b03bf06e65eb2e9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2777251686952416631, guid: 3c5cf7db22ab97445b03bf06e65eb2e9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7787156148078509276}
   m_SourcePrefab: {fileID: 100100000, guid: 3c5cf7db22ab97445b03bf06e65eb2e9, type: 3}
+--- !u!1 &456570896187810123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2777251686952416631, guid: 3c5cf7db22ab97445b03bf06e65eb2e9, type: 3}
+  m_PrefabInstance: {fileID: 2368004442380915772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7787156148078509276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456570896187810123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e557ca1495028e45ab7c9723e7735c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiObj: {fileID: 0}
+  animator: {fileID: 3877891514639634523}
+--- !u!95 &3877891514639634523 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1517113527610999911, guid: 3c5cf7db22ab97445b03bf06e65eb2e9, type: 3}
+  m_PrefabInstance: {fileID: 2368004442380915772}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4662567878634812490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6946824098656149622, guid: 3c5cf7db22ab97445b03bf06e65eb2e9, type: 3}

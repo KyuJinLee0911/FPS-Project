@@ -19,6 +19,6 @@ public class MagText : MonoBehaviour
     {
         if (currentWeapon != GameManager.Instance.playerFighter.currentWeapon)
             currentWeapon = GameManager.Instance.playerFighter.currentWeapon;
-        magText.text = $"{currentWeapon.currentMag} / {currentWeapon.mag}";
+        magText.text = $"{currentWeapon.currentMag} / {currentWeapon.totalMag}";
     }
 }

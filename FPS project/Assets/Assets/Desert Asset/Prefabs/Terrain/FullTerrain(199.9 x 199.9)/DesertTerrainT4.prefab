@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 704537836766667252}
   m_Layer: 0
   m_Name: DesertTerrainT4
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,6 +92,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: prefab_Terrain_04_BR
       objectReference: {fileID: 0}
+    - target: {fileID: 8130683067382071142, guid: f826670b8c6367b4d93b9a668b4792ce, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400325169893983139, guid: f826670b8c6367b4d93b9a668b4792ce, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -113,6 +121,14 @@ PrefabInstance:
     - target: {fileID: 3109944649667376564, guid: d53df6c70ab16764b92d242e3a7da7f4, type: 3}
       propertyPath: m_Name
       value: prefab_Terrain_04_BL
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109944649667376564, guid: d53df6c70ab16764b92d242e3a7da7f4, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086783381377295884, guid: d53df6c70ab16764b92d242e3a7da7f4, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 8742822482785466084, guid: d53df6c70ab16764b92d242e3a7da7f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -212,9 +228,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8648923763296339190, guid: 623888f10fa7200499ec84a8e6801046, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     - target: {fileID: 9007334163183124614, guid: 623888f10fa7200499ec84a8e6801046, type: 3}
       propertyPath: m_Name
       value: prefab_Terrain_04_TL
+      objectReference: {fileID: 0}
+    - target: {fileID: 9007334163183124614, guid: 623888f10fa7200499ec84a8e6801046, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -237,6 +261,10 @@ PrefabInstance:
     - target: {fileID: 387172592978987143, guid: e0b3fb3c446ccdd4f9fd0dc65e4cf7fd, type: 3}
       propertyPath: m_Name
       value: prefab_Terrain_04
+      objectReference: {fileID: 0}
+    - target: {fileID: 387172592978987143, guid: e0b3fb3c446ccdd4f9fd0dc65e4cf7fd, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 1734762574503730198, guid: e0b3fb3c446ccdd4f9fd0dc65e4cf7fd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -278,6 +306,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8930687299372200346, guid: e0b3fb3c446ccdd4f9fd0dc65e4cf7fd, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -299,6 +331,10 @@ PrefabInstance:
     - target: {fileID: 2205906414082421462, guid: eb6293dcf171ebb4fb254dbb7bfe01f6, type: 3}
       propertyPath: m_Name
       value: prefab_Terrain_04_MR
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205906414082421462, guid: eb6293dcf171ebb4fb254dbb7bfe01f6, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 2460086826110808098, guid: eb6293dcf171ebb4fb254dbb7bfe01f6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -339,6 +375,10 @@ PrefabInstance:
     - target: {fileID: 2460086826110808098, guid: eb6293dcf171ebb4fb254dbb7bfe01f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952380295302604728, guid: eb6293dcf171ebb4fb254dbb7bfe01f6, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -398,9 +438,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5320390631600945963, guid: 5b5dddb1674f4bf4a8df01bbcfb00a37, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     - target: {fileID: 7985123219411267216, guid: 5b5dddb1674f4bf4a8df01bbcfb00a37, type: 3}
       propertyPath: m_Name
       value: prefab_Terrain_04_TM
+      objectReference: {fileID: 0}
+    - target: {fileID: 7985123219411267216, guid: 5b5dddb1674f4bf4a8df01bbcfb00a37, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -423,6 +471,10 @@ PrefabInstance:
     - target: {fileID: 595363799996354715, guid: 711bc4ce8b7e1e5429de049564a3ad8f, type: 3}
       propertyPath: m_Name
       value: prefab_Terrain_04_ML
+      objectReference: {fileID: 0}
+    - target: {fileID: 595363799996354715, guid: 711bc4ce8b7e1e5429de049564a3ad8f, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 790503700610523159, guid: 711bc4ce8b7e1e5429de049564a3ad8f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -463,6 +515,10 @@ PrefabInstance:
     - target: {fileID: 790503700610523159, guid: 711bc4ce8b7e1e5429de049564a3ad8f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4085467474676213639, guid: 711bc4ce8b7e1e5429de049564a3ad8f, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -526,6 +582,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: prefab_Terrain_04_BM
       objectReference: {fileID: 0}
+    - target: {fileID: 1333599198132759249, guid: a46706805dce44f48905b792bbff07ae, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461066620633053998, guid: a46706805dce44f48905b792bbff07ae, type: 3}
+      propertyPath: m_TagString
+      value: Environment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -547,6 +611,10 @@ PrefabInstance:
     - target: {fileID: 1989341851913976464, guid: 447a111f96432d54b91600c20101fbb8, type: 3}
       propertyPath: m_Name
       value: prefab_Terrain_04_TR
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989341851913976464, guid: 447a111f96432d54b91600c20101fbb8, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 3288538387055276276, guid: 447a111f96432d54b91600c20101fbb8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -587,6 +655,10 @@ PrefabInstance:
     - target: {fileID: 3288538387055276276, guid: 447a111f96432d54b91600c20101fbb8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753883264603595161, guid: 447a111f96432d54b91600c20101fbb8, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

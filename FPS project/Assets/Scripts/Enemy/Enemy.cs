@@ -2,7 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
+using UnityEngine.UI;
+
+public enum EnemyType
+{
+    ET_NORMAL = 0,
+    ET_ELITE = 1,
+    ET_BOSS = 2
+}
 
 public class Enemy : Creature
 {
@@ -12,6 +19,9 @@ public class Enemy : Creature
     [SerializeField] protected float chaseRange;
     [SerializeField] private bool isInsideBattleZone;
     [SerializeField] protected Animator animator;
+    [SerializeField] protected GameObject hpBarParent;
+    [SerializeField] protected Slider hpBar;
+    [SerializeField] protected EnemyType enemyType;
     protected bool isMoving;
     protected BTSelector root;
     protected Fighter fighter;
@@ -20,7 +30,7 @@ public class Enemy : Creature
     public override void Initialize()
     {
         targetTransform = GameManager.Instance.player.transform;
-        
+
         int playerLevel = GameManager.Instance.player.level;
         fighter = GetComponent<Fighter>();
         hp = GameManager.Instance._data.enemyStats[playerLevel].hp;
@@ -37,7 +47,7 @@ public class Enemy : Creature
         BTSequence attackSequence = new BTSequence();
         BTSequence chaseSequence = new BTSequence();
         BTSequence scoutSequence = new BTSequence();
-        
+
         BTAction attackAction = new BTAction(Attack);
         BTAction chaseAction = new BTAction(Chase);
         BTAction scoutAction = new BTAction(Scout);
@@ -58,6 +68,11 @@ public class Enemy : Creature
 
         OnGetHit += ShowHitEffect;
         GameManager.Instance.onChangeTarget.AddListener(ChangeTarget);
+        if (hpBar != null)
+        {
+            hpBar.maxValue = maxHp;
+            hpBar.value = hp;
+        }
     }
 
     public void ChangeTarget(Transform newTarget)
@@ -69,6 +84,9 @@ public class Enemy : Creature
     {
         root.Evaluate();
         animator.SetBool("isMoving", isMoving);
+
+        if (hpBar != null)
+            hpBar.value = hp;
     }
 
     private void Start()
@@ -83,15 +101,33 @@ public class Enemy : Creature
         instigator.GetComponent<IStat>().exp += exp;
         isMoving = false;
         animator.SetTrigger("Die");
-        if(isInsideBattleZone && GameManager.Instance.battleZoneCtrl != null)
+        if (isInsideBattleZone && GameManager.Instance.battleZoneCtrl != null)
         {
             GameManager.Instance.battleZoneCtrl.SubtractEnemyCount(this);
         }
+
+        if (enemyType != EnemyType.ET_BOSS)
+        {
+            hpBarParent.SetActive(false);
+            StartCoroutine(HideDeadBody());
+        }
+    }
+
+    IEnumerator HideDeadBody()
+    {
+
+        yield return new WaitForSeconds(3.0f);
+
+        gameObject.SetActive(false);
     }
 
 
     public override void TakeDamage(GameObject instigator, float damage)
     {
+        if (hp == maxHp && hpBar != null)
+        {
+            hpBarParent.SetActive(true);
+        }
         if (isDead) return;
         // OnGetHit();
         base.TakeDamage(instigator, damage);

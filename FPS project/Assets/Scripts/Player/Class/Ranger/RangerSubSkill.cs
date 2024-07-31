@@ -35,6 +35,11 @@ public class RangerSubSkill : Skill
         DrawProjection();
     }
 
+    private void OnDestroy()
+    {
+        Destroy(javelin);
+    }
+
     public override void Initialize()
     {
         skillName = "Javelin";
@@ -51,6 +56,7 @@ public class RangerSubSkill : Skill
         releasePosition = lHand.parent.GetChild(1);
         line = releasePosition.GetComponent<LineRenderer>();
         javRb = javelin.GetComponent<Rigidbody>();
+        GameManager.Instance.controller.leftHandTransform.GetComponent<LHandAnimEvent>().Init();
     }
 
     IEnumerator Javelin()
@@ -89,4 +95,6 @@ public class RangerSubSkill : Skill
             line.SetPosition(i, point);
         }
     }
+
+
 }

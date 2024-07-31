@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,8 +21,10 @@ public class WeaponData : ItemData
     public float totalCriticalMultiples;
 
     [Header("Magazine")]
-    public int mag;
+    [SerializeField] private int mag;
+    [SerializeField] private int additionalMag;
     public int currentMag;
+    public int totalMag;
     [SerializeField] private float reloadTime;
     [SerializeField] private float totalReloadTime;
     [SerializeField] private float additionalReloadTime;
@@ -53,14 +53,22 @@ public class WeaponData : ItemData
         totalDamage = damage;
         totalFireRate = fireRate;
         totalCriticalMultiples = criticalMultiples;
+        totalMag = mag;
         additionalDamage = 0;
         additionalCriticalMultiples = 0;
         additionalFireRate = 0;
         additionalReloadTime = 0;
+        additionalMag = 0;
+    }
+
+    public void AddMag(float value)
+    {
+        ChangeValue(ref totalMag, ref additionalMag, mag, value);
     }
 
     public void AddCriticalMultiples(float value)
     {
+        if(value == 0) return;
         additionalCriticalMultiples += value;
         totalCriticalMultiples = criticalMultiples + additionalCriticalMultiples;
     }
@@ -85,6 +93,14 @@ public class WeaponData : ItemData
 
         additionalValue = originalValue * magnifier;
         valueToChange = additionalValue + originalValue;
+    }
+
+    public void ChangeValue(ref int valueToChange, ref int additionalValue, int originalValue, float magnifier)
+    {
+        if(magnifier == 0) return;
+
+        additionalValue = Mathf.FloorToInt(originalValue * magnifier);
+        valueToChange = originalValue + additionalValue;
     }
 
     public float TimeBetweenFires()
@@ -160,7 +176,7 @@ public class WeaponData : ItemData
         canFireWeapon = false;
         Debug.Log("Reloading...");
         yield return new WaitForSeconds(totalReloadTime);
-        currentMag = mag;
+        currentMag = totalMag;
         canFireWeapon = true;
     }
 

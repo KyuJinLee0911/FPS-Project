@@ -19,6 +19,7 @@ public class Interfaces : MonoBehaviour
 
 public interface IInteractable
 {
+    bool isInfinite { get; }
     GameObject worldSpaceUI { get; }
     bool canInteract { get; set; }
     void DoInteraction();

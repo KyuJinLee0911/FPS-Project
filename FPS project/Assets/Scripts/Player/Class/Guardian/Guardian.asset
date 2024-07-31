@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   classType: 0
   className: Guardian
-  hp: 100
-  defence: 10
+  hp: 200
+  defence: 0.1
   autoCriticalRate: 0.1
   mainSkill: {fileID: 1628043387786768075, guid: 118d613dd2c90a842aa581357d7857ac, type: 3}
   subSkill: {fileID: 8432331294738534537, guid: 79f8da56d7b000a438f16f99aff10077, type: 3}

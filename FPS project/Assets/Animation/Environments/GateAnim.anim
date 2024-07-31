@@ -175,13 +175,6 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: StopMoving
-    data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 2e557ca1495028e45ab7c9723e7735c4, type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 0.98333335
     functionName: FinishGateOpen
     data: 

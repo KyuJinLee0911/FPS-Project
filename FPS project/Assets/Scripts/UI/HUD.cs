@@ -21,13 +21,18 @@ public class HUD : MonoBehaviour
 
     private void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        GameManager.Instance.hud = this;
         player = GameManager.Instance.player;
-        
+
         player.mainSkill.skillCoolTimeUI = mainSkillCoolTimeUIObj;
         player.mainSkill.uiSkillImage = mainSkillImage;
         player.subSkill.skillCoolTimeUI = subSkillCoolTimeUIObj;
         player.subSkill.uiSkillImage = subSkillImage;
-        
     }
 
     private void Update()

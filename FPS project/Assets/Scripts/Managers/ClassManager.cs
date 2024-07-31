@@ -8,13 +8,13 @@ public enum ClassType
 {
     CT_GUARDIAN = 0,
     CT_COMMANDO = 1,
-    CT_REACON = 2,
-    CT_RANGER = 3
+    CT_RANGER = 2,
+    CT_REACON = 3
+    
 }
 
 public class ClassManager : MonoBehaviour
 {
-
     public PlayerClassData[] playerClassDatas;
     public List<PlayerClassData> unlockedClasses;
     public PlayerClassData currentClass;
@@ -32,7 +32,7 @@ public class ClassManager : MonoBehaviour
     // 어빌리티 등록 버튼에 해당 어빌리티 데이터의 설명을 설정해줌
     public void Init()
     {
-        currentClass = playerClassDatas[0];
+        // currentClass = playerClassDatas[(int)GameManager.Instance.player.classData.classType];
     }
     public void OpenSelectAbilityUI()
     {
@@ -105,7 +105,7 @@ public class ClassManager : MonoBehaviour
     {
         if(!unlockUI.activeSelf)
             unlockUI.SetActive(true);
-        unlockTxt.text = $"{className}을 잠금해제 했습니다";
+        unlockTxt.text = $"{className}을(를) 잠금해제 했습니다";
         yield return new WaitForSeconds(3);
 
         unlockUI.SetActive(false);

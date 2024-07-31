@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5220378754704175738}
   m_Layer: 0
   m_Name: S2_Z1
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 253130108309294806}
   m_Layer: 0
   m_Name: Nautre
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

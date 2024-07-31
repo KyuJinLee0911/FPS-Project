@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class Item : MonoBehaviour, IInteractable
 {
+    public bool isInfinite { get => false; }
     [SerializeField] protected ItemData itemData;
     public ItemData ItemData { get => itemData; }
     [SerializeField] protected GameObject itemInfoWorldSpaceUI;
     public GameObject worldSpaceUI { get => itemInfoWorldSpaceUI; }
     public bool canInteract { get; set; }
     public GameObject itemPrefab;
-    
+
     public CanvasType canvasType;
     public Text itemNameTxt;
     public Text itemDescriptionText;

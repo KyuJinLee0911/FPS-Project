@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5926430456107256096}
   m_Layer: 0
   m_Name: Terrains
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -290,6 +290,10 @@ PrefabInstance:
     - target: {fileID: 6590822912699075652, guid: 3f9c116716284cf4e94686f43b08c1f6, type: 3}
       propertyPath: m_Name
       value: DesertTerrainT1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6590822912699075652, guid: 3f9c116716284cf4e94686f43b08c1f6, type: 3}
+      propertyPath: m_TagString
+      value: Environment
       objectReference: {fileID: 0}
     - target: {fileID: 6590822912699075652, guid: 3f9c116716284cf4e94686f43b08c1f6, type: 3}
       propertyPath: m_StaticEditorFlags

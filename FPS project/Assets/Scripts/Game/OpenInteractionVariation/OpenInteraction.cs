@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OpenInteraction : MonoBehaviour, IInteractable
 {
+    public bool isInfinite { get => false; }
     [SerializeField] protected GameObject uiObj;
     public GameObject worldSpaceUI { get; protected set; }
 

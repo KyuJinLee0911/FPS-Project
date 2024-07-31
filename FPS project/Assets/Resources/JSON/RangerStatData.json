@@ -3,49 +3,49 @@
         {
             "key": "1",
             "level": "1",
-            "hp": "100",
+            "hp": "200",
             "defence": "0.1",
             "expToNextLevel" : "100"
         },
         {
             "key": "2",
             "level": "2",
-            "hp": "110",
+            "hp": "210",
             "defence": "0.11",
             "expToNextLevel" : "150"
         },
         {
             "key": "3",
             "level": "3",
-            "hp": "120",
+            "hp": "220",
             "defence": "0.12",
             "expToNextLevel" : "250"
         },
         {
             "key": "4",
             "level": "4",
-            "hp": "130",
+            "hp": "230",
             "defence": "0.13",
             "expToNextLevel" : "400"
         },
         {
             "key": "5",
             "level": "5",
-            "hp": "140",
+            "hp": "240",
             "defence": "0.14",
             "expToNextLevel" : "600"
         },
         {
             "key": "6",
             "level": "6",
-            "hp": "150",
+            "hp": "250",
             "defence": "0.15",
             "expToNextLevel" : "850"
         },
         {
             "key": "7",
             "level": "7",
-            "hp": "160",
+            "hp": "260",
             "defence": "0.16",
             "expToNextLevel" : "1150"
         }

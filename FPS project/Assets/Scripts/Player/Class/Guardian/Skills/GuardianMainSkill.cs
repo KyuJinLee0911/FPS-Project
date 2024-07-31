@@ -8,7 +8,7 @@ public class GuardianMainSkill : Skill
     [SerializeField] private GameObject playerBastion;
     public override void DoSkill()
     {
-        if(!IsReady()) return;
+        if (!IsReady()) return;
         currentCoolTime = coolTime;
         skillCoolTimeUI.SetActive(true);
         Debug.Log($"{skillName}, {coolTime}, {skillRange}, {skillDamage}");
@@ -27,6 +27,11 @@ public class GuardianMainSkill : Skill
         playerBastion.SetActive(false);
         // GameManager.Instance.player.playerHurtBox.enabled = true;
         GameManager.Instance.player.hitbox.enabled = true;
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(playerBastion);
     }
 
     public override void Initialize()

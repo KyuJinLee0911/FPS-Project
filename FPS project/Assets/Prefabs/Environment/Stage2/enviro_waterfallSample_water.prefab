@@ -58573,7 +58573,7 @@ GameObject:
   - component: {fileID: 291739521332139228}
   m_Layer: 0
   m_Name: enviro_waterfallSample_water
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
