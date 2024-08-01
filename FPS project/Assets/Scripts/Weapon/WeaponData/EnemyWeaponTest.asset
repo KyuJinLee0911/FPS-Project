@@ -18,13 +18,32 @@ MonoBehaviour:
   itemRarity: 0
   itemDescription: ew description
   itemImage: {fileID: 0}
+  Weight: 0
   damage: 20
+  additionalDamage: 0
+  totalDamage: 20
   criticalMultiples: 2
+  additionalCriticalMultiples: 0
+  totalCriticalMultiples: 2
   mag: 3
+  additionalMag: 0
   currentMag: 0
+  totalMag: 3
   reloadTime: 3
+  totalReloadTime: 3
+  additionalReloadTime: 0
+  canFireWeapon: 0
   fireRate: 1
+  additionalFireRate: 0
+  totalFireRate: 1
   fireRange: 30
+  effectiveRange: 0
   weaponType: 0
   projectile: {fileID: 4138816894924396826, guid: 2b328852af457b846a937da2c39f4ad3, type: 3}
-  weaponPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 4243271525775095593, guid: 8d4ea408abaf07a469b92763cc2f5a8f, type: 3}
+  bulletEffect: {fileID: 0}
+  rebound: 0.1
+  reboundMagnifier: 1
+  gunPosition: {x: 0, y: 0, z: 0}
+  leftHandPosition: {x: 0, y: 0, z: 0}
+  isTwoHanded: 0

@@ -10,22 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3bbd3de6f5ac4e4e89bfdace73809f2, type: 3}
-  m_Name: Test
+  m_Name: SMG
   m_EditorClassIdentifier: 
   itemType: 0
   itemKey: tw1
-  itemName: Test Weapon
+  itemName: SMG
   itemRarity: 0
-  itemDescription: twdescription twdescription twdescription twdescription twdescription
-    twdescription twdescription twdescription
+  itemDescription: Ass-em-Gee
   itemImage: {fileID: 0}
   Weight: 0
   damage: 10
+  additionalDamage: 0
+  totalDamage: 10
   criticalMultiples: 2
+  additionalCriticalMultiples: 0
+  totalCriticalMultiples: 2
   mag: 30
-  currentMag: 27
+  additionalMag: 0
+  currentMag: 0
+  totalMag: 30
   reloadTime: 2
+  totalReloadTime: 2
+  additionalReloadTime: 0
+  canFireWeapon: 0
   fireRate: 10
+  additionalFireRate: 0
+  totalFireRate: 10
   fireRange: 150
   effectiveRange: 100
   weaponType: 0
@@ -33,4 +43,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 4243271525775095593, guid: 65119681e5b1b264d9081d42b4a80a89, type: 3}
   bulletEffect: {fileID: 0}
   rebound: 0
-  reboundMagnifier: 3
+  reboundMagnifier: 0.6
+  gunPosition: {x: 0, y: 0, z: -0.439}
+  leftHandPosition: {x: 0.013, y: 0, z: 0.316}
+  isTwoHanded: 1

@@ -122,12 +122,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   itemInfoWorldSpaceUI: {fileID: 8683005921399743348}
+  itemPrefab: {fileID: 0}
   canvasType: 0
   itemNameTxt: {fileID: 4583593127956422956}
   itemDescriptionText: {fileID: 6244401682163606340}
   itemImage: {fileID: 2415590633465445805}
   item: {fileID: -4889574912063509115}
-  weaponData: {fileID: 11400000, guid: ce76737710f1fd244b3464570788825e, type: 2}
+  weaponData: {fileID: 11400000, guid: fb387edff5102a2439be66d298324b43, type: 2}
+  bulletEffect: {fileID: 0}
 --- !u!1 &9192581589288518983
 GameObject:
   m_ObjectHideFlags: 0

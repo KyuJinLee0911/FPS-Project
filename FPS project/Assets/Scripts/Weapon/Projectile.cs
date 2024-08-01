@@ -43,6 +43,8 @@ public class Projectile : MonoBehaviour
 
     bool isParticleStart = false;
 
+    IEnumerator coroutine;
+
     public Projectile(float damage, float criticalMultiples, GameObject instigator)
     {
         projectileDamage = damage;
@@ -113,6 +115,12 @@ public class Projectile : MonoBehaviour
         {
             currentWeaponData = instigator.GetComponent<Fighter>().currentWeapon;
             effectiveRange = currentWeaponData.EffectiveRange;
+
+            if (instigator.CompareTag("Player"))
+            {
+                coroutine = Move();
+                StartCoroutine(coroutine);
+            }
         }
 
         currentLifeTime = 0;
@@ -128,12 +136,19 @@ public class Projectile : MonoBehaviour
 
     private void OnDisable()
     {
+        if (instigator != null)
+        {
+            if (instigator.CompareTag("Player"))
+                StopCoroutine(coroutine);
+        }
         rb.angularVelocity = Vector3.zero;
         instigator = null;
+        // coroutine = Move();
     }
 
     private void Update()
     {
+        if (instigator != null && instigator.CompareTag("Player")) return;
         currentLifeTime += Time.deltaTime;
         movedDistance = currentLifeTime * projectileSpeed;
         if (movedDistance > effectiveRange && !isDamageDecreased)
@@ -150,9 +165,48 @@ public class Projectile : MonoBehaviour
     void FixedUpdate()
     {
         // Debug.Log(rb.angularVelocity);
-        MoveToTarget();
+        if (!instigator.CompareTag("Player"))
+            MoveToTarget();
         if (isHoaming)
             HoamingTarget();
+    }
+
+    // 플레이어의 경우, 화면 중앙의 크로스 헤드로 조준하고 발사를 하지만
+    // 투사체는 총구에서 나가므로 조준 위치와 투사체의 도달 위치가 다소 차이가 있음
+    // 그것을 보간하며 이동하는 코루틴
+    // instigator가 플레이어일 경우에만 작동하도록 하였음
+    IEnumerator Move()
+    {
+        yield return new WaitUntil(() => GameManager.Instance.playerFighter.muzzleTransform != null);
+        Vector3 muzzlePosition = GameManager.Instance.playerFighter.muzzleTransform.position;
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        Vector3 dir = ray.origin + ray.direction * 10;
+        Vector3 newDir = (dir - muzzlePosition).normalized;
+        Ray newRay = new Ray(muzzlePosition, newDir);
+        Vector3 startPos = transform.position;
+        float movedDistance = 0.0f;
+        WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
+        while (movedDistance < range)
+        {
+            if (movedDistance < 10f)
+            {
+                transform.Translate(newRay.direction * projectileSpeed * Time.deltaTime, Space.World);
+            }
+            else
+            {
+                transform.Translate(Vector3.forward * projectileSpeed * Time.deltaTime);
+            }
+            movedDistance = Vector3.Distance(startPos, transform.position);
+
+            if (movedDistance > effectiveRange && !isDamageDecreased)
+            {
+                projectileDamage *= 0.6f;
+                isDamageDecreased = true;
+            }
+            yield return waitForEndOfFrame;
+        }
+
+        GameManager.Instance._pool.ReturnObj(instigator.name, this);
     }
 
     void MoveToTarget()

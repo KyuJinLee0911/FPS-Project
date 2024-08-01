@@ -9,4 +9,9 @@ public class SpecialTrick : Ability
         base.DoAbility();
         GameManager.Instance.player.subSkill.skillDamage *= 1.15f;
     }
+
+    public override void RemoveAbility()
+    {
+        GameManager.Instance.player.subSkill.skillDamage /= 1.15f;
+    }
 }

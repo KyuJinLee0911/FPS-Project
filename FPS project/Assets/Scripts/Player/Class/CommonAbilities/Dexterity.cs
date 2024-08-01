@@ -12,5 +12,10 @@ public class Dexterity : Ability
         GameManager.Instance.playerFighter.additionalReloadSpeedMagnifier -= 0.15f;
         GameManager.Instance.playerFighter.currentWeapon.ChangeReloadSpeed(GameManager.Instance.playerFighter.additionalReloadSpeedMagnifier);
     }
-    
+
+    public override void RemoveAbility()
+    {
+        GameManager.Instance.playerFighter.additionalReloadSpeedMagnifier += 0.15f;
+    }
+
 }

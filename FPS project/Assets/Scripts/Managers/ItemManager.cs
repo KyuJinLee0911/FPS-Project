@@ -13,6 +13,11 @@ public class ItemManager : MonoBehaviour
     {
         var loadedJson = Resources.Load<TextAsset>("JSON/ItemDropTable");
     }
+
+    public void RemoveEveryItem()
+    {
+        
+    }
 }
 
 public class ItemDropData

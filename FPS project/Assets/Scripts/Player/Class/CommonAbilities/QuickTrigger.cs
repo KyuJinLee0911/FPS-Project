@@ -10,4 +10,9 @@ public class QuickTrigger : Ability
         GameManager.Instance.playerFighter.additionalFireRateMagnifier += 0.15f;
         GameManager.Instance.playerFighter.currentWeapon.ChangeFireRate(GameManager.Instance.playerFighter.additionalFireRateMagnifier);
     }
+
+    public override void RemoveAbility()
+    {
+        GameManager.Instance.playerFighter.additionalFireRateMagnifier -= 0.15f;
+    }
 }

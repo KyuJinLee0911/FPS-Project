@@ -45,6 +45,11 @@ public class WeaponData : ItemData
     public float rebound;
     public float reboundMagnifier;
 
+    [Header("Transform Adjustment")]
+    public Vector3 gunPosition;
+    public Vector3 leftHandPosition;
+    public bool isTwoHanded;
+
 
     // 아이템이 생성될 때 한 번만 호출
     public void Init()
@@ -68,7 +73,7 @@ public class WeaponData : ItemData
 
     public void AddCriticalMultiples(float value)
     {
-        if(value == 0) return;
+        if (value == 0) return;
         additionalCriticalMultiples += value;
         totalCriticalMultiples = criticalMultiples + additionalCriticalMultiples;
     }
@@ -97,7 +102,7 @@ public class WeaponData : ItemData
 
     public void ChangeValue(ref int valueToChange, ref int additionalValue, int originalValue, float magnifier)
     {
-        if(magnifier == 0) return;
+        if (magnifier == 0) return;
 
         additionalValue = Mathf.FloorToInt(originalValue * magnifier);
         valueToChange = originalValue + additionalValue;
@@ -140,30 +145,30 @@ public class WeaponData : ItemData
         Vector2 reboundRayPos = Random.insideUnitCircle * rebound * 0.033f;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2 - 1 + reboundRayPos.x, Screen.height / 2 - 1 + reboundRayPos.y));
 
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, fireRange))
+        RaycastHit[] hits = Physics.RaycastAll(ray, fireRange);
+        foreach (var info in hits)
         {
-            // 탄흔효과
-            bulletEffect.SetPosition(1, hit.point);
+            if (info.collider.GetComponent<HitBox>() == null)
+                continue;
 
-            HitBox hitBox = hit.collider.transform.GetComponent<HitBox>();
-            if (hitBox == null) return;
+            // 탄흔효과
+            bulletEffect.SetPosition(1, info.point);
+
+            HitBox hitBox = info.collider.transform.GetComponent<HitBox>();
 
             hitBox.instigator = instigator;
 
             // 유효사거리보다 멀면 데미지 40% 감소
-            float effectiveRangeMultiplier = Vector3.Distance(muzzleTransform.position, hit.point) <= effectiveRange ? 1 : 0.6f;
+            float effectiveRangeMultiplier = Vector3.Distance(muzzleTransform.position, info.point) <= effectiveRange ? 1 : 0.6f;
             float _damage = hitBox.CalculateDamage(totalDamage, totalCriticalMultiples) * effectiveRangeMultiplier;
 
             hitBox.damage = _damage;
-            Debug.DrawLine(muzzleTransform.position, hit.point, Color.red);
             hitBox.GetHit(instigator, _damage);
+            return;
         }
-        else
-        {
-            Debug.DrawLine(muzzleTransform.position, muzzleTransform.position + muzzleTransform.TransformDirection(reboundRayPos.x, reboundRayPos.y, 15), Color.red, 3.0f);
-            bulletEffect.SetPosition(1, muzzleTransform.position + muzzleTransform.TransformDirection(reboundRayPos.x, reboundRayPos.y, 15));
-        }
+
+        Debug.DrawLine(muzzleTransform.position, muzzleTransform.position + muzzleTransform.TransformDirection(reboundRayPos.x, reboundRayPos.y, 15), Color.red, 3.0f);
+        bulletEffect.SetPosition(1, muzzleTransform.position + muzzleTransform.TransformDirection(reboundRayPos.x, reboundRayPos.y, 15));
     }
 
     public void MeleeAttack()

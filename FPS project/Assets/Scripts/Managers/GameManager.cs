@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using FPS.Control;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -193,6 +194,17 @@ public class GameManager : MonoBehaviour
         StartCoroutine(PlayCutScene());
     }
     #endregion
+
+    public void RemoveEverythingInGame()
+    {
+        // 어빌리티, 아이템, 무기 초기화
+        _class.RemoveEveryAbility();
+        _item.RemoveEveryItem();
+        
+        playerFighter.RemoveEveryWeapon();
+        
+
+    }
 
     IEnumerator PlayCutScene()
     {

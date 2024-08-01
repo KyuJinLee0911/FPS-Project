@@ -12,20 +12,42 @@ public class AbilityUI : MonoBehaviour
     public Text nameText;
     public Text descriptionText;
     public Image image;
+    UnityAction call = null;
     private void OnEnable()
     {
+        Debug.Log("Enable");
         AddAndSetAbility();
     }
 
     private void AddAndSetAbility()
     {
-        GetComponent<Button>().onClick.AddListener(() => ability.DoAbility());
+        call = () => ability.DoAbility();
+
+        GetComponent<Button>().onClick.AddListener(call);
         AbilityData data = ability.data;
-        
-        if(data == null) return;
-        
+
+        if (data == null) return;
+
         nameText.text = data.AbilityName;
         descriptionText.text = data.AbilityDescription;
         image.sprite = data.AbilitySprite;
+
+        GetComponent<Button>().onClick.AddListener(() =>
+        {
+            for (int i = 0; i < transform.parent.childCount; i++)
+            {
+                transform.parent.GetChild(i).gameObject.SetActive(false);
+            }
+            transform.parent.gameObject.SetActive(false);
+        });
+    }
+
+    private void OnDisable()
+    {
+        GetComponent<Button>().onClick.RemoveListener(call);
+        nameText.text = "";
+        descriptionText.text = "";
+        image.sprite = null;
+        
     }
 }

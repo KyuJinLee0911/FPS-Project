@@ -8,7 +8,12 @@ public class Ability : MonoBehaviour
     public int currentIdx = 0;
     public virtual void DoAbility()
     {
-        GameManager.Instance._class.activatedAbilityDict.Add(data.Key, this);
+        GameManager.Instance._class.activatedAbility.Add(this);
+    }
+
+    public virtual void RemoveAbility()
+    {
+        
     }
 
 }

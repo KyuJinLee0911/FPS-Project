@@ -10,4 +10,10 @@ public class TimeGraft : Ability
         GameManager.Instance.player.mainSkill.coolTime *= 0.90f;
         GameManager.Instance.player.subSkill.coolTime *= 0.90f;
     }
+
+    public override void RemoveAbility()
+    {
+        GameManager.Instance.player.mainSkill.coolTime /= 0.90f;
+        GameManager.Instance.player.subSkill.coolTime /= 0.90f;
+    }
 }

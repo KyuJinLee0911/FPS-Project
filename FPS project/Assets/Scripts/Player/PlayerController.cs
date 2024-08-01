@@ -24,6 +24,7 @@ namespace FPS.Control
         // 즉, x축감도는 가로 회전(y축 회전)의 감도, y축 감도는 세로 회전(x축 회전)의 감도임
         public float playerXAxisSensitivity = 1f;
         public float playerYAxisSensitivity = 1f;
+        public float reboundXRotation = 0f;
 
         [Header("Move")]
         public float moveSpeed = 5f;
@@ -135,8 +136,9 @@ namespace FPS.Control
 
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
+            firstPersonCameraObject.transform.localRotation = Quaternion.Euler(xRotation + reboundXRotation, 0, 0);
 
-            firstPersonCameraObject.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+            reboundXRotation =  Mathf.Lerp(reboundXRotation, 0, Time.deltaTime * 3.0f);
 
             transform.rotation = Quaternion.Euler(0, yRotation, 0);
         }

@@ -19,7 +19,7 @@ public class Item : MonoBehaviour, IInteractable
     public Image itemImage = null;
     public Item item;
 
-    public void SetDescription()
+    public virtual void SetDescription()
     {
         if (canvasType == CanvasType.CT_SCREENSPACE) return;
         Debug.Log($"{item.ItemData}");

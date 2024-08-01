@@ -10,4 +10,9 @@ public class SharpenedWits : Ability
         GameManager.Instance.playerFighter.additionalCriticalMultiples += 0.1f;
         GameManager.Instance.playerFighter.currentWeapon.AddCriticalMultiples(GameManager.Instance.playerFighter.additionalCriticalMultiples);
     }
+
+    public override void RemoveAbility()
+    {
+        GameManager.Instance.playerFighter.additionalCriticalMultiples -= 0.1f;
+    }
 }

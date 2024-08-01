@@ -6,6 +6,9 @@ public class Weapon : Item
 {
     public WeaponData weaponData;
     public LineRenderer bulletEffect;
+    public Transform muzzleTransform;
+    public Transform rGripParent;
+    public Transform lGripParent;
 
     private void Awake()
     {
@@ -18,12 +21,21 @@ public class Weapon : Item
         }
     }
 
+    public override void SetDescription()
+    {
+        if (canvasType == CanvasType.CT_SCREENSPACE) return;
+        itemNameTxt.text = weaponData.itemName;
+        itemDescriptionText.text = weaponData.itemDescription;
+        if (weaponData.itemImage != null)
+            itemImage.sprite = weaponData.itemImage;
+    }
+
 
     public override void DoInteraction()
     {
-        itemInfoWorldSpaceUI.SetActive(false);
-        Fighter fighter = GameManager.Instance.player.transform.GetComponent<Fighter>();
-        GameObject newWeapon = Instantiate(weaponData.weaponPrefab, fighter.GunPosition);
-        fighter.PickUpWeapon(newWeapon);
+        if (itemInfoWorldSpaceUI.activeSelf)
+            itemInfoWorldSpaceUI.SetActive(false);
+
+        GameManager.Instance.playerFighter.PickUpWeapon(this);
     }
 }

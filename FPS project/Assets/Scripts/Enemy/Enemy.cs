@@ -153,7 +153,7 @@ public class Enemy : Creature
         gunTransform.LookAt(targetTransform.position + new Vector3(0, 1, 0));
         fighter.isWeaponFire = true;
         fighter.Fire();
-        Debug.Log("Attack Action");
+        // Debug.Log("Attack Action");
         return BTNodeState.Success;
     }
 
@@ -162,7 +162,7 @@ public class Enemy : Creature
         if (isDead) return BTNodeState.Failure;
         if (fighter.isWeaponFire) fighter.isWeaponFire = false;
         transform.LookAt(targetTransform);
-        Debug.Log("Chase Action");
+        // Debug.Log("Chase Action");
         transform.position = Vector3.MoveTowards(transform.position, targetTransform.position, moveSpeed * Time.deltaTime);
         isMoving = true;
         return BTNodeState.Running;
@@ -173,7 +173,7 @@ public class Enemy : Creature
         if (isDead) return BTNodeState.Failure;
         if (fighter.isWeaponFire) fighter.isWeaponFire = false;
         isMoving = false;
-        Debug.Log("Scout Action");
+        // Debug.Log("Scout Action");
         return BTNodeState.Running;
     }
 
@@ -181,6 +181,6 @@ public class Enemy : Creature
     {
         animator.SetTrigger("GetHit");
         // 피격 효과
-        Debug.Log($"Effect! {gameObject.name}");
+        // Debug.Log($"Effect! {gameObject.name}");
     }
 }
