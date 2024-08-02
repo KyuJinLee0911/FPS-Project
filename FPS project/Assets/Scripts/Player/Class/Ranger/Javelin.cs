@@ -54,6 +54,7 @@ public class Javelin : MonoBehaviour, IInteractable
 
     public void OnChangeScene()
     {
+        if(GameManager.Instance.player == null) return;
         if(GameManager.Instance.controller.leftHandTransform.childCount != 0) return;
 
         // 씬이 바뀔때 쿨타임을 초기화해서 자동으로 자벨린 회수할 수 있도록 함

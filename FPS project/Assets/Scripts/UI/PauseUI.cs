@@ -19,8 +19,19 @@ public class PauseUI : MonoBehaviour
     void Init()
     {
         resumeBtn.onClick.AddListener(() => GameManager.Instance.ResumeGame());
-        restartConfirmBtn.onClick.AddListener(() => GameManager.Instance.RestartGame());
-        backToTitleBtn.onClick.AddListener(() => GameManager.Instance.BackToTitle());
+        restartConfirmBtn.onClick.AddListener(() =>
+        {
+            if (GameManager.Instance.gameState == GameState.GS_INGAME)
+            {
+                GameManager.Instance.RestartGame();
+            }
+            gameObject.SetActive(false);
+        });
+        backToTitleBtn.onClick.AddListener(() =>
+        {
+            GameManager.Instance.BackToTitle();
+            gameObject.SetActive(false);
+        });
     }
 
     void Start()

@@ -156,6 +156,7 @@ public class Enemy : Creature
 
     protected virtual bool IsPlayerInRange()
     {
+        if(targetTransform == null) return false;
         float distance = Vector3.Distance(transform.position, targetTransform.position);
         return distance <= attackRange;
     }

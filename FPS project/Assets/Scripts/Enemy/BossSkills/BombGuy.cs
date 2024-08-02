@@ -55,7 +55,7 @@ public class BombGuy : Enemy
         hpBar.value = hp;
         anim.SetBool("isRunning", isMoving);
 
-        if (isMoving)
+        if (isMoving && playerGameObject != null)
         {
             transform.LookAt(playerGameObject.transform);
             transform.position = Vector3.MoveTowards(transform.position, playerGameObject.transform.position, bombGuySpeed * Time.deltaTime);

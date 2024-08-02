@@ -60,6 +60,7 @@ public class RangerMainSkill : Skill
 
     public void OnChangeScene()
     {
+        if(GameManager.Instance.player == null) return;
         StopCoroutine(coroutine);
         currentCoolTime = 0;
         if (decoy.transform.parent == null)
