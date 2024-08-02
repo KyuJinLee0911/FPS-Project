@@ -8,12 +8,19 @@ public class PauseUI : MonoBehaviour
     [SerializeField] Button resumeBtn;
     [SerializeField] Button optionBtn;
     [SerializeField] Button restartConfirmBtn;
+    [SerializeField] Button backToTitleBtn;
     [SerializeField] GameObject restartConfirmObj;
+
+    private void OnEnable()
+    {
+        GameManager.Instance.AdjustTimeScale(0);
+    }
 
     void Init()
     {
         resumeBtn.onClick.AddListener(() => GameManager.Instance.ResumeGame());
         restartConfirmBtn.onClick.AddListener(() => GameManager.Instance.RestartGame());
+        backToTitleBtn.onClick.AddListener(() => GameManager.Instance.BackToTitle());
     }
 
     void Start()
@@ -23,6 +30,7 @@ public class PauseUI : MonoBehaviour
 
     private void OnDisable()
     {
+        GameManager.Instance.AdjustTimeScale(1);
         restartConfirmObj.SetActive(false);
     }
 }

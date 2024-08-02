@@ -27,7 +27,7 @@ public class Enemy : Creature
     protected Fighter fighter;
     protected event Action OnGetHit;
 
-    public override void Initialize()
+    public override void InitCreature()
     {
         targetTransform = GameManager.Instance.player.transform;
 
@@ -91,12 +91,15 @@ public class Enemy : Creature
 
     private void Start()
     {
-        Initialize();
+        InitCreature();
     }
     public override void Die(GameObject instigator)
     {
         // if (isDead) return;
         base.Die(instigator);
+        GameManager.Instance.ingameKillCount++;
+        GameManager.Instance.totalKillCount++;
+        AddScore(enemyType);
         fighter.isWeaponFire = false;
         instigator.GetComponent<IStat>().exp += exp;
         isMoving = false;
@@ -115,10 +118,28 @@ public class Enemy : Creature
 
     IEnumerator HideDeadBody()
     {
-
         yield return new WaitForSeconds(3.0f);
-
+        GameManager.Instance._item.DropItem(transform);
         gameObject.SetActive(false);
+    }
+
+    protected void AddScore(EnemyType type)
+    {
+        int _score = 0;
+        switch (type)
+        {
+            case EnemyType.ET_NORMAL:
+                _score = 10;
+                break;
+
+            case EnemyType.ET_ELITE:
+                _score = 50;
+                break;
+            case EnemyType.ET_BOSS:
+                _score = 100;
+                break;
+        }
+        GameManager.Instance.score += _score;
     }
 
 

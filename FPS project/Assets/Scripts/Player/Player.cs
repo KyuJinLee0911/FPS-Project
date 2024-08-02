@@ -24,7 +24,7 @@ public class Player : Creature
 
     // 최초 플레이어 생성 시, 클래스 변경 시, 게임을 클리어하고 다시 거점으로 돌아올 때 호출
     // 플레이어의 레벨을 1로, 스탯을 1레벨 기준으로 초기화
-    public override void Initialize()
+    public override void InitCreature()
     {
         level = 1;
         Stat stat = GameManager.Instance._data.userStats[level];
@@ -61,6 +61,13 @@ public class Player : Creature
         GameManager.Instance.playerFighter = transform.GetComponent<Fighter>();
     }
 
+    public void GetHp(float value)
+    {
+        hp += value;
+        if(hp > maxHp)
+            hp = maxHp;
+    }
+
     public void SetPlayerPosition()
     {
         Debug.Log("Player Position Set");
@@ -84,7 +91,7 @@ public class Player : Creature
     }
     void OnEnable()
     {
-        Initialize();
+        InitCreature();
     }
 
     public override void TakeDamage(GameObject instigator, float damage)
@@ -109,7 +116,7 @@ public class Player : Creature
         classData = GameManager.Instance._class.playerClassDatas[index];
         GameManager.Instance._class.currentClass = classData;
         GameManager.Instance._data.Init();
-        Initialize();
+        InitCreature();
         GameManager.Instance.hud.Init();
     }
 

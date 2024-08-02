@@ -15,10 +15,10 @@ public class BombGuy : Enemy
 
     void Start()
     {
-        Initialize();
+        InitCreature();
     }
 
-    public override void Initialize()
+    public override void InitCreature()
     {
         playerGameObject = GameManager.Instance.player.gameObject;
         rb.AddForce(new Vector3(0, 0.5f, 0.5f), ForceMode.Impulse);

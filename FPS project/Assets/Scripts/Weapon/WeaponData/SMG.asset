@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bbd3de6f5ac4e4e89bfdace73809f2, type: 3}
   m_Name: SMG
   m_EditorClassIdentifier: 
-  itemType: 0
-  itemKey: tw1
+  itemType: 9
+  itemKey: smg
   itemName: SMG
   itemRarity: 0
   itemDescription: Ass-em-Gee
   itemImage: {fileID: 0}
-  Weight: 0
+  Weight: 20
+  prefab: {fileID: 4243271525775095593, guid: 65119681e5b1b264d9081d42b4a80a89, type: 3}
   damage: 10
   additionalDamage: 0
   totalDamage: 10
@@ -40,7 +41,6 @@ MonoBehaviour:
   effectiveRange: 100
   weaponType: 0
   projectile: {fileID: 4138816894924396826, guid: 2b328852af457b846a937da2c39f4ad3, type: 3}
-  weaponPrefab: {fileID: 4243271525775095593, guid: 65119681e5b1b264d9081d42b4a80a89, type: 3}
   bulletEffect: {fileID: 0}
   rebound: 0
   reboundMagnifier: 0.6

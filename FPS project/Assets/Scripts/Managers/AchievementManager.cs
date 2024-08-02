@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +11,8 @@ public class AchievementManager : MonoBehaviour
     Dictionary<string, Achievement> achievements = new Dictionary<string, Achievement>();
     public Dictionary<string, Achievement> achievedDict = new Dictionary<string, Achievement>();
     [SerializeField] GameObject achievementUIObj;
-    [SerializeField] Text nameTxt;
-    [SerializeField] Text descriptionTxt;
+    [SerializeField] TextMeshProUGUI nameTxt;
+    [SerializeField] TextMeshProUGUI descriptionTxt;
     string path;
     
     public void Init()

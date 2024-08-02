@@ -6,12 +6,10 @@ using UnityEngine.UI;
 public class Item : MonoBehaviour, IInteractable
 {
     public bool isInfinite { get => false; }
-    [SerializeField] protected ItemData itemData;
-    public ItemData ItemData { get => itemData; }
+    public ItemData itemData;
     [SerializeField] protected GameObject itemInfoWorldSpaceUI;
     public GameObject worldSpaceUI { get => itemInfoWorldSpaceUI; }
     public bool canInteract { get; set; }
-    public GameObject itemPrefab;
 
     public CanvasType canvasType;
     public Text itemNameTxt;
@@ -22,11 +20,11 @@ public class Item : MonoBehaviour, IInteractable
     public virtual void SetDescription()
     {
         if (canvasType == CanvasType.CT_SCREENSPACE) return;
-        Debug.Log($"{item.ItemData}");
-        itemNameTxt.text = item.ItemData.itemName;
-        itemDescriptionText.text = item.ItemData.itemDescription;
-        if (item.ItemData.itemImage != null)
-            itemImage.sprite = item.ItemData.itemImage;
+        Debug.Log($"{item.itemData}");
+        itemNameTxt.text = item.itemData.itemName;
+        itemDescriptionText.text = item.itemData.itemDescription;
+        if (item.itemData.itemImage != null)
+            itemImage.sprite = item.itemData.itemImage;
     }
 
     public virtual void DoItem() { }
@@ -34,10 +32,10 @@ public class Item : MonoBehaviour, IInteractable
     public virtual void DoInteraction()
     {
         DoItem();
-        Instantiate(itemPrefab, GameManager.Instance._item.transform);
-        GameManager.Instance._item.activatedItem.Add(itemData);
-        SetDescription();
-        Debug.Log($"item {itemData.itemKey} activated");
-        Destroy(gameObject);
+        if(itemData.itemType == ItemType.IT_ITEM || itemData.itemType == ItemType.IT_WEAPON)
+            GameManager.Instance._item.activatedItem.Add(this);
+
+        transform.SetParent(transform, GameManager.Instance._item.transform);
+        gameObject.SetActive(false);
     }
 }

@@ -12,6 +12,7 @@ public class StartUI : MonoBehaviour
     private Button startBtn;
     private Button optionBtn;
     private Button exitBtn;
+    [SerializeField] Sprite pressed;
 
 
     private void Start()

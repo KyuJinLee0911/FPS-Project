@@ -38,13 +38,18 @@ public class Fighter : MonoBehaviour
         InitWeapon();
     }
 
+    public void InitFighter()
+    {
+        InitWeapon();
+    }
+
     // 초기 무기 세팅
     private void InitWeapon()
     {
         currentWeapon = basicWeapon;
         currentWeapons[0] = currentWeapon;
         currentWeaponIndex = 0;
-        GameObject newBasicWeaponObj = Instantiate(currentWeapon.weaponPrefab, GunPosition);
+        GameObject newBasicWeaponObj = Instantiate(currentWeapon.prefab, GunPosition);
         Weapon weapon = newBasicWeaponObj.GetComponent<Weapon>();
         muzzleTransform = weapon.muzzleTransform;
 
@@ -246,6 +251,7 @@ public class Fighter : MonoBehaviour
         // 모든 무기 데이터, 무기 게임 오브젝트 삭제
         for (int i = 0; i < currentWeapons.Length; i++)
         {
+            if(currentWeapons[i] == null) continue;
             currentWeapons[i].Init();
             Destroy(weaponSlots[i]);
             weaponSlots[i] = null;

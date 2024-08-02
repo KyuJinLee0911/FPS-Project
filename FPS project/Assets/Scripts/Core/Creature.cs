@@ -13,7 +13,7 @@ public abstract class Creature : MonoBehaviour, IDamageable, IStat
     public bool isDead { get; set; }
     public int exp { get; set; }
 
-    public abstract void Initialize();
+    public abstract void InitCreature();
 
     public virtual void Die(GameObject instigator)
     {

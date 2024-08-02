@@ -19,6 +19,7 @@ MonoBehaviour:
   itemDescription: ew description
   itemImage: {fileID: 0}
   Weight: 0
+  prefab: {fileID: 4243271525775095593, guid: 8d4ea408abaf07a469b92763cc2f5a8f, type: 3}
   damage: 20
   additionalDamage: 0
   totalDamage: 20
@@ -40,7 +41,6 @@ MonoBehaviour:
   effectiveRange: 0
   weaponType: 0
   projectile: {fileID: 4138816894924396826, guid: 2b328852af457b846a937da2c39f4ad3, type: 3}
-  weaponPrefab: {fileID: 4243271525775095593, guid: 8d4ea408abaf07a469b92763cc2f5a8f, type: 3}
   bulletEffect: {fileID: 0}
   rebound: 0.1
   reboundMagnifier: 1

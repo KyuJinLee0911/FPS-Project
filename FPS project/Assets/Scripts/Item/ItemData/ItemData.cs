@@ -10,8 +10,11 @@ public enum ItemRarity
 
 public enum ItemType
 {
-    IT_WEAPON,
-    IT_ITEM
+    IT_NOTHING = 0,
+    IT_BATTERY = 2,
+    IT_HEAL = 3,
+    IT_ITEM = 6,
+    IT_WEAPON = 9
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "Item/Make new item data", order = 2)]
@@ -26,5 +29,6 @@ public class ItemData : ScriptableObject
     [TextArea]
     public string itemDescription;
     public Sprite itemImage;
-    public int Weight;
+    public float Weight;
+    public GameObject prefab;
 }

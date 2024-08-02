@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -17,10 +18,17 @@ public class Boss : Enemy
     int highestPriority = int.MaxValue;
     BossSkillData nextSkill = null;
     // [SerializeField] UnityEngine.UI.Slider hpBar;
-    [SerializeField] Text hpText;
+    [SerializeField] TextMeshProUGUI hpText;
     bool isAttacking = false;
-    public override void Initialize()
+
+    public GameObject resultObj;
+    public override void InitCreature()
     {
+        if(GameManager.Instance.boss == null)
+            GameManager.Instance.boss = this;
+        else
+            Destroy(gameObject);
+
         targetTransform = GameManager.Instance.player.transform;
 
         int playerLevel = GameManager.Instance.player.level;
@@ -80,6 +88,7 @@ public class Boss : Enemy
         if(isDead) return;
         isDead = true;
         isMoving = false;
+        AddScore(enemyType);
         animator.SetTrigger("Die");
         if(!GameManager.Instance._achivement.achievedDict.ContainsKey("reboot"))
         {
@@ -90,7 +99,7 @@ public class Boss : Enemy
 
     private void Start()
     {
-        Initialize();
+        InitCreature();
 
         StartCoroutine(SelfHealRoutine());
     }

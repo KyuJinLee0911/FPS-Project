@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Drawing;
 using FPS.Control;
 using UnityEditor;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public GameState gameState;
+
     public ClassManager _class;
     public DataManager _data;
     public ItemManager _item;
@@ -33,6 +36,7 @@ public class GameManager : MonoBehaviour
     public GameObject pauseUIObj;
     public GameObject loadingUIObj;
     public GameObject playerPrefab;
+    public GameObject gameOverUI;
     public string[] stageNames;
     public int currentStageIndex = 0;
     public Transform startPos;
@@ -40,6 +44,13 @@ public class GameManager : MonoBehaviour
     public UnityEvent<Transform> onChangeTarget;
     public event Action onSceneChange;
     public HUD hud;
+
+    [Header("Game information")]
+    public int totalKillCount = 0;
+    public int ingameKillCount = 0;
+    public int score = 0;
+    public Boss boss;
+    public ResultUI resultUI;
 
     public void Init()
     {
@@ -58,6 +69,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
+        SetGameState(GameState.GS_TITLE);
         Init();
     }
 
@@ -71,7 +83,7 @@ public class GameManager : MonoBehaviour
     {
         controller.isControlable = false;
         pauseUIObj.SetActive(true);
-        AdjustTimeScale(0);
+        // AdjustTimeScale(0);
         SetCursorState(true, CursorLockMode.None);
     }
 
@@ -79,7 +91,7 @@ public class GameManager : MonoBehaviour
     {
         controller.isControlable = true;
         pauseUIObj.SetActive(false);
-        AdjustTimeScale(1);
+        // AdjustTimeScale(1);
         SetCursorState(false, CursorLockMode.Locked);
     }
 
@@ -105,17 +117,19 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        AdjustTimeScale(1);
+        // AdjustTimeScale(1);
 
         currentStageIndex = 1;
-        player.Initialize();
+        player.InitCreature();
+        playerFighter.InitFighter();
         StartCoroutine(LoadSceneAsyncWithLoadingUI(stageNames[1]));
-        if(!controller.isControlable) controller.isControlable = true;
+        if (!controller.isControlable) controller.isControlable = true;
     }
 
     #region Change Stages
     IEnumerator LoadSceneAsyncWithLoadingUI(string sceneName)
     {
+        yield return new WaitForSeconds(0.5f);
         loadingUIObj.SetActive(true);
         Slider loadingGauge = loadingUIObj.transform.GetComponentInChildren<Slider>();
         Text loadingText = loadingUIObj.transform.GetComponentInChildren<Text>();
@@ -134,9 +148,10 @@ public class GameManager : MonoBehaviour
         }
 
         Init();
-        startPos = GameObject.FindGameObjectWithTag("Start").transform;
-        yield return new WaitUntil(() => startPos != null);
-        player.SetPlayerPosition();
+        startPos = GameObject.FindGameObjectWithTag("Start")?.transform;
+        // yield return new WaitUntil(() => startPos != null);
+        if (player != null)
+            player.SetPlayerPosition();
         loadingUIObj.SetActive(false);
     }
 
@@ -148,18 +163,30 @@ public class GameManager : MonoBehaviour
 
         if (currentStageIndex == 3)
         {
-            player.Initialize();
+            player.InitCreature();
         }
         currentStageIndex = 4;
 
+        RemoveEverythingInGame();
+
         StartCoroutine(LoadSceneAsyncWithLoadingUI(stageNames[currentStageIndex]));
+        SetGameState(GameState.GS_FORTRESS);
+
+        if (Time.timeScale == 0) Time.timeScale = 1;
+    }
+
+    private void SetGameState(GameState state)
+    {
+        gameState = state;
     }
 
     // 요새에서 스테이지 1로 가는 함수
     // 요새에서 문과 상호작용하면 호출
     public void BeginPlay()
     {
+        
         ToNextStage();
+        SetGameState(GameState.GS_INGAME);
     }
 
     // 0 = 시작화면
@@ -193,6 +220,21 @@ public class GameManager : MonoBehaviour
         // 컷씬 재생
         StartCoroutine(PlayCutScene());
     }
+
+    public void BackToTitle()
+    {
+        // 플레이어 삭제 및 아이템, 어빌리티, 무기 데이터 삭제
+        
+        RemoveEverythingInGame();
+
+        controller.isControlable = false;
+        currentStageIndex = 0;
+        Destroy(player.gameObject);
+        player = null;
+        StartCoroutine(LoadSceneAsyncWithLoadingUI(stageNames[currentStageIndex]));
+
+        SetGameState(GameState.GS_TITLE);
+    }
     #endregion
 
     public void RemoveEverythingInGame()
@@ -200,10 +242,17 @@ public class GameManager : MonoBehaviour
         // 어빌리티, 아이템, 무기 초기화
         _class.RemoveEveryAbility();
         _item.RemoveEveryItem();
-        
-        playerFighter.RemoveEveryWeapon();
-        
+        _item.RemoveBatteies(gameState);
+        ingameKillCount = 0;
+        score = 0;
+        if (playerFighter != null)
+            playerFighter.RemoveEveryWeapon();
+    }
 
+    public void GameOver()
+    {
+        SetGameState(GameState.GS_GAME_END);
+        gameOverUI.SetActive(true);
     }
 
     IEnumerator PlayCutScene()
@@ -222,4 +271,14 @@ public class GameManager : MonoBehaviour
         Application.Quit();
 #endif
     }
+}
+
+
+public enum GameState
+{
+    GS_TITLE,
+    GS_FORTRESS,
+    GS_INGAME,
+    GS_GAME_END,
+    GS_RESULT
 }

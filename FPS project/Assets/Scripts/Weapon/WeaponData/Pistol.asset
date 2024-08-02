@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bbd3de6f5ac4e4e89bfdace73809f2, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  itemType: 9
+  itemKey: pistol
+  itemName: Pistol
+  itemRarity: 0
+  itemDescription: "\uBAA8\uB798\uBC18\uC9C0 \uBE75\uC57C\uBE75\uC57C"
+  itemImage: {fileID: 0}
+  Weight: 10
+  prefab: {fileID: 4243271525775095593, guid: 1a54157448a18c74eb7324bb646b9b62, type: 3}
+  damage: 20
+  additionalDamage: 0
+  totalDamage: 20
+  criticalMultiples: 2
+  additionalCriticalMultiples: 0
+  totalCriticalMultiples: 2
+  mag: 15
+  additionalMag: 0
+  currentMag: 15
+  totalMag: 15
+  reloadTime: 2
+  totalReloadTime: 2
+  additionalReloadTime: 0
+  canFireWeapon: 1
+  fireRate: 2
+  additionalFireRate: 0.3
+  totalFireRate: 2.3
+  fireRange: 150
+  effectiveRange: 50
+  weaponType: 2
+  projectile: {fileID: 0}
+  bulletEffect: {fileID: 0}
+  rebound: 0
+  reboundMagnifier: 4
+  gunPosition: {x: 0, y: 0, z: 0}
+  leftHandPosition: {x: 0, y: 0, z: 0}
+  isTwoHanded: 0

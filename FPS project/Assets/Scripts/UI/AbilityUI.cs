@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -9,8 +10,8 @@ using UnityEngine.UI;
 public class AbilityUI : MonoBehaviour
 {
     public Ability ability;
-    public Text nameText;
-    public Text descriptionText;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI descriptionText;
     public Image image;
     UnityAction call = null;
     private void OnEnable()

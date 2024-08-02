@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d7099fa4783cf41a96150f623f2479, type: 3}
+  m_Name: Heal
+  m_EditorClassIdentifier: 
+  itemType: 3
+  itemKey: Heal
+  itemName: "\uD790"
+  itemRarity: 0
+  itemDescription: "\uD53C\uB97C \uCC44\uC6CC\uC900\uB2E4. \uB0E0\uB0E0"
+  itemImage: {fileID: 21300000, guid: b39ccdf2015654b45b55960c0227e7d9, type: 3}
+  Weight: 0
+  prefab: {fileID: 1873486755594602960, guid: afa74f7939e8d8243bc8329251d9e61b, type: 3}

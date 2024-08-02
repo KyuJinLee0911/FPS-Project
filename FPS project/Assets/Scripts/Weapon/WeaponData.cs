@@ -40,7 +40,6 @@ public class WeaponData : ItemData
     [SerializeField] private WeaponType weaponType;
     public WeaponType WeaponType { get => weaponType; }
     public Projectile projectile;
-    public GameObject weaponPrefab;
     public LineRenderer bulletEffect;
     public float rebound;
     public float reboundMagnifier;

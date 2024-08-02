@@ -8,6 +8,7 @@ public class UICanvas : MonoBehaviour
     [SerializeField] GameObject pauseUIObj;
     [SerializeField] GameObject loadingUIObj;
     [SerializeField] GameObject abilityUI;
+    [SerializeField] GameObject gameOverUI;
 
     void Init()
     {

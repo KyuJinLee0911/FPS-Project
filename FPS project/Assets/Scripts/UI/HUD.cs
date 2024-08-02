@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,12 +8,12 @@ public class HUD : MonoBehaviour
 {
     [SerializeField] Slider hpBar;
     [SerializeField] Slider expBar;
-    [SerializeField] Text hpText;
-    [SerializeField] Text expText;
-    [SerializeField] Text levelText;
+    [SerializeField] TextMeshProUGUI hpText;
+    [SerializeField] TextMeshProUGUI expText;
+    [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] Image profileImage;
-    [SerializeField] Text mainSkillCoolTimeTxt;
-    [SerializeField] Text subSkillCoolTimeTxt;
+    [SerializeField] TextMeshProUGUI mainSkillCoolTimeTxt;
+    [SerializeField] TextMeshProUGUI subSkillCoolTimeTxt;
     [SerializeField] private GameObject mainSkillCoolTimeUIObj;
     [SerializeField] private GameObject subSkillCoolTimeUIObj;
     [SerializeField] Image mainSkillImage;

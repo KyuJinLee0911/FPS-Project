@@ -8,7 +8,6 @@ public class DataManager : MonoBehaviour
     public Dictionary<int, Stat> userStats { get; private set; } = new Dictionary<int, Stat>();
     public Dictionary<int, Stat> enemyStats { get; private set; } = new Dictionary<int, Stat>();
     string path;
-    private SaveData data = new SaveData();
 
 
     public Dictionary<TKey, TValue> LoadJson<TKey, TValue>(string path) where TValue : Data<TKey>
@@ -57,18 +56,6 @@ public class DataManager : MonoBehaviour
 }
 
 [Serializable]
-public class SaveData
-{
-    public float hp;
-    public float maxHp;
-    public float defence;
-    public int level;
-    public int currentExp;
-    public int currentClass;
-    public float autoCriticalRate;
-    public float autoCriticalMagnification;
-}
-
 public class JsonWrapper<T>
 {
     public JsonWrapper(List<T> datas)
@@ -77,3 +64,13 @@ public class JsonWrapper<T>
     }
     public List<T> datas;
 }
+
+[Serializable]
+public class DataToSave
+{
+    public JsonWrapper<string> classData;
+    public JsonWrapper<string> perkData;
+    public int totalKillCount;
+    public int totalBatteryCount;
+}
+

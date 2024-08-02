@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MagText : MonoBehaviour
 {
-    public Text magText;
+    public TextMeshProUGUI magText;
     private WeaponData currentWeapon;
 
 

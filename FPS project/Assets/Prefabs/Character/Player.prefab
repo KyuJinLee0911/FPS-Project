@@ -3635,7 +3635,9 @@ MonoBehaviour:
   currentWeapons:
   - {fileID: 0}
   - {fileID: 0}
-  weaponSlots: []
+  weaponSlots:
+  - {fileID: 0}
+  - {fileID: 0}
   currentWeaponIndex: 0
   isWeaponFire: 0
   timeSinceLastFire: 0
@@ -3690,6 +3692,7 @@ MonoBehaviour:
   firstPersonCameraObject: {fileID: 218007949132413988}
   playerXAxisSensitivity: 1
   playerYAxisSensitivity: 1
+  reboundXRotation: 0
   moveSpeed: 5
   runningSpeedModifier: 1.5
   jumpPower: 5
