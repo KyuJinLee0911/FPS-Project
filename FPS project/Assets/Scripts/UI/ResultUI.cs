@@ -22,7 +22,10 @@ public class ResultUI : MonoBehaviour
 
     private void OnEnable()
     {
+        GameManager.Instance._data.SaveUserData();
         GameManager.Instance.AdjustTimeScale(0);
+        if (GameManager.Instance.gameState != GameState.GS_RESULT)
+            GameManager.Instance.SetGameState(GameState.GS_RESULT);
         GameManager.Instance.SetCursorState(true, CursorLockMode.None);
         SetInfos();
         backToTitleBtn.onClick.AddListener(() =>
@@ -68,7 +71,7 @@ public class ResultUI : MonoBehaviour
         }
 
         scoreText.text = GameManager.Instance.score.ToString();
-        countText.text = GameManager.Instance.totalKillCount.ToString();
+        countText.text = GameManager.Instance.ingameKillCount.ToString();
         DecideGrade();
     }
 

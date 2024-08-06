@@ -71,6 +71,22 @@ public class GameManager : MonoBehaviour
 
         SetGameState(GameState.GS_TITLE);
         Init();
+        _data.LoadUserData();
+
+        if(totalKillCount < 50)
+        {
+            StartCoroutine(KillAchivement());
+        }
+    }
+
+    IEnumerator KillAchivement()
+    {
+        yield return new WaitUntil(() => totalKillCount == 50);
+
+        if(totalKillCount >= 50 && !_achivement.achievedDict.ContainsKey("robotEnforcementOfficer"))
+        {
+            _achivement.Achived("robotEnforcementOfficer");
+        }
     }
 
     #region About Pause and Resume
@@ -175,7 +191,7 @@ public class GameManager : MonoBehaviour
         if (Time.timeScale == 0) Time.timeScale = 1;
     }
 
-    private void SetGameState(GameState state)
+    public void SetGameState(GameState state)
     {
         gameState = state;
     }
@@ -184,7 +200,7 @@ public class GameManager : MonoBehaviour
     // 요새에서 문과 상호작용하면 호출
     public void BeginPlay()
     {
-        
+        _data.SaveUserData();
         ToNextStage();
         SetGameState(GameState.GS_INGAME);
     }

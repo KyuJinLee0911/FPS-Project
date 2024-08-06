@@ -4,21 +4,28 @@ using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using FPS.Control;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : Creature
 {
+    [Header("Class And Skills")]
     public PlayerClassData classData;
     public Transform mainSkillParent;
     public Transform subSkillParent;
     public Skill mainSkill;
     public Skill subSkill;
-    private int abilityPoint;
+
+    [Header("Exp")]
     public int currentTotalExp;
     public int expToNextLevel;
     public Collider playerHurtBox;
     public HitBox hitbox;
 
-    public event Action OnPlayerDamage;
+    [Header("Level Up Effect")]
+    public ParticleSystem levelUpEffect;
+    public GameObject uiLevelUpText;
+    public float loopTime;
+
     public event Action OnPlayerDie;
     public event Action OnPlayerLevelUp;
 
@@ -56,7 +63,8 @@ public class Player : Creature
 
         OnPlayerLevelUp += SetStats;
         // OnPlayerLevelUp += GainAbilityPoint;
-        OnPlayerLevelUp += GameManager.Instance._class.OpenSelectAbilityUI;
+        OnPlayerLevelUp += ShowLevelUpEffect;
+        OnPlayerLevelUp += GameManager.Instance._class.OpenAbilityUI;
 
         GameManager.Instance.playerFighter = transform.GetComponent<Fighter>();
     }
@@ -73,6 +81,23 @@ public class Player : Creature
         Debug.Log("Player Position Set");
         transform.position = GameManager.Instance.startPos.position;
         transform.localRotation = GameManager.Instance.startPos.localRotation;
+    }
+
+    void ShowLevelUpEffect()
+    {
+        StartCoroutine(PlayAndStopEffect());
+    }
+
+    IEnumerator PlayAndStopEffect()
+    {
+        levelUpEffect.Clear();
+        levelUpEffect.Play();
+        uiLevelUpText.SetActive(true);
+
+        yield return new WaitForSeconds(loopTime);
+
+        levelUpEffect.Stop();
+        uiLevelUpText.SetActive(false);
     }
     void Awake()
     {
@@ -120,8 +145,6 @@ public class Player : Creature
         GameManager.Instance.hud.Init();
     }
 
-
-
     private void Update()
     {
         if (exp >= expToNextLevel)
@@ -140,11 +163,6 @@ public class Player : Creature
 
         OnPlayerLevelUp();
     }
-
-    // public void GainAbilityPoint()
-    // {
-    //     abilityPoint++;
-    // }
 
     public void SetStats()
     {

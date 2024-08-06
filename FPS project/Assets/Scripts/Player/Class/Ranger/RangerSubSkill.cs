@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class RangerSubSkill : Skill
@@ -22,6 +23,8 @@ public class RangerSubSkill : Skill
     public override void DoSkill()
     {
         if (!IsReady()) return;
+        // 왼손 처음 위치로 복귀
+        GameManager.Instance.playerFighter.ChangeLGripParent(false);
         skillCoolTimeUI.SetActive(true);
         // if(Vector3.Distance(transform.position, targetLocation) > skillRange) return;
         currentCoolTime = coolTime;

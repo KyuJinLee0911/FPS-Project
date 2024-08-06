@@ -35,8 +35,14 @@ public class ClassManager : MonoBehaviour
     {
         // currentClass = playerClassDatas[(int)GameManager.Instance.player.classData.classType];
     }
-    public void OpenSelectAbilityUI()
+
+    public void OpenAbilityUI()
     {
+        StartCoroutine(OpenSelectAbilityUI());
+    }
+    public IEnumerator OpenSelectAbilityUI()
+    {
+        yield return new WaitForSeconds(GameManager.Instance.player.loopTime);
         // 총 어빌리티 개수에서 현재 활성화된 어빌리티 개수를 뺀 값이 3보다 작으면
         // 선택할 어빌리티가 충분하지 않으므로
         // 더 이상 어빌리티를 선택할 수 없게 함
@@ -44,7 +50,7 @@ public class ClassManager : MonoBehaviour
         if (currentClass.AllAbilities.Count - activatedAbility.Count < 3)
         {
             Debug.Log("Not enough abilities left");
-            return;
+            yield break;
         }
 
         abilityUI.SetActive(true);
@@ -97,6 +103,11 @@ public class ClassManager : MonoBehaviour
         }
         // 어빌리티 창 켜질때 일시정지
         GameManager.Instance.AdjustTimeScale(0);
+    }
+
+    public IEnumerator WaitForLevelUpEffect()
+    {
+        yield return new WaitForSeconds(1f);
     }
 
     public void RemoveEveryAbility()

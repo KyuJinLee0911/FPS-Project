@@ -138,7 +138,7 @@ namespace FPS.Control
 
             firstPersonCameraObject.transform.localRotation = Quaternion.Euler(xRotation + reboundXRotation, 0, 0);
 
-            reboundXRotation =  Mathf.Lerp(reboundXRotation, 0, Time.deltaTime * 3.0f);
+            reboundXRotation = Mathf.Lerp(reboundXRotation, 0, Time.deltaTime * 3.0f);
 
             transform.rotation = Quaternion.Euler(0, yRotation, 0);
         }

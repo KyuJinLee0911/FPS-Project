@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,15 +19,22 @@ public class Enemy : Creature
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float attackRange;
     [SerializeField] protected float chaseRange;
+    [SerializeField] protected float minDistance;
     [SerializeField] private bool isInsideBattleZone;
     [SerializeField] protected Animator animator;
     [SerializeField] protected GameObject hpBarParent;
     [SerializeField] protected Slider hpBar;
     [SerializeField] protected EnemyType enemyType;
+
     protected bool isMoving;
     protected BTSelector root;
     protected Fighter fighter;
     protected event Action OnGetHit;
+
+    [Header("Dissolve Effect")]
+    [SerializeField] protected SkinnedMeshRenderer skinnedRenderer;
+    [SerializeField] protected int dissolveAmount = Shader.PropertyToID("_DissolveAmount");
+    [SerializeField] protected float dissolveTime = 2f;
 
     public override void InitCreature()
     {
@@ -118,7 +127,18 @@ public class Enemy : Creature
 
     IEnumerator HideDeadBody()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(1f);
+        float elapsedTime = 0f;
+        while (elapsedTime < dissolveTime)
+        {
+            elapsedTime += Time.deltaTime;
+
+            float lerpedDissolve = Mathf.Lerp(0, 1f, elapsedTime / dissolveTime);
+
+            skinnedRenderer.materials[0].SetFloat(dissolveAmount, lerpedDissolve);
+
+            yield return null;
+        }
         GameManager.Instance._item.DropItem(transform);
         gameObject.SetActive(false);
     }
@@ -156,9 +176,9 @@ public class Enemy : Creature
 
     protected virtual bool IsPlayerInRange()
     {
-        if(targetTransform == null) return false;
+        if (targetTransform == null) return false;
         float distance = Vector3.Distance(transform.position, targetTransform.position);
-        return distance <= attackRange;
+        return distance <= attackRange && UnityEngine.Random.Range(0, 100) > 20;
     }
 
     protected virtual bool IsPlayerInChaseRange()
@@ -173,8 +193,14 @@ public class Enemy : Creature
         isMoving = false;
         transform.LookAt(targetTransform);
         gunTransform.LookAt(targetTransform.position + new Vector3(0, 1, 0));
-        fighter.isWeaponFire = true;
-        fighter.Fire();
+        float dist = Vector3.Distance(transform.position, targetTransform.position);
+        if (dist > minDistance)
+        {
+            fighter.isWeaponFire = true;
+            fighter.Fire();
+        }
+
+
         // Debug.Log("Attack Action");
         return BTNodeState.Success;
     }
@@ -185,7 +211,9 @@ public class Enemy : Creature
         if (fighter.isWeaponFire) fighter.isWeaponFire = false;
         transform.LookAt(targetTransform);
         // Debug.Log("Chase Action");
+
         transform.position = Vector3.MoveTowards(transform.position, targetTransform.position, moveSpeed * Time.deltaTime);
+
         isMoving = true;
         return BTNodeState.Running;
     }

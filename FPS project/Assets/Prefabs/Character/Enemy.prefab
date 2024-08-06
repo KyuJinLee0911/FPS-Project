@@ -450,6 +450,9 @@ MonoBehaviour:
   hpBarParent: {fileID: 467192150796265911}
   hpBar: {fileID: 8739293270298848976}
   enemyType: 0
+  skinnedRenderer: {fileID: 7467060486984504340}
+  dissolveAmount: 2631
+  dissolveTime: 2
 --- !u!1 &1199313089321044297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,7 +1945,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e2348c246a5a17549b71ceff05aa0245, type: 2}
+  - {fileID: 2100000, guid: c5ff04b3db5dc0a468d890a32fa053d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

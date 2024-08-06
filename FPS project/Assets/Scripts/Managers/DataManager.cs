@@ -7,6 +7,7 @@ public class DataManager : MonoBehaviour
 {
     public Dictionary<int, Stat> userStats { get; private set; } = new Dictionary<int, Stat>();
     public Dictionary<int, Stat> enemyStats { get; private set; } = new Dictionary<int, Stat>();
+    [SerializeField] DataToSave data = new DataToSave();
     string path;
 
 
@@ -46,13 +47,62 @@ public class DataManager : MonoBehaviour
         Debug.Log(path);
     }
 
-    public void DeleteIngameData()
+    public async void SaveUserData()
+    {
+        DataToSave data = new DataToSave();
+        data.totalBatteryCount = GameManager.Instance._item.batteries;
+        data.totalKillCount = GameManager.Instance.totalKillCount;
+        data.classData = GetClassKey();
+
+        string json = JsonUtility.ToJson(data, true);
+
+        await File.WriteAllTextAsync(path, json);
+        Debug.Log("Saved");
+    }
+
+    public void LoadUserData()
     {
         if (!File.Exists(path))
-            return;
+        {
+            GameManager.Instance._item.batteries = 0;
+            GameManager.Instance.totalKillCount = 0;
+            if (GameManager.Instance._class.unlockedClasses.Count == 0)
+                GameManager.Instance._class.unlockedClasses.Add(GameManager.Instance._class.playerClassDatas[0]);
+            SaveUserData();
+        }
+        else
+        {
+            string loadedJson = File.ReadAllText(path);
+            data = JsonUtility.FromJson<DataToSave>(loadedJson);
+            GameManager.Instance._item.batteries = data.totalBatteryCount;
+            GameManager.Instance.totalKillCount = data.totalKillCount;
+            foreach (var type in data.classData.datas)
+            {
+                PlayerClassData savedClassData = GameManager.Instance._class.playerClassDatas[type];
+                if (!GameManager.Instance._class.unlockedClasses.Contains(savedClassData))
+                    GameManager.Instance._class.unlockedClasses.Add(savedClassData);
+            }
+        }
 
-        File.Delete(path);
+        Debug.Log("Loaded");
     }
+
+    public JsonWrapper<int> GetClassKey()
+    {
+        List<int> types = new List<int>();
+
+
+        foreach (var data in GameManager.Instance._class.unlockedClasses)
+        {
+            types.Add((int)data.classType);
+        }
+
+        JsonWrapper<int> classWrappers = new JsonWrapper<int>(types);
+
+        return classWrappers;
+    }
+
+
 }
 
 [Serializable]
@@ -68,7 +118,7 @@ public class JsonWrapper<T>
 [Serializable]
 public class DataToSave
 {
-    public JsonWrapper<string> classData;
+    public JsonWrapper<int> classData;
     public JsonWrapper<string> perkData;
     public int totalKillCount;
     public int totalBatteryCount;

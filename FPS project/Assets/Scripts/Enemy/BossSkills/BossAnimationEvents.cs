@@ -80,7 +80,7 @@ public class BossAnimationEvents : MonoBehaviour
         yield return new WaitUntil(() => expEffect.isStopped);
         
         GameManager.Instance.boss.resultObj.SetActive(true);
-        GameManager.Instance.gameState = GameState.GS_RESULT;
+        GameManager.Instance.SetGameState(GameState.GS_RESULT);
         if(expEffect.isStopped)
             Destroy(boss.gameObject);
     }
