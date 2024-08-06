@@ -51,6 +51,7 @@ MonoBehaviour:
   targetLocation: {x: 0, y: 0, z: 0}
   skillName: Bastion
   skillCoolTimeUI: {fileID: 0}
-  skillSprite: {fileID: 0}
+  skillSprite: {fileID: 21300000, guid: 0a0859a18d5c9c74abfaa208425e51c5, type: 3}
   uiSkillImage: {fileID: 0}
   bastionPrefab: {fileID: 8534667930507795268, guid: f1a5d01f87a2eed42a4c4563babd0d99, type: 3}
+  playerBastion: {fileID: 0}

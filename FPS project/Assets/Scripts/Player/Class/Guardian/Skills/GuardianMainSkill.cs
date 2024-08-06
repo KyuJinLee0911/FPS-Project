@@ -42,6 +42,7 @@ public class GuardianMainSkill : Skill
         currentCoolTime = 0;
         skillRange = 3;
         skillDamage = 0;
+        
         playerBastion = Instantiate(bastionPrefab, GameManager.Instance.player.transform);
         playerBastion.SetActive(false);
     }

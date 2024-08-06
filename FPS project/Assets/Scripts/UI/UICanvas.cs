@@ -10,6 +10,7 @@ public class UICanvas : MonoBehaviour
     [SerializeField] GameObject abilityUI;
     [SerializeField] GameObject gameOverUI;
     [SerializeField] GameObject uiLevelUpObj;
+    [SerializeField] GameObject uiReloadObj;
 
     void Init()
     {
@@ -17,6 +18,7 @@ public class UICanvas : MonoBehaviour
         GameManager.Instance.loadingUIObj = loadingUIObj;
         GameManager.Instance._class.abilityUI = abilityUI;
         GameManager.Instance.player.uiLevelUpText = uiLevelUpObj;
+        GameManager.Instance.playerFighter.reloadUIObj = uiReloadObj;
     }
     void Start()
     {

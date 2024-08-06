@@ -26,6 +26,7 @@ public class Fighter : MonoBehaviour
     public TwoBoneIKConstraint rightArmConstraint;
     public TwoBoneIKConstraint leftArmConstraint;
     public Transform lOGTargetParent;
+    public GameObject reloadUIObj;
 
     // 무기의 추가 수치 (씬 변경시 저장하여 넘겨주는 데이터)
     [Header("Additional Weapon Data Values")]

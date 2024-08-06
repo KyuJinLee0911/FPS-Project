@@ -51,8 +51,9 @@ MonoBehaviour:
   targetLocation: {x: 0, y: 0, z: 0}
   skillName: 
   skillCoolTimeUI: {fileID: 0}
-  skillSprite: {fileID: 0}
+  skillSprite: {fileID: 21300000, guid: 7574f9e7bf395214ba7b54e3495021b7, type: 3}
   uiSkillImage: {fileID: 0}
   stealthTime: 4
   decoyTime: 5
   decoyPrefab: {fileID: 4230876511792860406, guid: c5715750a8c5bf24b8bb85883e807b4d, type: 3}
+  decoy: {fileID: 0}

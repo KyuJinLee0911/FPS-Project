@@ -51,7 +51,7 @@ MonoBehaviour:
   targetLocation: {x: 0, y: 0, z: 0}
   skillName: 
   skillCoolTimeUI: {fileID: 0}
-  skillSprite: {fileID: 0}
+  skillSprite: {fileID: 21300000, guid: 8f761b1f12ed86c479aa306104d418b2, type: 3}
   uiSkillImage: {fileID: 0}
   layerMask:
     serializedVersion: 2

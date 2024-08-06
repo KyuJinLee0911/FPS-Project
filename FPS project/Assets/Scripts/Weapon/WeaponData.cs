@@ -178,10 +178,12 @@ public class WeaponData : ItemData
     public IEnumerator ReloadMag()
     {
         canFireWeapon = false;
+        GameManager.Instance.playerFighter.reloadUIObj.SetActive(true);
         Debug.Log("Reloading...");
         yield return new WaitForSeconds(totalReloadTime);
         currentMag = totalMag;
         canFireWeapon = true;
+        GameManager.Instance.playerFighter.reloadUIObj.SetActive(false);
     }
 
     public void ApplyImpack(Vector3 dir, float power)

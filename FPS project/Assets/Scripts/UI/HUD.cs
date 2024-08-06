@@ -34,6 +34,8 @@ public class HUD : MonoBehaviour
         player.mainSkill.uiSkillImage = mainSkillImage;
         player.subSkill.skillCoolTimeUI = subSkillCoolTimeUIObj;
         player.subSkill.uiSkillImage = subSkillImage;
+        player.mainSkill.uiSkillImage.sprite = player.mainSkill.skillSprite;
+        player.subSkill.uiSkillImage.sprite = player.subSkill.skillSprite;
     }
 
     private void Update()

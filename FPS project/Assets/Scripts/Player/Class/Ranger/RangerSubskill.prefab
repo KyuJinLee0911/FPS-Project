@@ -51,7 +51,7 @@ MonoBehaviour:
   targetLocation: {x: 0, y: 0, z: 0}
   skillName: 
   skillCoolTimeUI: {fileID: 0}
-  skillSprite: {fileID: 0}
+  skillSprite: {fileID: 21300000, guid: 338a5bd2d7f2d8743836464e4f0f2158, type: 3}
   uiSkillImage: {fileID: 0}
   javelinPrefab: {fileID: 1207145758441076341, guid: 4c0b882ffc5e56844b73ae4df4abe15b, type: 3}
   javRb: {fileID: 0}

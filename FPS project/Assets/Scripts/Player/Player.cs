@@ -60,7 +60,6 @@ public class Player : Creature
         mainSkill.Initialize();
         subSkill.Initialize();
 
-
         OnPlayerLevelUp += SetStats;
         // OnPlayerLevelUp += GainAbilityPoint;
         OnPlayerLevelUp += ShowLevelUpEffect;
