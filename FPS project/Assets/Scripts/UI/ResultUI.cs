@@ -66,8 +66,8 @@ public class ResultUI : MonoBehaviour
         {
             if (GameManager.Instance.playerFighter.currentWeapons[i] == null) continue;
             GameObject newWeaponObj = Instantiate(weaponInfoPrefab, weaponInfoParent);
-            newWeaponObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = GameManager.Instance.playerFighter.currentWeapons[i].itemName;
-            newWeaponObj.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = GameManager.Instance.playerFighter.currentWeapons[i].itemDescription;
+            newWeaponObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = GameManager.Instance.playerFighter.currentWeapons[i].weaponData.itemName;
+            newWeaponObj.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = GameManager.Instance.playerFighter.currentWeapons[i].weaponData.itemDescription.Replace("\\n", "\n");
         }
 
         scoreText.text = GameManager.Instance.score.ToString();

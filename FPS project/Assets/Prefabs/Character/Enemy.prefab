@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 4834864768359535290}
   - component: {fileID: 56556153362964695}
   - component: {fileID: 1031010448739619303}
+  - component: {fileID: 3356877443627953746}
   m_Layer: 5
   m_Name: EnemyWorldSpaceCanvas
   m_TagString: Untagged
@@ -92,7 +93,7 @@ RectTransform:
   m_GameObject: {fileID: 467192150796265911}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_LocalScale: {x: -0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6873179027519090518}
@@ -166,6 +167,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3356877443627953746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467192150796265911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9227f882bd2f76a49a8638ff70a83fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &481411456054691167
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,12 +421,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c172afc48b0896f43a5725d34faeac13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicWeapon: {fileID: 11400000, guid: fc3d70915e2863d4fbf4ff3bc5939937, type: 2}
-  currentWeapon: {fileID: 11400000, guid: fc3d70915e2863d4fbf4ff3bc5939937, type: 2}
+  basicWeapon: {fileID: 6853597264005597379}
+  currentWeapon: {fileID: 0}
   currentWeapons:
-  - {fileID: 0}
-  - {fileID: 0}
-  weaponSlots:
   - {fileID: 0}
   - {fileID: 0}
   currentWeaponIndex: 0
@@ -421,9 +431,12 @@ MonoBehaviour:
   timeSinceLastFire: 0
   muzzleTransform: {fileID: 3107170431175330107}
   GunPosition: {fileID: 892557823022114832}
-  gunModel: {fileID: 6474842663361499759}
+  defaultGunPos: {x: 0, y: 0, z: 0}
   isSubSkillSet: 0
   rightArmConstraint: {fileID: 0}
+  leftArmConstraint: {fileID: 0}
+  lOGTargetParent: {fileID: 0}
+  reloadUIObj: {fileID: 0}
   additionalDamageMagnifier: 0
   additionalReloadSpeedMagnifier: 0
   additionalFireRateMagnifier: 0
@@ -443,13 +456,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 0}
   moveSpeed: 2
-  attackRange: 30
-  chaseRange: 50
+  attackRange: 10
+  chaseRange: 16
+  minDistance: 0
   isInsideBattleZone: 0
   animator: {fileID: 8167884370150236682}
   hpBarParent: {fileID: 467192150796265911}
   hpBar: {fileID: 8739293270298848976}
-  enemyType: 0
+  enemyType: 200
   skinnedRenderer: {fileID: 7467060486984504340}
   dissolveAmount: 2631
   dissolveTime: 2
@@ -2306,11 +2320,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5198984567652084861, guid: 8d4ea408abaf07a469b92763cc2f5a8f, type: 3}
   m_PrefabInstance: {fileID: 7149574223607784774}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6474842663361499759 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4243271525775095593, guid: 8d4ea408abaf07a469b92763cc2f5a8f, type: 3}
+--- !u!114 &6853597264005597379 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4889574912063509115, guid: 8d4ea408abaf07a469b92763cc2f5a8f, type: 3}
   m_PrefabInstance: {fileID: 7149574223607784774}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31800d615ab57d847968781e247e33b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8289301009912826112 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1166960866882120774, guid: 8d4ea408abaf07a469b92763cc2f5a8f, type: 3}

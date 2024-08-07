@@ -1,18 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using FPS.Control;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class Fighter : MonoBehaviour
 {
-    public WeaponData basicWeapon;
-    public WeaponData currentWeapon;
-    public WeaponData[] currentWeapons = new WeaponData[2];
-    public GameObject[] weaponSlots = new GameObject[2];
+    public Weapon basicWeapon;
+    public Weapon currentWeapon;
+    public Weapon[] currentWeapons = new Weapon[2];
+    // public GameObject[] weaponSlots = new GameObject[2];
     public int currentWeaponIndex = 0;
     public bool isWeaponFire = false;
     [SerializeField] private float timeSinceLastFire = float.MaxValue;
@@ -28,7 +25,7 @@ public class Fighter : MonoBehaviour
     public Transform lOGTargetParent;
     public GameObject reloadUIObj;
 
-    // 무기의 추가 수치 (씬 변경시 저장하여 넘겨주는 데이터)
+    // 무기의 추가 수치 (어빌리티 습득시 증가. 모든 무기에 영향을 미침)
     [Header("Additional Weapon Data Values")]
     public float additionalDamageMagnifier = 0;
     public float additionalReloadSpeedMagnifier = 0;
@@ -51,17 +48,16 @@ public class Fighter : MonoBehaviour
     {
 
         currentWeaponIndex = 0;
-        currentWeapons[currentWeaponIndex] = basicWeapon;
-        currentWeapon = currentWeapons[currentWeaponIndex];
-
-        GameObject newBasicWeaponObj = Instantiate(currentWeapon.prefab, GunPosition);
+        GameObject newBasicWeaponObj = Instantiate(basicWeapon.weaponData.prefab, GunPosition);
         Weapon weapon = newBasicWeaponObj.GetComponent<Weapon>();
-        weaponSlots[currentWeaponIndex] = newBasicWeaponObj;
+        currentWeapons[currentWeaponIndex] = weapon;
+        currentWeapon = weapon;
+
         muzzleTransform = weapon.muzzleTransform;
         if (gameObject.CompareTag("Player"))
             lOGTargetParent = leftArmConstraint.data.target.parent;
 
-        if (currentWeapon.WeaponType == WeaponType.WT_PROJECTILE)
+        if (currentWeapon.weaponData.weaponType == WeaponType.WT_PROJECTILE)
         {
             GameManager.Instance._pool.AddNewObj(gameObject.name, currentWeapon.projectile.gameObject);
             GameManager.Instance._pool.Initialize(gameObject.name, 20);
@@ -70,29 +66,30 @@ public class Fighter : MonoBehaviour
         currentWeapon.canFireWeapon = true;
         currentWeapon.Init();
 
-        defaultGunPos = weaponSlots[currentWeaponIndex].transform.localPosition;
-        defaultGunRot = weaponSlots[currentWeaponIndex].transform.localRotation.eulerAngles;
+        defaultGunPos = currentWeapon.transform.localPosition;
+        defaultGunRot = currentWeapon.transform.localRotation.eulerAngles;
 
         // 총의 반동과 함께 팔도 움직일 수 있도록 IKConstraint의 target 트랜스폼의 부모 오브젝트 변경
-        ChangeGripParent();
+        ChangeGripParent(weapon);
+
+        // currentWeapon.effectObj.SetActive(false);
     }
 
-    private void ChangeGripParent()
+    private void ChangeGripParent(Weapon weapon)
     {
         if (!gameObject.CompareTag("Player")) return;
-
-        Weapon weapon = weaponSlots[currentWeaponIndex].GetComponent<Weapon>();
+        
         rightArmConstraint.data.target.SetParent(weapon.rGripParent);
         rightArmConstraint.data.target.localPosition = Vector3.zero;
         // 두손무기면 왼손도 이동
-        ChangeLGripParent(currentWeapon.isTwoHanded);
+        ChangeLGripParent(currentWeapon.weaponData.isTwoHanded);
     }
 
     // 왼손 이동시키는 함수
     public void ChangeLGripParent(bool isTwoHanded)
     {
         if (!gameObject.CompareTag("Player")) return;
-        Weapon weapon = weaponSlots[currentWeaponIndex].GetComponent<Weapon>();
+        Weapon weapon = currentWeapon;
         if (isTwoHanded)
         {
             leftArmConstraint.data.target.SetParent(weapon.lGripParent);
@@ -108,7 +105,6 @@ public class Fighter : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Debug.Log($"is sub skill set? {isSubSkillSet}");
         if (isWeaponFire)
             Fire();
     }
@@ -136,7 +132,7 @@ public class Fighter : MonoBehaviour
         if (timeSinceLastFire >= _timeBetweenFires)
         {
             currentWeapon.FireArm(muzzleTransform, gameObject);
-            if (currentWeapon.WeaponType == WeaponType.WT_HITSCAN)
+            if (currentWeapon.weaponData.weaponType == WeaponType.WT_HITSCAN)
                 StartCoroutine(ShowBulletEffect(muzzleTransform));
             timeSinceLastFire = 0;
             MakeRebound();
@@ -197,7 +193,7 @@ public class Fighter : MonoBehaviour
 
     void OnSwapToWeapon2()
     {
-        if (weaponSlots[1] == null)
+        if (currentWeapons[1] == null)
         {
             Debug.Log("No Weapon To Swap");
             return;
@@ -209,7 +205,7 @@ public class Fighter : MonoBehaviour
 
     void SwapWeapon(int index)
     {
-        Weapon weapon = weaponSlots[index].GetComponent<Weapon>();
+        Weapon weapon = currentWeapons[index];
         if (currentWeaponIndex == index)
         {
             Debug.Log("Already");
@@ -217,16 +213,16 @@ public class Fighter : MonoBehaviour
         }
 
         // 기존 무기 오브젝트 비활성화 및 새 무기 오브젝트 활성화
-        weaponSlots[currentWeaponIndex].SetActive(false);
+        currentWeapon.gameObject.SetActive(false);
         currentWeaponIndex = index;
-        weaponSlots[index].SetActive(true);
-
         currentWeapon = currentWeapons[currentWeaponIndex];
+        currentWeapon.gameObject.SetActive(true);
+
         currentWeapon.canFireWeapon = true;
 
         SetDefaultPos();
 
-        ChangeGripParent();
+        ChangeGripParent(currentWeapon);
     }
 
     public void PickUpWeapon(Weapon weapon)
@@ -237,28 +233,26 @@ public class Fighter : MonoBehaviour
         // 무기 슬롯이 가득차있을때
         // 현재 무기를 바닥에 버리고 새로운 무기 장착
         // index는 변화 없음
-        if (weaponSlots[1] != null)
+        if (currentWeapons[1] != null)
         {
-            weaponSlots[currentWeaponIndex].transform.SetParent(null);
+            currentWeapon.transform.SetParent(null);
             Vector3 newPos = transform.position + (Vector3.up * 0.6f) + Vector3.forward;
-            weaponSlots[currentWeaponIndex].transform.SetPositionAndRotation(newPos, Quaternion.identity);
-            weaponSlots[currentWeaponIndex] = newWeapon;
-            currentWeapons[currentWeaponIndex] = weapon.weaponData;
+            currentWeapon.transform.SetPositionAndRotation(newPos, Quaternion.identity);
         }
         // 무기 슬롯이 가득차있지 않을 때
         // 새 무기를 새로운 슬롯에 장착하고
         // 인덱스를 현재 무기로 변환
         else
         {
-            weaponSlots[currentWeaponIndex].SetActive(false);
-            weaponSlots[1] = newWeapon;
-            currentWeapons[1] = weapon.weaponData;
-            timeSinceLastFire = float.MaxValue;
+            currentWeapon.gameObject.SetActive(false);
             currentWeaponIndex = 1;
         }
+
+        currentWeapon = weapon;
+        currentWeapons[currentWeaponIndex] = weapon;
+        timeSinceLastFire = float.MaxValue;
         muzzleTransform = weapon.muzzleTransform;
 
-        currentWeapon = currentWeapons[currentWeaponIndex];
         currentWeapon.canFireWeapon = true;
 
         // 습득시 스케일 조정 및 위치 조절
@@ -266,40 +260,42 @@ public class Fighter : MonoBehaviour
         {
             newWeapon.transform.localScale = Vector3.one;
         }
-        newWeapon.transform.localPosition = currentWeapon.gunPosition;
+        newWeapon.transform.localPosition = currentWeapon.weaponData.gunPosition;
         newWeapon.transform.localRotation = Quaternion.identity;
 
 
         SetDefaultPos();
 
-        if (currentWeapon.WeaponType == WeaponType.WT_PROJECTILE)
+        if (currentWeapon.weaponData.weaponType == WeaponType.WT_PROJECTILE)
         {
             GameManager.Instance._pool.AddNewObj(gameObject.name, currentWeapon.projectile.gameObject);
             GameManager.Instance._pool.Initialize(gameObject.name, 20);
         }
-        ChangeGripParent();
+        ChangeGripParent(weapon);
         SetInGameWeaponData();
     }
 
     private void SetDefaultPos()
     {
         // 무기 교체와 동시에 반동에 사용되는 기본 총 위치도 변경
-        defaultGunPos = weaponSlots[currentWeaponIndex].transform.localPosition;
-        defaultGunRot = weaponSlots[currentWeaponIndex].transform.localRotation.eulerAngles;
+        defaultGunPos = currentWeapon.transform.localPosition;
+        defaultGunRot = currentWeapon.transform.localRotation.eulerAngles;
     }
 
     // 게임이 끝났을 때 사용하는 함수
     public void RemoveEveryWeapon()
     {
+        // 손 위치 기본 무기 위치로 변경
+        GameObject tempWeapon = Instantiate(basicWeapon.weaponData.prefab, GunPosition);
+        Weapon temp = tempWeapon.GetComponent<Weapon>();
+        ChangeGripParent(temp);
+        Destroy(tempWeapon);
         currentWeapon = basicWeapon;
-        ChangeGripParent();
         // 모든 무기 데이터, 무기 게임 오브젝트 삭제
         for (int i = 0; i < currentWeapons.Length; i++)
         {
             if (currentWeapons[i] == null) continue;
-            currentWeapons[i].Init();
-            Destroy(weaponSlots[i]);
-            weaponSlots[i] = null;
+            Destroy(currentWeapons[i].gameObject);
             currentWeapons[i] = null;
         }
 
@@ -311,7 +307,6 @@ public class Fighter : MonoBehaviour
     // 현재 어빌리티와 아이템에 의해 변경된 추가 수치에 맞게 새로 주운 무기의 수치 변경
     private void SetInGameWeaponData()
     {
-        currentWeapon.Init();
         currentWeapon.ChangeWeaponDamage(additionalDamageMagnifier);
         currentWeapon.ChangeReloadSpeed(additionalReloadSpeedMagnifier);
         currentWeapon.ChangeFireRate(additionalFireRateMagnifier);
@@ -321,7 +316,7 @@ public class Fighter : MonoBehaviour
 
     public IEnumerator ShowBulletEffect(Transform muzzleTransform)
     {
-        if (currentWeapon.WeaponType != WeaponType.WT_HITSCAN)
+        if (currentWeapon.weaponData.weaponType != WeaponType.WT_HITSCAN)
             yield break;
         WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
         currentWeapon.bulletEffect.SetPosition(0, muzzleTransform.position);
@@ -338,11 +333,11 @@ public class Fighter : MonoBehaviour
     {
         if (!gameObject.CompareTag("Player")) return;
         currentWeapon.rebound += currentWeapon.reboundMagnifier;
-        weaponSlots[currentWeaponIndex].transform.localPosition = defaultGunPos;
+        currentWeapon.transform.localPosition = defaultGunPos;
         Vector3 targetRotation = GunPosition.transform.localRotation.eulerAngles - new Vector3(currentWeapon.rebound, 0, 0);
         GameManager.Instance.controller.reboundXRotation = currentWeapon.rebound * -1f;
-        weaponSlots[currentWeaponIndex].transform.Translate(Vector3.forward * -0.1f);
-        weaponSlots[currentWeaponIndex].transform.Rotate(targetRotation, Space.Self);
+        currentWeapon.transform.Translate(Vector3.forward * -0.1f);
+        currentWeapon.transform.Rotate(targetRotation, Space.Self);
 
         if (!isRebound)
         {
@@ -355,12 +350,12 @@ public class Fighter : MonoBehaviour
         isRebound = true;
         while (true)
         {
-            weaponSlots[currentWeaponIndex].transform.localPosition = Vector3.Lerp(weaponSlots[currentWeaponIndex].transform.localPosition, defaultGunPos, Time.deltaTime * 3.0f);
-            weaponSlots[currentWeaponIndex].transform.localRotation = Quaternion.Lerp(weaponSlots[currentWeaponIndex].transform.localRotation, Quaternion.Euler(defaultGunRot), Time.deltaTime * 3.0f);
+            currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, defaultGunPos, Time.deltaTime * 3.0f);
+            currentWeapon.transform.localRotation = Quaternion.Lerp(currentWeapon.transform.localRotation, Quaternion.Euler(defaultGunRot), Time.deltaTime * 3.0f);
             currentWeapon.rebound = Mathf.Lerp(currentWeapon.rebound, 0, Time.deltaTime * 3.0f);
-            if (Vector3.Distance(weaponSlots[currentWeaponIndex].transform.localPosition, defaultGunPos) < 0.001f)
+            if (Vector3.Distance(currentWeapon.transform.localPosition, defaultGunPos) < 0.001f)
             {
-                weaponSlots[currentWeaponIndex].transform.localPosition = defaultGunPos;
+                currentWeapon.transform.localPosition = defaultGunPos;
                 currentWeapon.rebound = 0;
                 isRebound = false;
                 break;

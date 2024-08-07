@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
 {
     // IDamageable target;
     [Header("Projectile Data")]
-    WeaponData currentWeaponData;
+    Weapon currentWeapon;
     [SerializeField] float projectileSpeed = 15f;
     [SerializeField] float projectileDamage = 0f;
     // 약점 공격 시의 크리티컬 배율 (무기의 크리티컬 배율을 따라감)
@@ -76,7 +76,7 @@ public class Projectile : MonoBehaviour
 
         // 히트박스에 정보 전달
         hitbox.instigator = instigator;
-        hitbox.damage = hitbox.CalculateDamage(projectileDamage, currentWeaponData.totalCriticalMultiples);
+        hitbox.damage = hitbox.CalculateDamage(projectileDamage, currentWeapon.totalCriticalMultiples);
 
         GameManager.Instance._pool.ReturnObj(instigator.name, this);
     }
@@ -113,8 +113,8 @@ public class Projectile : MonoBehaviour
     {
         if (instigator != null)
         {
-            currentWeaponData = instigator.GetComponent<Fighter>().currentWeapon;
-            effectiveRange = currentWeaponData.EffectiveRange;
+            currentWeapon = instigator.GetComponent<Fighter>().currentWeapon;
+            effectiveRange = currentWeapon.effectiveRange;
 
             if (instigator.CompareTag("Player"))
             {

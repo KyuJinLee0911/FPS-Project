@@ -34,8 +34,9 @@ public class Boss : Enemy
         int playerLevel = GameManager.Instance.player.level;
         fighter = GetComponent<Fighter>();
         animator = GetComponent<Animator>();
-        hp = 15; // 테스트용 체력
         maxHp = 1500;
+        hp = maxHp; // 테스트용 체력
+        
         defence = 0.2f;
         autoCriticalRate = 0.0f;
         autoCriticalMagnification = 1f;
@@ -114,7 +115,7 @@ public class Boss : Enemy
         root.Evaluate();
         animator.SetBool("isMoving", isMoving);
         hpBar.value = hp;
-        hpText.text = $"{hp}/{maxHp}";
+        hpText.text = $"{Mathf.FloorToInt(hp)}/{maxHp}";
     }
 
     // 근거리 스킬 (1, 5) 혹은 일반 공격 사용

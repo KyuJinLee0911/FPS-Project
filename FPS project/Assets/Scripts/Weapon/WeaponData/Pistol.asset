@@ -21,29 +21,12 @@ MonoBehaviour:
   Weight: 10
   prefab: {fileID: 4243271525775095593, guid: 1a54157448a18c74eb7324bb646b9b62, type: 3}
   damage: 20
-  additionalDamage: 0
-  totalDamage: 20
   criticalMultiples: 2
-  additionalCriticalMultiples: 0
-  totalCriticalMultiples: 2
   mag: 15
-  additionalMag: 0
-  currentMag: 15
-  totalMag: 15
   reloadTime: 2
-  totalReloadTime: 2
-  additionalReloadTime: 0
-  canFireWeapon: 1
-  fireRate: 2
-  additionalFireRate: 0.3
-  totalFireRate: 2.3
-  fireRange: 150
-  effectiveRange: 50
-  weaponType: 2
-  projectile: {fileID: 0}
-  bulletEffect: {fileID: 0}
-  rebound: 0
-  reboundMagnifier: 4
-  gunPosition: {x: 0, y: 0, z: 0}
-  leftHandPosition: {x: 0, y: 0, z: 0}
   isTwoHanded: 0
+  weaponType: 2
+  fireRange: 150
+  fireRate: 2
+  gunPosition: {x: 0.01, y: -0.011, z: -0.2208}
+  leftHandPosition: {x: 0, y: 0, z: 0}

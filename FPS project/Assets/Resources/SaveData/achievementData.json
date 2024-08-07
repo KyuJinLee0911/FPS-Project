@@ -1,6 +1,11 @@
 {
     "datas": [
         {
+            "key": "robotEnforcementOfficer",
+            "name": "로봇 단속관",
+            "description": "적 로봇 50명을 제압한다."
+        },
+        {
             "key": "reboot",
             "name": "재부팅",
             "description": "게임을 클리어한다."

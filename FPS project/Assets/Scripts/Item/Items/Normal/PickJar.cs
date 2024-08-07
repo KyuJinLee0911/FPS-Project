@@ -9,4 +9,9 @@ public class PickJar : Item
         base.DoItem();
         GameManager.Instance.player.hp = GameManager.Instance.player.maxHp;
     }
+
+    public override void RemoveItem()
+    {
+        base.RemoveItem();
+    }
 }

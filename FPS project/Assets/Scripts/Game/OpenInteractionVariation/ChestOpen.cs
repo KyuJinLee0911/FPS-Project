@@ -9,6 +9,6 @@ public class ChestOpen : OpenInteraction
         base.DoInteraction();
 
         // 랜덤 아이템 드랍
-        Debug.Log("Random item droped!");
+        GameManager.Instance._item.ChestDropItem(transform);
     }
 }

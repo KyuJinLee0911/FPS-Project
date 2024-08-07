@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum ItemRarity
 {
-    IR_NORMAL,
-    IR_SUPERIOR,
-    IR_LEGENDARY
+    IR_NULL = 0,
+    IR_NORMAL = 400,
+    IR_SUPERIOR = 80,
+    IR_LEGENDARY = 20
 }
 
 public enum ItemType

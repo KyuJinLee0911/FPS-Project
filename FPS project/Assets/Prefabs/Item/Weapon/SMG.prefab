@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &199484891446195827
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7514500507621969716}
+  m_Layer: 0
+  m_Name: FeatureParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7514500507621969716
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199484891446195827}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.02886638, y: -0.07045953, z: 0.3403205}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1166960866882120774}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4026480425991826376
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,6 +98,7 @@ Transform:
   - {fileID: 414314892610389122}
   - {fileID: 1991626862833750253}
   - {fileID: 2362786836628246152}
+  - {fileID: 7514500507621969716}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-7463687276258565343
@@ -87,12 +119,40 @@ MonoBehaviour:
   itemNameTxt: {fileID: 78500991496925252}
   itemDescriptionText: {fileID: 7503638719224984108}
   itemImage: {fileID: 2238064128772336837}
-  item: {fileID: 0}
   weaponData: {fileID: 11400000, guid: e6db029a7316278499ae92198abe3798, type: 2}
+  weaponRarity: 0
   bulletEffect: {fileID: 0}
   muzzleTransform: {fileID: 5198984567652084861}
   rGripParent: {fileID: 1991626862833750253}
   lGripParent: {fileID: 2362786836628246152}
+  normalFeature: []
+  superiorFeature: []
+  legendaryFeature: {fileID: 0}
+  featureParent: {fileID: 7514500507621969716}
+  effectObj: {fileID: 0}
+  dropEffect: {fileID: 0}
+  addDamageRateByFeature: 0
+  totalDamage: 0
+  addCriticalMultiplesByFeature: 0
+  totalCriticalMultiples: 0
+  addMagRateByFeature: 0
+  currentMag: 0
+  totalMag: 0
+  addReloadTimeRateByFeature: 0
+  totalReloadTime: 0
+  canFireWeapon: 0
+  addFireRateByFeature: 0
+  totalFireRate: 0
+  addRangeRateByFeature: 0
+  effectiveRange: 0
+  totalFireRange: 0
+  projectile: {fileID: 4138816894924396826, guid: 2b328852af457b846a937da2c39f4ad3, type: 3}
+  rebound: 0
+  reboundMagnifier: 0
+  rarityWeights:
+  - 400
+  - 80
+  - 20
 --- !u!65 &8762345105811292192
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -192,9 +252,33 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2479517967359165787, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479517967359165787, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479517967359165787, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4884488956259434769, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5430681308681553715, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5430681308681553715, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5430681308681553715, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5761426566837154805, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
       propertyPath: m_Pivot.x
@@ -230,7 +314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5761426566837154805, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.005
+      value: -0.005
       objectReference: {fileID: 0}
     - target: {fileID: 5761426566837154805, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
       propertyPath: m_LocalScale.y
@@ -295,6 +379,38 @@ PrefabInstance:
     - target: {fileID: 6631928245296307064, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744664303948051477, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7900152958957389149, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7900152958957389149, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 43a7d98bd4222b64e933596512dc09ad, type: 3}
+    - target: {fileID: 7900152958957389149, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7900152958957389149, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7900152958957389149, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7900152958957389149, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400346759437357137, guid: 5bfc806c4db52044292da41675aa42eb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

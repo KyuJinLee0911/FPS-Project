@@ -8,9 +8,9 @@ using UnityEngine.UI;
 
 public enum EnemyType
 {
-    ET_NORMAL = 0,
-    ET_ELITE = 1,
-    ET_BOSS = 2
+    ET_NORMAL = 200,
+    ET_ELITE = 50,
+    ET_BOSS = 0
 }
 
 public class Enemy : Creature
@@ -24,7 +24,7 @@ public class Enemy : Creature
     [SerializeField] protected Animator animator;
     [SerializeField] protected GameObject hpBarParent;
     [SerializeField] protected Slider hpBar;
-    [SerializeField] protected EnemyType enemyType;
+    public EnemyType enemyType;
 
     protected bool isMoving;
     protected BTSelector root;
@@ -178,7 +178,8 @@ public class Enemy : Creature
     {
         if (targetTransform == null) return false;
         float distance = Vector3.Distance(transform.position, targetTransform.position);
-        return distance <= attackRange && UnityEngine.Random.Range(0, 100) > 20;
+        
+        return distance <= attackRange;
     }
 
     protected virtual bool IsPlayerInChaseRange()
@@ -192,6 +193,7 @@ public class Enemy : Creature
         Transform gunTransform = fighter.GunPosition.GetChild(0);
         isMoving = false;
         transform.LookAt(targetTransform);
+        fighter.muzzleTransform.LookAt(targetTransform.position + Vector3.up * 0.8f);
         gunTransform.LookAt(targetTransform.position + new Vector3(0, 1, 0));
         float dist = Vector3.Distance(transform.position, targetTransform.position);
         if (dist > minDistance)
@@ -199,7 +201,6 @@ public class Enemy : Creature
             fighter.isWeaponFire = true;
             fighter.Fire();
         }
-
 
         // Debug.Log("Attack Action");
         return BTNodeState.Success;

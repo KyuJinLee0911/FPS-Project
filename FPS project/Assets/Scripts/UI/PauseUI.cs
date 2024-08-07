@@ -41,7 +41,8 @@ public class PauseUI : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.Instance.AdjustTimeScale(1);
+        if (GameManager.Instance != null)
+            GameManager.Instance.AdjustTimeScale(1);
         restartConfirmObj.SetActive(false);
     }
 }

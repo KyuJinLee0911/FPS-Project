@@ -98,6 +98,4 @@ public class RangerSubSkill : Skill
             line.SetPosition(i, point);
         }
     }
-
-
 }

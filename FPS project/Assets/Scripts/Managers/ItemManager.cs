@@ -11,6 +11,10 @@ using UnityEngine.UIElements;
 public class ItemManager : MonoBehaviour
 {
     public List<Item> activatedItem = new List<Item>();
+    public List<Feature> weaponFeatures_n;
+    public List<Feature> weaponFeatures_s;
+    public List<GameObject> itemDropEffect;
+
     public GameObject itemInfoPrefab;
     public Transform itemInfoParent;
     public int batteries = 0;
@@ -43,6 +47,7 @@ public class ItemManager : MonoBehaviour
 
     private void Start()
     {
+
     }
 
     public void DropItem(Transform locationTransform)
@@ -70,6 +75,34 @@ public class ItemManager : MonoBehaviour
         }
     }
 
+
+    public void ChestDropItem(Transform locationTransform)
+    {
+        List<float> temp = new List<float> { 50, 50 };
+        int idx = PickRandomIndex(temp);
+        ItemData newData = null;
+        if(idx == 0)
+        {
+            // 임시
+            newData = PickItem(everyWeapons);
+
+        }
+        else if(idx == 1)
+        {
+            newData = PickItem(everyWeapons);
+        }
+
+        if (newData != null)
+        {
+            Item newItem = new Item();
+            newItem.itemData = newData;
+
+            GameObject newItemObj = Instantiate(newItem.itemData.prefab);
+            newItemObj.transform.position = locationTransform.position + Vector3.up * 0.2f + Vector3.forward * 1.2f;
+            newItemObj.transform.LookAt(GameManager.Instance.player.transform.position);
+        }
+    }
+
     public void AddBattery()
     {
         gainedBatteriesInGame++;
@@ -86,7 +119,7 @@ public class ItemManager : MonoBehaviour
     }
 
     // 리스트에서 랜덤 확률로 하나의 인덱스를 뽑는 함수
-    int PickRandomIndex(List<float> rates)
+    public int PickRandomIndex(List<float> rates)
     {
         if (rates.Count == 0) return -1;
         float total = 0;

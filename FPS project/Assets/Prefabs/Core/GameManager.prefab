@@ -270,6 +270,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activatedItem: []
+  weaponFeatures_n:
+  - {fileID: 7271504746768760699, guid: e526bfb2dc51e02448e49f6928dd9d98, type: 3}
+  - {fileID: 2844249190270434037, guid: 8f86851380886814581e93c7196ed843, type: 3}
+  - {fileID: 986188658799319591, guid: bb353ce328e743c468c600fdacf9c78c, type: 3}
+  - {fileID: 6185753527191916286, guid: c2b37bb3599c4bc4e9f80e6fb7ebdea2, type: 3}
+  weaponFeatures_s:
+  - {fileID: 7837881997969788734, guid: 6ac3aece84887b34c8a3f2af233f0dd2, type: 3}
+  - {fileID: 6674637377567123596, guid: 76a2616101aecdb468b0262850934bf6, type: 3}
+  - {fileID: 77482795687902657, guid: 865637ff68d9d454594b6cf3ab91b33a, type: 3}
+  - {fileID: 8649221439336711163, guid: 15d7f6fd290c67247a6568a3f664ff76, type: 3}
+  itemDropEffect:
+  - {fileID: 700382619794936597, guid: ab6882cc489031741a92ec83090815c6, type: 3}
+  - {fileID: 1367394989971530236, guid: d73d685b225343045a568fc947153540, type: 3}
+  - {fileID: 5481620125690827099, guid: 94fb054ef3ec2194fb4a65bff2cacb2b, type: 3}
+  - {fileID: 2025039724166479808, guid: 41d37209a9e30684da350e3311ebc6f2, type: 3}
+  - {fileID: 7899163903211205664, guid: 7e50bba0eff20304b981ce6c183f0946, type: 3}
   itemInfoPrefab: {fileID: 8569248381464452894, guid: fdd977a6ff87cb349ad45facca61402b, type: 3}
   itemInfoParent: {fileID: 0}
   batteries: 0
@@ -333,6 +349,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 873b800d54406b94195adb85c93cbea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data:
+    classData:
+      datas: 
+    perkData:
+      datas: []
+    totalKillCount: 0
+    totalBatteryCount: 0
 --- !u!1 &5456376614226522077
 GameObject:
   m_ObjectHideFlags: 0

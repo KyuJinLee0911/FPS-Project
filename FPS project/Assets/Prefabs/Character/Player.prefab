@@ -168,7 +168,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.08
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -2252,7 +2252,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -2515,13 +2515,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6232525720600346670}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.34844393, y: 0.62109387, z: 0.35859248, w: 0.6035237}
   m_LocalPosition: {x: -0.346, y: 0.53, z: 1.205}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1926166393280086519}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -1.424, y: 90.822, z: 59.99}
 --- !u!120 &231605103672348644
 LineRenderer:
   serializedVersion: 2
@@ -3485,7 +3485,7 @@ GameObject:
   - component: {fileID: 650248711994178409}
   m_Layer: 0
   m_Name: GunPosition
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3695,12 +3695,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c172afc48b0896f43a5725d34faeac13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicWeapon: {fileID: 11400000, guid: fb387edff5102a2439be66d298324b43, type: 2}
+  basicWeapon: {fileID: -4889574912063509115, guid: 1a54157448a18c74eb7324bb646b9b62, type: 3}
   currentWeapon: {fileID: 0}
   currentWeapons:
-  - {fileID: 0}
-  - {fileID: 0}
-  weaponSlots:
   - {fileID: 0}
   - {fileID: 0}
   currentWeaponIndex: 0
@@ -3713,6 +3710,7 @@ MonoBehaviour:
   rightArmConstraint: {fileID: 5460428063619000654}
   leftArmConstraint: {fileID: 704617213320158093}
   lOGTargetParent: {fileID: 0}
+  reloadUIObj: {fileID: 0}
   additionalDamageMagnifier: 0
   additionalReloadSpeedMagnifier: 0
   additionalFireRateMagnifier: 0

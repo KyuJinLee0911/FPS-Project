@@ -38,7 +38,7 @@ public class LHandAnimEvent : MonoBehaviour
         Vector3 dirVec = jav.transform.up;
         javRb.AddForce(dirVec * 15, ForceMode.Impulse);
         // 왼손 위치 한손인지 두손인지 판별해서 옮김
-        GameManager.Instance.playerFighter.ChangeLGripParent(GameManager.Instance.playerFighter.currentWeapon.isTwoHanded);
+        GameManager.Instance.playerFighter.ChangeLGripParent(GameManager.Instance.playerFighter.currentWeapon.weaponData.isTwoHanded);
         StartCoroutine(AutoRegain());
     }
 

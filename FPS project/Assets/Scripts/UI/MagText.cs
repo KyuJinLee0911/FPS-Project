@@ -6,7 +6,7 @@ using UnityEngine;
 public class MagText : MonoBehaviour
 {
     public TextMeshProUGUI magText;
-    private WeaponData currentWeapon;
+    private Weapon currentWeapon;
 
 
     void Start()
