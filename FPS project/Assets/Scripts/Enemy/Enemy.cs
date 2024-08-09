@@ -33,7 +33,6 @@ public class Enemy : Creature
 
     [Header("Dissolve Effect")]
     [SerializeField] protected SkinnedMeshRenderer skinnedRenderer;
-    [SerializeField] protected int dissolveAmount = Shader.PropertyToID("_DissolveAmount");
     [SerializeField] protected float dissolveTime = 2f;
 
     public override void InitCreature()
@@ -135,7 +134,7 @@ public class Enemy : Creature
 
             float lerpedDissolve = Mathf.Lerp(0, 1f, elapsedTime / dissolveTime);
 
-            skinnedRenderer.materials[0].SetFloat(dissolveAmount, lerpedDissolve);
+            skinnedRenderer.materials[0].SetFloat("_DissolveAmount", lerpedDissolve);
 
             yield return null;
         }

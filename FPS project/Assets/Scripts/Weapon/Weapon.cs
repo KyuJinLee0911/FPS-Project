@@ -105,7 +105,7 @@ public class Weapon : Item
                 if (transform.parent != null && transform.parent.gameObject.CompareTag("Player"))
                     break;
 
-                effectObj = Instantiate(GameManager.Instance._item.itemDropEffect[0], transform);
+                effectObj = Instantiate(GameManager.Instance._item.itemDropEffect[0], transform.position, Quaternion.identity);
                 dropEffect = effectObj.GetComponentInChildren<VisualEffect>();
                 break;
 
@@ -113,7 +113,7 @@ public class Weapon : Item
                 weaponRarity = ItemRarity.IR_SUPERIOR;
                 if (transform.parent != null && transform.parent.gameObject.CompareTag("Player"))
                     break;
-                effectObj = Instantiate(GameManager.Instance._item.itemDropEffect[3], transform);
+                effectObj = Instantiate(GameManager.Instance._item.itemDropEffect[3], transform.position, Quaternion.identity);
                 dropEffect = effectObj.GetComponentInChildren<VisualEffect>();
                 break;
 
@@ -121,7 +121,7 @@ public class Weapon : Item
                 weaponRarity = ItemRarity.IR_LEGENDARY;
                 if (transform.parent != null && transform.parent.gameObject.CompareTag("Player"))
                     break;
-                effectObj = Instantiate(GameManager.Instance._item.itemDropEffect[4], transform);
+                effectObj = Instantiate(GameManager.Instance._item.itemDropEffect[4], transform.position, Quaternion.identity);
                 dropEffect = effectObj.GetComponentInChildren<VisualEffect>();
                 break;
         }

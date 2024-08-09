@@ -15,7 +15,7 @@ public class ItemInfoUI : MonoBehaviour
 
     private void Update()
     {
-        transform.parent.LookAt(GameManager.Instance.player.transform, Vector3.up);
+        transform.parent.LookAt(GameManager.Instance.player.transform.position + Vector3.up, Vector3.up);
     }
 
 }
